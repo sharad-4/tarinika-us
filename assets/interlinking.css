@@ -1,0 +1,144 @@
+.interlinking-container {
+  padding-top: 40px;
+}
+.container.border-top-padding,
+.container.popular-searches {
+  margin: 0px 10%;
+}
+.container.border-top-padding {
+  display: flex;
+  justify-content: space-between;
+}
+.border-top-padding {
+  padding-top: 2rem;
+  border-top: 1px solid #d9d9d9;
+}
+.bestselling_products.column {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.product_type_description,
+.popular__search {
+  width: 62.5%;
+}
+.product_type_description, .bestselling_products, .popular__search {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+.has-padding-bottom {
+  padding-bottom: 30px;
+}
+.collection__description {
+  width: 100%;
+  margin: auto;
+  text-align: left;
+}
+.bestselling_products {
+  width: 32.5%;
+}
+.popular_searches_bestselling_space_between {
+  width: 5%;
+}
+.product_type_description, .bestselling_products, .popular__search {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+.bestselling_products h2 {
+  margin-bottom: 0.5714em;
+  color: #6b6b6b;
+}
+.bsp-prod-head {
+  text-align: left;
+}
+.collection__description ul {
+  margin-top: .5em !important;
+  margin-left: 0 !important;
+}
+.flex-space-between {
+  display: flex;
+  flex-direction: column;
+}
+#col-bsp-titles > div > a {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0.5rem;
+  align-items: center;
+  width: 100%;
+}
+@media screen and (max-width: 798px) {
+  #col-bsp-titles > div > a {
+    padding-bottom: 0.25rem;
+  }
+}
+#col-bsp-titles > div > a > .productTitle {
+  width: 80%;
+  text-align: left;
+/*   word-break: break-word; */
+}
+#col-bsp-titles > div > a > .productprice {
+  width: 20%;
+  text-align: right;
+}
+#col-bsp-titles > div > a:hover {
+  text-shadow: 1px 0 0 #000;
+}
+a {
+  color: #0e0808;
+  text-decoration: none;
+  cursor: pointer;
+}
+.popular_search.row {
+  padding-top: 2rem;
+  border-top: 1px solid #d9d9d9;
+}
+.popular_search h2 {
+  margin-bottom: 0.5714em;
+  color: #6b6b6b;
+}
+.popular__search h2 {
+  margin-bottom: 1.5rem;
+  color: #6b6b6b;
+}
+.collection__description h2,
+.collection__description h3,
+.collection__description h4 {
+  color: #6b6b6b;
+}
+#row-popular-search a:hover {
+  text-shadow: 1px 0 0 #000;
+}
+
+.collection__description a {
+  line-height: normal !important;
+}
+
+.collection__description a strong {
+  color: #6b6b6b !important;
+}
+
+@media screen and (max-width: 1024px) {
+  .container.border-top-padding {
+    display: flex;
+    flex-direction: column;
+  }
+  .popular_search_bestselling {
+    flex-direction: column-reverse !important;
+  }
+  .product_type_description,
+  .popular__search,
+  .bestselling_products {
+    width: 100%;
+  }
+  .bestselling_products h2,
+  .collection__description ul {
+    margin-left: 0rem;
+  }
+  .container.popular-searches,
+  .container.border-top-padding {
+    width: 95%;
+    margin: 0 auto;
+  }
+}
+
+
+

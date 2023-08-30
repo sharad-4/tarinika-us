@@ -1,0 +1,16 @@
+{% if template contains 'product' %} 
+<script>
+  window.addEventListener('sswhelperload', () => { 
+    if(typeof sswRun == 'function') {
+      sswRun(function(){
+        var WishlistButton = setInterval(function(){
+          if(ssw('#widget-fave-html').length && ssw('.button.button.action_button.button--add-to-cart.action_button--secondary').length){
+            ssw('#widget-fave-html').insertAfter(ssw('.button.button.action_button.button--add-to-cart.action_button--secondary'));
+            clearInterval(WishlistButton);
+          }
+        }, 1000);
+      });
+    }
+  })
+</script>
+{% endif %}	

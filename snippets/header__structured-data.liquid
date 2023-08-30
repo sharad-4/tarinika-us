@@ -1,0 +1,33 @@
+{% comment %} JSON-LD Structured data - https://developers.google.com/search/docs/guides/intro-structured-data {% endcomment %}
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "JewelryStore",
+    "name": "{{ shop.name }}",
+    {% if section.settings.logo %}
+      {% assign image_size = section.settings.logo.width | append:'x' %}
+      "image": "https:{{ section.settings.logo | img_url: image_size }}",
+    {% endif %}
+    "description": "Tarinika is an online jewellery store that’s your one-stop shop for all your fashion jewellery needs. If you are looking to buy Indian jewellery online, our over 1000 jewellery designs in categories like necklace sets, earrings, choker sets, pendant sets, bangles, and bridal jewelry come at the best price for you. In fact, buying jewellery online from Tarinika is a seamless process - something we work upon every day. ",
+  {% if section.settings.logo %}
+      {% assign image_size = section.settings.logo.width | append:'x' %}
+      "logo": "https:{{ section.settings.logo | img_url: image_size }}",
+    {% endif %}
+    "telephone": "+91 6300864997",
+    "sameAs": [
+      "{{ settings.twitter_link }}",
+      "{{ settings.facebook_link }}",
+      "{{ settings.pinterest_link }}",
+      "{{ settings.instagram_link }}",
+      "{{ settings.tumblr_link }}",
+      "{{ settings.snapchat_link }}",
+      "{{ settings.youtube_link }}",
+      "{{ settings.vimeo_link }}"
+    ],
+    "url": "{{ shop.url }}{{ page.url }}",
+    "address": {
+		"@type": "PostalAddress",
+		"addressCountry": "India"
+	}
+  }
+</script>

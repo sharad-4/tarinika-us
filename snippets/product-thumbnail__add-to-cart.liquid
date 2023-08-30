@@ -1,0 +1,176 @@
+{% assign collection_handles = product.collections | map: 'handle' %}
+{% assign variant = product.selected_or_first_available_variant %}
+{% capture thumbnail_paths_alts %}{% if product.media %}{% for media in product.media %}{{ media | img_url: "master" }}^{{ media.media_type | escape }}^{{ media.id }}^{{ media.width }}{% unless forloop.last %}~{% endunless %}{% endfor %}{% else %}{% for image in product.images %}{{ image | img_url: "master" }}^{{ image.alt | escape }}^{{ image.id }}^{{ image.width }}{% unless forloop.last %}~{% endunless %}{% endfor %}{% endif %}{% endcapture %}
+{% capture image_paths_alts %}{% if product.media %}{{ product_media_loop }}{% else %}{% for image in product.images %}{{ image | img_url: "master" }}^{{ image.alt | escape }}^{{ image.id }}^{{ image.width }}{% unless forloop.last %}~{% endunless %}{% endfor %}{% endif %}{% endcapture %}
+
+<style>
+  .product-image__wrapper:hover .thumbnail-overlay__container {
+    justify-content: center;
+  }
+  .thumbnail-overlay__container .add-to-cart__buttons {
+    padding-top: 0;
+  }
+  .add_to_cart:hover {
+    color: white;
+    background-color: black;
+  }
+/*   #add-to-cart_product {
+    padding-bottom: 10px;
+  } */
+/*   .quick-shop__buttons {
+    padding-top: 10px;
+  } */
+
+  #contentWrapper_Modal {
+    display: none;
+    position: fixed;
+    z-index: 2147483647;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,.4);
+  }
+  .contentWrapper_alert {
+    top: 2%;
+/*     background: rgb(163, 210, 212); */
+    background: #fff;
+    gradient_left: rgb(255, 0, 0);
+    gradient_right: rgb(0, 0, 255);
+    width: 30%;
+    height: 10%;
+/*     border-color: rgb(86, 130, 133); */
+    border-color: rgb(163, 210, 212);
+/*     border-width: 2px; */
+    border-width: 7px;
+/*     border-radius: 6px; */
+    padding: 0px;
+    position: relative;
+    margin: auto;
+    border-style: solid;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);
+  }
+  .contentWrapper_animation {
+    -webkit-animation-name: cz-animatetop1;
+    -webkit-animation-duration: 0.4s;
+    animation-name: cz-animatetop1;
+    animation-duration: 0.4s;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+  #dismiss_alert {
+    display: flex;
+  }
+  #contentWrapper_dismiss_alert {
+    font-weight: 700;
+    font-size: 27px;
+    top: 0;
+    right: 0;
+    border-radius: 7px;
+    position: absolute;
+    cursor: pointer;
+    display: block;
+    overflow: visible;
+    width: 30px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    -webkit-transition: color .2s;
+    transition: color .2s;
+    text-decoration: none;
+    color: #95979c;
+    border: 0;
+    outline: 0;
+    background: 0 0;
+    text-align: center;
+  }
+  .contentWrapper__modal-body {
+    font-size: 17px;
+    text-align: center;
+    display: flex;
+    height: 100%;
+  }
+  .contentWrapper__modal-body-text {
+    margin: auto;
+    margin-left: 10px;
+  }
+  {% if thumbnail %}
+    #add-to-cart_product {
+      z-index: 11;
+    }
+  {% endif %}
+</style>
+
+{% if thumbnail %}
+  {%
+    render 'product-thumbnail__quick-shop-button-new',
+    product: product,
+    thumbnail: 'thumbnail'
+  %}
+{% else %}
+  {%
+    render 'product-thumbnail__quick-shop-button-new',
+    product: product
+  %}
+{% endif %}
+
+<div id="add-to-cart_product" class="add-to-cart__buttons animated fadeInUp" onclick="addProductsInCart(event)">
+  <span class="add_to_cart button action_button js-add-to-cart-link" inventory="{{ product.variants[0].inventory_quantity }}" variant-id="{{ product.variants[0].id }}" data-id="{{ product.id }}" data-url="{{ product.url }}">
+    Add to Cart
+  </span>
+</div>
+
+<script>
+  // document.getElementById("add-to-cart_product").onclick = function(event) {addProductsInCart(event)};
+  function addProductsInCart(event) {
+    event.preventDefault()
+    document.getElementById("contentWrapper_Modal").style.display = "block"
+    // document.getElementById("open-product-detail").setAttribute('href', "");
+    var data = event.target
+
+    var product_inventory = data.attributes[1].value
+    var product_variant_id = data.attributes[2].value
+    var properties = {
+      "_variant-status": "out-of-stock",
+      "Status": "Ships in 7-10 business days"
+    }
+    // if (product_inventory > 0) {
+    //     properties = {
+    //         "_variant-status": "in-stock",
+    //         "Status": "Ready to Ship"
+    //     }
+    // } else {
+    //     properties = {
+    //         "_variant-status": "out-of-stock",
+    //         "Status": "Ships in 7-10 business days"
+    //     }
+    // }
+    $.ajax({
+        type: 'POST',
+        url: '/cart/add.js',
+        data: {
+          quantity: 1,
+          id: product_variant_id,
+          properties: properties
+        },
+        dataType: 'json',
+        success: function(data) {
+          // alert("Product has been added in cart.")
+          document.getElementById("contentWrapper_Modal").style.display = "block"
+        }
+    })
+  }
+
+  function closeModal(event) {
+    event.preventDefault()
+    document.getElementById("contentWrapper_Modal").style.display = "none"
+  }
+
+  // document.getElementById("contentWrapper_dismiss_alert").addEventListener("click", function() {
+  //   document.getElementById("contentWrapper_Modal").style.display = "none"
+  // });
+  
+</script>

@@ -1,0 +1,150 @@
+{% comment %}
+  The contents of the page.gift.liquid template can be found in /sections/page-gift-template.liquid
+{% endcomment %}
+<style>
+  .collection__list {
+    width: 100%;
+    background-color: #EBDCD5;
+  }
+  .gift__cards {
+    width: 100%;
+/*     background-color: #C5D5DA; */
+  }
+/*   .rich-text__heading {
+    letter-spacing: 10px;
+  } */
+  .gift__cards .rich-text__content div {
+    width: 45%;
+    margin: auto;
+  }
+  #shopify-section-text-columns-with-images-gift {
+    margin-bottom: 90px;
+  }
+/*   .collection__list {
+    margin-bottom: 50px;
+  } */
+  button {
+    font-family: Barlow,sans-serif!important;
+  }
+/*   #shopify-section-index__rich-text .rich-text__text p,
+  #shopify-section-rich-text-collection .rich-text__text p,
+  #shopify-section-rich-text-new .rich-text__text p,
+  #shopify-section-rich-text-4 .rich-text__text p,
+  #shopify-section-rich-text-5 .rich-text__text p {
+    font-size: 1.5rem !important;
+  } */
+/*   #shopify-section-index__rich-text .rich-text__text p,
+  #shopify-section-rich-text-4 .rich-text__text,
+  #shopify-section-rich-text-5 .rich-text__text p {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  } */
+  #shopify-section-rich-text-collection .rich-text__text p {
+    margin-top: 2rem;
+  }
+  #shopify-section-rich-text-4 .rich-text__text p {
+    margin-bottom: .5rem;
+  }
+/*   #shopify-section-0d53c0b2-bcc5-48d0-be14-9e75aeb8b90b h2 {
+    font-size: 4rem !important;
+  }
+  #shopify-section-0d53c0b2-bcc5-48d0-be14-9e75aeb8b90b p {
+    font-size: 1.5rem !important;
+  }
+  #shopify-section-0d53c0b2-bcc5-48d0-be14-9e75aeb8b90b .subtitle {
+    margin-top: 0 !important;
+  } */
+  @media only screen and (max-width: 480px) {
+/*     .gift__cards .rich-text__content div {
+      width: 100%;
+    } */
+/*     #shopify-section-0d53c0b2-bcc5-48d0-be14-9e75aeb8b90b h2 {
+      font-size: 2rem !important;
+    } */
+  }
+  @media only screen and (max-width: 1024px){
+/*     #shopify-section-0d53c0b2-bcc5-48d0-be14-9e75aeb8b90b h2 {
+      font-size: 2rem !important;
+    } */
+    #shopify-section-rich-text .rich-text__heading,
+    #shopify-section-rich-text-collection .rich-text__heading,
+    #shopify-section-rich-text-new .rich-text__heading,
+    #shopify-section-rich-text-4 .rich-text__heading,
+    #shopify-section-rich-text-5 .rich-text__heading {
+      font-size: 1.5rem !important;
+    }
+  }
+  .custom_list_now {
+    width: 100%;
+/*     background-color: #D3D3D3; */
+  }
+
+
+/*   Arrow Icon Style */
+  .ivDFXw {
+      right: -10px;
+  }
+  .fUHKSs {
+      left: -10px;
+  }
+  .jSVjCL {
+      width: 40px;
+      height: 40px;
+      line-height: 37px;
+      border-radius: 50%;
+      position: absolute;
+      text-align: center;
+      border: 1px solid black;
+  }
+  .kYgaUp {
+      top: 0px;
+      bottom: 0px;
+      z-index: 1;
+      color: black;
+      opacity: 1;
+      cursor: pointer;
+      right: 0px;
+  }
+  .anticon {
+      display: inline-block;
+      color: black;
+      font-style: normal;
+      line-height: 0;
+      text-align: center;
+      text-transform: none;
+      vertical-align: -0.125em;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+  }
+  .anticon svg {
+      display: inline-block;
+  }
+  svg:not(:root) {
+      overflow: hidden;
+  }
+  .anticon>* {
+      line-height: 1;
+  }
+/*   End Arrow Icon Style */
+</style>
+
+{% section "index__slideshow-classic" %}
+{% section "rich-text" %}
+{% section "custom-collection-gift-style" %}
+<div class="collection__list">
+  {% section "rich-text-collection" %}
+  {% section "custom-collection-gift-ocassion" %}
+</div>
+{% section "rich-text-new" %}
+{% section "slideshow-classic-new" %}
+<div class="custom_list_now">
+  {% section "rich-text-4" %}
+  {% section "custom-collection-list-new" %}
+</div>
+<div class="gift__cards">
+  {% section "rich-text-5" %}
+  {% section "text-columns-with-images-new" %}
+<!--   {% section "custom-collection-gift" %} -->
+</div>
+

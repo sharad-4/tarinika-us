@@ -1,0 +1,54 @@
+{% comment %}
+IMPORTANT, PLEASE EDIT CAREFULLY. MAKE SURE THERE ARE NO SYNTAX ERRORS
+ONLY EDIT LIQUID VALUES, DON"T CHANGE SCRIPT
+{% endcomment %}
+
+{% liquid 
+  assign IN_STOCK_PROCESS_TIME = 2
+  assign OUT_OF_STOCK_PROCESS_TIME = 7
+  
+  assign STANDARD_TRANSIT_TIME = 17
+  assign EXPRESS_TRANSIT_TIME = 12
+
+  assign STANDARD_RATE_1 = 'Free - Standard Shipping'
+  assign STANDARD_RATE_2 = 'Standard Shipping'
+  assign STANDARD_RATE_3 = 'Express Shipping'
+
+  assign MIXED_RATE_1 = 'Free - Standard Shipping'
+  assign MIXED_RATE_2 = 'Standard Shipping'
+  assign MIXED_RATE_3 = 'Express Shipping'
+  
+  assign MIXED_RATE_4 = 'Split Shipment - Standard'
+  assign MIXED_RATE_5 = 'Split Shipment - Express'
+%}
+
+
+
+<script>
+  const SHIPPING_CONFIG = (function() {
+    var settings = {};
+    settings.process_time = {
+      in_stock: {{ IN_STOCK_PROCESS_TIME | json }},
+      out_stock: {{ OUT_OF_STOCK_PROCESS_TIME | json }}
+    };
+    
+    settings.transit_time = {
+      standard: {{ STANDARD_TRANSIT_TIME | json }},
+      express: {{ EXPRESS_TRANSIT_TIME | json }}
+    };
+
+    settings.STANDARD_RATE_1 = {{ STANDARD_RATE_1 | json }};
+    settings.STANDARD_RATE_2 = {{ STANDARD_RATE_2 | json }};
+    settings.STANDARD_RATE_3 = {{ STANDARD_RATE_3 | json }};
+    
+    settings.MIXED_RATE_1 = {{ MIXED_RATE_1 | json }};
+    settings.MIXED_RATE_2 = {{ MIXED_RATE_2 | json }};
+    settings.MIXED_RATE_3 = {{ MIXED_RATE_3 | json }};
+    settings.MIXED_RATE_4 = {{ MIXED_RATE_4 | json }};
+    settings.MIXED_RATE_5 = {{ MIXED_RATE_5 | json }};
+    
+    return settings;
+  })();
+  
+  //console.log(SHIPPING_CONFIG);
+</script>

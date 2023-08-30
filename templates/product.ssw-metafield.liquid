@@ -1,0 +1,6 @@
+{% layout none %}
+
+{% capture the_snippet_fave_icon %}{% render 'ssw-widget-faveicon' with product.id %}{% endcapture %}
+{% unless the_snippet_fave_icon contains 'Liquid error' %}
+{{ the_snippet_fave_icon }}
+{% endunless %}    

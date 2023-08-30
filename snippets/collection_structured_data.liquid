@@ -1,0 +1,15 @@
+{% comment %} JSON-LD Structured data - https://developers.google.com/search/docs/guides/intro-structured-data {% endcomment %}
+<script type="application/ld+json" data-creator_name="Tarinika">
+{
+    "@context": "http://schema.org/",
+    "@type": "Collection",
+    "name": "{{ collection.title | escape }}",
+    "url": "{{ shop.url }}{{ collection.url }}",
+    "description":{%- if collection.featured_image -%}
+      {%- assign image_size = collection.featured_image.width | append: 'x' -%}
+      "image": [
+        "https:{{ collection.featured_image.src | img_url: image_size }}"
+      ],
+    {%- endif -%}
+  }
+</script>
