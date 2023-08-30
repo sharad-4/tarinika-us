@@ -1,9 +1,3 @@
-{% comment %}    
-/**************************************************
-* DO NOT MODIFY THIS FILE!!!                      *
-* IT WILL BE OVERWRITTEN BY UPDATES FROM GROWAVE! *
-**************************************************/
-{% endcomment %}
 {% layout none %}
 {%assign options_size =  product.options_with_values | size %}
 {%assign variants_size =  product.variants | size %}
@@ -81,7 +75,7 @@
 
   {%assign divided_price =  variant.price | divided_by: 100 %}
   {%assign modulo_price =  variant.price | modulo: 100 %}
-  {% if modulo_price > 9 %}
+  {% if modulo_price >9 %}
     {%assign modulo_price = '.' | append: modulo_price %}
   {% elsif modulo_price > 0 %}
     {%assign modulo_price = '.0' | append: modulo_price %}

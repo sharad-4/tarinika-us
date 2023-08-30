@@ -134,6 +134,7 @@ h1 {
               medium-down--one-whole">
 
     <div class="mobile_breadcrumb">{% render 'mobile-breadcrumb' %}</div>
+    
 
     {% comment %} Sale sticker {% endcomment %}
     {% if stickers_enabled %}
@@ -392,6 +393,8 @@ Doing this will ensure your beautiful artificial jewelry goes on for years.
               {% endunless %}
             </div>
           {% endif %}
+
+          <div class="mobile-menu-divider"></div>
 
         {%- elsif block.type == 'product-links' -%}
           {% comment %} Collections, type, tags {% endcomment %}
