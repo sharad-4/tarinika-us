@@ -190,13 +190,18 @@
               </div>
             </div>
           {% if section.settings.button_type != 'none' %}
-            <div class="blog-card__read-more">
+            <div class="blog-card__read-more buttons">
               {% render 'button',
                       label: section.settings.button_label,
                       href: article.url,
                       type: "link",
                       style: section.settings.button_type
               %}
+              <p class="redirect-arrow-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M5.83325 14.1663L14.1666 5.83301M14.1666 5.83301H5.83325M14.1666 5.83301V14.1663" stroke="#6941C6" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </p>
             </div>
           {% endif %}
           </div>

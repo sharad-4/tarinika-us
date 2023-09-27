@@ -169,8 +169,8 @@
     {% paginate blog.articles by section.settings.blog_posts_per_page %}
     <section class="{% if section.blocks.size > 0 and section.settings.show_sidebar %} three-fourths medium-down--one-whole column equal-columns--outside-trim{% endif %}">
       <div class="container {% if settings.heading_divider_style == 'long' %}has-heading-divider-below {% endif %}">
-        <div class="one-half medium-down--one-whole column has-no-side-gutter">
-          <div class="hide-when-banner-enabled">
+        <div class="one-half medium-down--one-whole column has-no-side-gutter blog-container_wrapper">
+          <div class="hide-when-banner-enabled blog-heading-container">
             {% comment %} Blog title {% endcomment %}
             {% render 'heading',
                     title: blog.title,
@@ -207,23 +207,24 @@
         {% endif %}
       </div>
 
-      <div class="container" {% if section.settings.pagination_type != 'basic_pagination' %}data-load-more--grid {% endif %}>
+      <div class="container blog-map-wrapper" {% if section.settings.pagination_type != 'basic_pagination' %}data-load-more--grid {% endif %}>
         {% if blog.articles.size == 0 %}
           <div class="blog-page__no-content one-whole column">
             <div class="excerpt">{{ 'homepage.onboarding.blog_excerpt' | t }}</div>
           </div>
         {% endif %}
         {% for article in blog.articles %}
-          <div class="featured-article blog-card {% render 'column-width', value: section.settings.blog_posts_per_row %} columns article card show-border-{{ section.settings.show_border }} medium-down--one-half small-down--one-whole has-margin-bottom {% if section.settings.blog_posts_per_row == 1 %}is-horizontal{% endif %}" {% if section.settings.pagination_type != 'basic_pagination' %}data-load-more--grid-item{% endif %}>
+          <div class="featured-article blog-card first-above-all {% render 'column-width', value: section.settings.blog_posts_per_row %} columns article card show-border-{{ section.settings.show_border }} medium-down--one-half small-down--one-whole has-margin-bottom {% if section.settings.blog_posts_per_row == 1 %}is-horizontal{% endif %}" {% if section.settings.pagination_type != 'basic_pagination' %}data-load-more--grid-item{% endif %}>
             {% if article.image %}
               <div class="card-image blog-card__image">
                 <figure class="image">
                   <a href="{{ article.url }}" title="{{ article.title | escape }}">
                      {% if article.image.src %}
- <img src="{{ article.image.src | img_url: '400x300' }}" alt="{{ article.image.alt }}">
+ <img src="{{ article.image.src | img_url: '1600x900' }}" alt="{{ article.image.alt }}">
  {% endif %}
                   </a>
                 </figure>
+          
               </div>
             {% endif %}
 
@@ -278,6 +279,7 @@
                           type: "link",
                           style: section.settings.button_type
                   %}
+                  
                 </div>
               {% endif %}
             </div>
@@ -290,6 +292,11 @@
                       type: "link",
                       style: section.settings.button_type
               %}
+              <p class="redirect-arrow-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M5.83325 14.1663L14.1666 5.83301M14.1666 5.83301H5.83325M14.1666 5.83301V14.1663" stroke="#6941C6" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </p>
             </div>
           {% endif %}
           </div>
