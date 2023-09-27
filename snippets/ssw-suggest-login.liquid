@@ -1,9 +1,3 @@
-{% comment %}    
-/**************************************************
-* DO NOT MODIFY THIS FILE!!!                      *
-* IT WILL BE OVERWRITTEN BY UPDATES FROM GROWAVE! *
-**************************************************/
-{% endcomment %}
 {% assign customer_locale = shop.locale | prepend: 'lang_' %}
 {% unless shop.metafields.ssw[customer_locale] %}
   {% for published_locale in shop.published_locales %}
@@ -11,9 +5,4 @@
       {% assign customer_locale = published_locale.iso_code | prepend: 'lang_' %}
     {% endif %}
   {% endfor %}
-{% endunless %}
-<div id="ssw-suggest-login" data-show-time="0">
-  <button class="ssw-close">&times;</button>
-  <span class="ssw-suggest-text ssw-control-group"></span>
-  <span><a class="btn button ssw-login-btn" href="/account/login">{{ shop.metafields.ssw[customer_locale].value.log_in }}</a></span>
-</div>
+{% endunless %}<div id="ssw-suggest-login" data-show-time="0"><button class="ssw-close">&times;</button><span class="ssw-suggest-text ssw-control-group"></span><span><a class="btn button ssw-login-btn" href="/account/login">{{ shop.metafields.ssw[customer_locale].value.log_in }}</a></span></div>

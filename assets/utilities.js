@@ -1,4 +1,19 @@
 "use strict";
+// -----Single Product thumbnail image slider-----
+  window.addEventListener("load", (event) => {
+    const ImageSliderContainer = document.querySelector(".product-gallery__thumbnails>div>div");
+    const previousBtnImageSlider = document.querySelector(".product_gallery__thumbnails_previous_btn");
+    const nextBtnImageSlider = document.querySelector(".product_gallery__thumbnails_next_btn");
+    const handlePrevBtn = () => {
+      ImageSliderContainer.scrollLeft -= 92;
+    };
+  
+    const handleNextBtn = () => {
+      ImageSliderContainer.scrollLeft += 92;
+    };
+    previousBtnImageSlider.addEventListener("click", handlePrevBtn);
+    nextBtnImageSlider.addEventListener("click", handleNextBtn);
+  });
 
 window.PXUTheme.contentCreator.accordion = {
   init: function () {

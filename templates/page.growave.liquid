@@ -1,4 +1,4 @@
-{% comment %}    
+{% comment %}
 /**************************************************
 * DO NOT MODIFY THIS FILE!!!                      *
 * IT WILL BE OVERWRITTEN BY UPDATES FROM GROWAVE! *
@@ -17,7 +17,7 @@
     </script>
   </div>
 {% else %}
-  {% if page.handle == 'share-review' %}
+  {% if page.handle == 'share-review' and shop.customer_accounts_enabled %}
     <div id="ssw-page" class="ssw-page ssw-clearfix gw-container">
       {% render 'ssw-widget-share-review' %}
     </div>
