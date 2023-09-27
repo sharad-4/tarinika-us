@@ -2841,7 +2841,7 @@ table th {
 
 @font-face {
   font-family: "flex-icon";
-  src: url(//cdn.shopify.com/s/files/1/2026/1561/t/175/assets/flex-icon.ttf?v=141001306366886470981692703443) format("truetype"), url(//cdn.shopify.com/s/files/1/2026/1561/t/175/assets/flex-icon.woff?v=65562972783189949211692703443) format("woff"), url(//cdn.shopify.com/s/files/1/2026/1561/t/175/assets/flex-icon.svg?v=122155750794120575381692703443) format("svg");
+  src: url(//cdn.shopify.com/s/files/1/2026/1561/t/182/assets/flex-icon.ttf?v=141001306366886470981693470494) format("truetype"), url(//cdn.shopify.com/s/files/1/2026/1561/t/182/assets/flex-icon.woff?v=65562972783189949211693470494) format("woff"), url(//cdn.shopify.com/s/files/1/2026/1561/t/182/assets/flex-icon.svg?v=122155750794120575381693470494) format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -13612,9 +13612,6 @@ h1.header__logo-text > a:hover {
   margin-top: 20px;
 }
 
-.heading-wrapper {
-  margin-bottom: 40px;
-}
 @media only screen and (max-width: 798px) {
   .heading-wrapper {
     margin-bottom: 20px;
@@ -16139,8 +16136,8 @@ ul.faceted-filter-group-display__list {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  border: thin solid #D3D3D3;
-  box-shadow: 0 2px 3px rgba(211, 211, 211, 0.1), 0 0 0 1px rgba(211, 211, 211, 0.1);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: 22px;
 }
 @media only screen and (max-width: 798px) {
   .blog-card {
@@ -16173,9 +16170,6 @@ ul.faceted-filter-group-display__list {
 }
 .blog-card .media-content .title {
   font-size: 0.8em;
-}
-.blog-card .blog-card__read-more {
-  margin: auto 1.5rem 1.5rem;
 }
 .blog-card .blog-card__read-more .button {
   height: auto;
@@ -17596,10 +17590,5 @@ line-height: 20px;
 .mobile-banner-shipping{
   display : none;
 }  
-
-
-
-
-
 
 

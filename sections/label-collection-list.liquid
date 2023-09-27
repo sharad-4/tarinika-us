@@ -163,11 +163,11 @@ display:block;
   }
 
     @media only screen and (min-width:1310px){
-    #products-template--14689230291010__3bc69ff2-5ca0-4e30-9d94-fdd56a2c25df {
+    #products-template--14693629198402__3bc69ff2-5ca0-4e30-9d94-fdd56a2c25df{
       width: 85%;
       margin: auto;
     }
-    div#butns-template--14689230291010__3bc69ff2-5ca0-4e30-9d94-fdd56a2c25df{
+    div#butns-template--14693629198402__3bc69ff2-5ca0-4e30-9d94-fdd56a2c25df{
       display: none;
     }
 }
@@ -198,7 +198,7 @@ display:block;
                   data-scroll-class="{{ animation }}"
                 {% endif %} style="position:relative">
 
-  <div id="products-{{id}}" class="container featured_container">
+  <div id="products-{{id}}" class="container featured_container affiliate-section-part-carousel">
     {% if section.blocks.size > 0 %}
 
       {% for block in section.blocks %}
@@ -302,7 +302,7 @@ display:block;
 
     {% endif %}
   </div>
-<div id="butns-{{id}}" class="container justify-content-between new-collection-button">
+<div id="butns-{{id}}" class="container justify-content-between new-collection-button affiliate-button-carousel-parent">
 <button class="rightleft prevcol" onclick="slideCollection('left','{{ id }}')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="12 8 8 12 12 16"></polyline><line x1="16" y1="12" x2="8" y2="12"></line></svg></button>
 <button class="rightleft nextcol" onclick="slideCollection('right','{{ id }}')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="12 16 16 12 12 8"></polyline><line x1="8" y1="12" x2="16" y2="12"></line></svg></button>
 </div>
