@@ -52,11 +52,7 @@
     padding-bottom: {{ padding_bottom }}px;
     background-color: #E2EAEC;
     overflow: auto;
-    {% if width == 'wide' %}
-      width: 100%;
-    {% endif %}
     height: 201px;
-    overflow-y: hidden;
   }
   #shopify-section-{{ id }}:hover::-webkit-scrollbar {
       height:4px;
@@ -89,18 +85,15 @@
           id: id
   %}
   .section{max-width:unset}
-  ::-webkit-scrollbar {
-    background: transparent;
-}
 div#products-{{id}} {
     flex-flow: row !important;
     display: inline-flex;
-    overflow-x: auto;
-    overflow-y: hidden;
+/*     overflow-x: auto;
+    overflow-y: hidden; */
 }
   .collection-bar {
-    overflow-x: auto;
-    overflow-y: hidden;
+/*     overflow-x: auto;
+    overflow-y: hidden; */
   white-space: nowrap;
   }
 .column.one-fifth.thumbnail.list-collection--align-height.has-gutter.has-gutter--mobile.list-collection__thumbnail.medium-down--one-whole {
@@ -147,7 +140,7 @@ display:block;
     font-size: 1.5rem !important;
   } */
   .collection-bar-desktop {
-    margin-top: 62px;
+    margin: 62px 0px 0px 0px;
   }
 @media only screen and (max-width:900px){
     .collection-bar-desktop-wrap {
@@ -207,7 +200,6 @@ display:block;
     #collection_bar_desktop {
       margin-left: auto;
       display: flex;
-      max-width: unset;
     }
   }
 {% endstyle %}
@@ -330,6 +322,7 @@ display:block;
 </section>
 
 <script type="text/javascript">
+  window.addEventListener("touchstart", func, {passive: true} )
 function slide(direction){
     var container = document.getElementById('products-{{ id }}');
     scrollCompleted = 0;
@@ -471,7 +464,7 @@ function slide(direction){
       "label": "Bottom spacing",
       "min": 0,
       "max": 80,
-      "default": 15,
+      "default": 20,
       "unit": "px"
     },
     {

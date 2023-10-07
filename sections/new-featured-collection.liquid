@@ -37,30 +37,34 @@
     css: section.settings.custom_css,
     id: section.id
   %}
-  .collection_style {
-    margin-top: 42px;
-  }
+/*   .collection_style {
+    margin-top: 50px;
+  } */
   #new-featured-collection .slider-gallery {
     background-color: #E2EAEC;
-    padding: 15px;
+    padding: 16px;
+    overflow-y: hidden;
+    padding-bottom: 0px;
+    padding-right: 0;
   }
   .collection_title_wrap .content {
       text-align: center;
       margin: 10px auto;
     }
   {% if section.settings.description_text %}
-  .heading-wrapper--new-featured-collection .heading-divider {
-    display: none;
-  }
-    {% endif %}
+    .heading-wrapper--new-featured-collection .heading-divider {
+      display: none;
+    }
+  {% endif %}
   .new-featured-collection__title,
   .heading-wrapper--new-featured-collection {
     margin: 0 !important;
   }
   .heading-wrapper--new-featured-collection {
     overflow: unset !important;
-    width: 100%
+    width: 100%;
   }
+  
   
   @media only screen and (min-width:1024px){
     #new-featured-collection {
@@ -88,6 +92,7 @@
 <section class="section
                 {{ section.settings.css_class }}
                 is-width-{{ section.settings.width }}
+                featured__collection
                 {% if section.settings.show_gutter == false %}
                   has-no-side-gutter
                   has-background
@@ -203,6 +208,7 @@
   }
 </script>
 <script data-theme-editor-load-script src="{{ 'z__jsFeaturedCollection.js' | asset_url }}"></script>
+
 
 {% schema %}
 {

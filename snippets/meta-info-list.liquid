@@ -8,11 +8,11 @@ blog_comment_count: <string>
 {% endcomment %}
 
 <ul class="meta-info-list">
-  {% if blog_author %}
+  <!-- {% if blog_author %}
     <li class="meta-info-list__item">
       <a href="{{ routes.search_url }}?type=author&q={{ article.author }}">{{ 'blogs.article.by' | t }} {% if article %}{{ article.author }}{% else %}{{ shop.name }}{% endif %}</a>
     </li>
-  {% endif %}
+  {% endif %} -->
   {% if blog_date %}
     <li class="meta-info-list__item">
       <span class="featured-article__date">{% if article %}{{ article.published_at | date: "%B %d, %Y" }}{% else %}{{ "today" | date: "%B %d, %Y" }}{% endif %}</span>

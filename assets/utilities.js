@@ -1,5 +1,130 @@
 "use strict";
+// Custom code start
 
+function evalEqlCardWidth(gap, minWidth, containerWidth, cardRefs){
+  try {
+  const numOfCards = Math.floor((containerWidth - gap )/ (minWidth+ gap))
+  const cardWidth = (containerWidth - ((numOfCards+1) * gap)) / numOfCards ;
+  cardRefs.forEach(cardRef => {
+    // cardRef.setAttribute('style', `width:${cardWidth}px !important`  )
+    cardRef.style.setProperty("width",  `${cardWidth}px`, "important")
+      // cardRef.style.width =  `${cardWidth}px`
+  });
+  } catch (error) {
+      console.log(error)
+  }
+}
+
+alignTopCar();
+
+document.addEventListener("DOMContentLoaded", (event) => {
+
+  if(window.location.pathname === '/'){
+  $('#footer-text-section-home').css("display", "block")
+  }
+
+      // const currencies = ['United States (USD $)', 'Canada (CAD $)', 'India (INR ₹)', 'United Kingdom (GBP £)', 'Australia (AUD $)', 'Germany (EUR €)', 'Japan (JPY ¥)'];
+
+      // $('.disclosure-list__item').each(function () {
+      //   const listItem = $(this);
+      //   const button = listItem.find('.disclosure__button');
+      //   const buttonText = button.text();
+      //   let currencyFound = false;
+
+      //   for (let i = 0; i < currencies.length; i++) {
+      //     if (buttonText.includes(currencies[i])) {
+      //       currencyFound = true;
+      //       // if((buttonText).includes("United States (USD $)" ) ){
+      //       //      button.click()
+      //       // }
+      //        button.text(buttonText.replace(/.*\((.*)\)/, '$1'));
+      //       break;
+      //     }
+      //   }
+
+      //   if (!currencyFound) {
+      //     listItem.remove();
+      //   }
+      // });
+  
+      if(window.innerWidth < 800)
+        document.querySelector('a[href="https://omniform1.com/forms/v1/landingPage/61489ea823d8ae001a4b2d04/641cf32db09e89c71966c57c"]').setAttribute("href", "https://omniform1.com/forms/v1/landingPage/61489ea823d8ae001a4b2d04/64eda546195751ac400d4038"   )
+});
+
+
+
+
+// Custom code end
+
+
+// -----Single Product thumbnail image slider-----
+
+  function runOnWindowWidthInRange() {
+      const windowWidth = window.innerWidth;
+      if (windowWidth <= 1300) {
+         document.querySelector(".overlay2").classList.remove("is-opened");
+      } else if(windowWidth >= 1301 ) {
+         document.querySelector(".overlay2").classList.add("is-opened");
+      }
+    }
+    runOnWindowWidthInRange();
+   function makeCarouseDynamic(){
+     
+      const ImageSliderContainer = document.querySelector(".product-gallery__thumbnails>div>div");
+    const sliderImage = document.querySelector(".product-gallery__thumbnails>div>div>div");
+    const previousBtnImageSlider = document.querySelector(".product_gallery__thumbnails_previous_btn");
+    const nextBtnImageSlider = document.querySelector(".product_gallery__thumbnails_next_btn");
+    nextBtnImageSlider.style.display = 'flex'
+    previousBtnImageSlider.style.display = 'flex'
+
+    let dynamicWidth;
+    function trackDynamicWidth() {
+      dynamicWidth = sliderImage.offsetWidth;
+    }
+    const handlePrevBtn = () => {
+      trackDynamicWidth()
+      handleScroll()
+      ImageSliderContainer.scrollLeft -= dynamicWidth + 12;
+    };
+  
+    const handleNextBtn = () => {
+      trackDynamicWidth()
+      handleScroll()
+      ImageSliderContainer.scrollLeft += dynamicWidth + 12;
+    };
+    previousBtnImageSlider.addEventListener("click", handlePrevBtn);
+    nextBtnImageSlider.addEventListener("click", handleNextBtn);
+
+    function handleScroll() {
+        const { scrollLeft, scrollWidth, clientWidth } = ImageSliderContainer;
+        const isEndReached = scrollLeft + clientWidth >= scrollWidth - 20;
+       previousBtnImageSlider.style.display = 'flex'
+      nextBtnImageSlider.style.display = 'flex'
+      if(scrollWidth<=clientWidth){
+         previousBtnImageSlider.style.display = 'none'
+      nextBtnImageSlider.style.display = 'none'
+      }
+        // if(scrollLeft <= 0){
+        //   previousBtnImageSlider.style.display = 'none'
+        // }else{
+        //   previousBtnImageSlider.style.display = 'flex'
+        // }
+        // if(isEndReached){
+        //   nextBtnImageSlider.style.display = 'none'
+        // }else{
+        //   nextBtnImageSlider.style.display = 'flex'
+        // }
+    }
+    handleScroll()
+    
+   }
+  window.addEventListener("load", (event) => {
+   makeCarouseDynamic()
+  });
+window.addEventListener("resize",makeCarouseDynamic)
+// -----------------------------------
+
+// -----------------------------------
 
 window.PXUTheme.contentCreator.accordion = {
   init: function () {
@@ -397,6 +522,7 @@ window.PXUTheme.infiniteScroll = {
     if ($('[data-load-infinite-scroll]').length) {
       window.PXUTheme.infiniteScroll.enableInfinite();
     }
+    
   },
 
   loadNextPage(url, $button) {
@@ -1184,11 +1310,13 @@ window.PXUTheme.responsiveVideo = {
 };
 
 function selectCallback(productEl, product, variant, state) {
+
     $(document).trigger({
     type: 'variant:change',
     variant: variant,
     product: product
   });
+  
   const $product = $(productEl);
   const $notifyForm = $('.product__notify-form', $product);
   const $productForm = $('.product_form, .shopify-product-form', $product);
@@ -1249,15 +1377,26 @@ function selectCallback(productEl, product, variant, state) {
   $('.cart-warning', $product).text('');
 
   if (variant) {
+    
     $('.sku', $product).text(variant.sku);
     $('.notify_form_message', $product).attr('value', `${$('.notify_form_message', $product).data('body')} - ${variant.title}`);
   }
 
   if (variant && variant.available) {
+   
     const variantWithInventory = { ...variant,
       ...(variantInventory ? variantInventory.find(v => v.id === variant.id) || {} : {})
     };
+    if (variantWithInventory) {
+      variant.inventory_quantity = variantWithInventory.inventory_quantity;
+      variant.inventory_management = variantWithInventory.inventory_management;
+      variant.inventory_policy = variantWithInventory.inventory_policy;
 
+      var sVariants = JSON.parse(sessionStorage.getItem("variants")) || {}
+      sVariants[variant.id] = variant
+      sessionStorage.setItem("variants", JSON.stringify(sVariants));
+      // debugger
+    }
     if (variantWithInventory.inventory_management && variantWithInventory.inventory_quantity > 0) {
       if (window.PXUTheme.theme_settings.display_inventory_left) {
         let itemsLeftText = window.PXUTheme.translation.product_count_other;
@@ -1834,61 +1973,38 @@ window.PXUTheme.video = {
 
 function slideCollection(direction, id){
     const container = document.getElementById( `products-${id}`);
-    let scrollCompleted = 0;
-    const slideVar = setInterval(function(){
-        if(direction == 'left'){
-            container.scrollLeft -= 50;
+      let scrollValue = container.children[0].offsetWidth + 20;
+       if(direction == 'left'){
+            container.scrollLeft -= scrollValue;
         } else {
-            container.scrollLeft += 50;
+            container.scrollLeft += scrollValue;
         }
-        scrollCompleted += 10;
-        if(scrollCompleted >= 100){
-            window.clearInterval(slideVar);
-        }
-    }, 50);
 }
 
-document.addEventListener("DOMContentLoaded", (event) => {
- var productOfferOpen = true
-
-var productAccordionContainer = document.querySelector(".attryb-offer-accordion-down")
-
-if(productAccordionContainer){
-  productAccordionContainer.addEventListener("click", function () {
-    if (productOfferOpen) {
-        var productPannel = document.querySelector(".attryb-offer-content")
-        productPannel.className += " active"
-        productPannel.style.maxHeight = productPannel.scrollHeight + "px"
-        document.querySelector(".attryb-offer-header").className += " active"
-        document.querySelector(".attryb-offer-accordion-down").className += " active"
-        document.querySelector(".attryb-offer-container").className += " active"
-        productOfferOpen = false
-    } else {
-        var productPannel = document.querySelector(".attryb-offer-content")
-        productPannel.className = "attryb-offer-content"
-        productPannel.style.maxHeight = null
-        document.querySelector(".attryb-offer-header").className = "attryb-offer-header"
-        document.querySelector(".attryb-offer-accordion-down").className = "attryb-offer-accordion-down"
-        document.querySelector(".attryb-offer-container").className = "attryb-offer-container"
-        productOfferOpen = true
+  function handleCheckShowIcon(){
+    let widthOfItem=document.querySelector(".featured_container").scrollWidth
+    let buttons=document.querySelector(".new-collection-carousel-prev-icon")
+    let buttons1=document.querySelector(".new-collection-carousel-next-icon")
+    if(widthOfItem<window.innerWidth){
+      buttons.style.display="none"
+      buttons1.style.display="none"
+    }else{
+       buttons.style.display="flex"
+       buttons1.style.display="flex"
     }
-})
+  }
+  handleCheckShowIcon()
+window.addEventListener("resize",handleCheckShowIcon)
 
-var productOfferItems = document.getElementsByClassName("attryb-offer-code")
 
-for (var i = 0; i < productOfferItems.length; i++) {
-    const ele = productOfferItems[i]
-    ele.addEventListener("click", (e) => {
-        navigator.clipboard.writeText
-            (e.target.textContent);
-        e.target.parentNode.classList.add("active")
-        setTimeout(() => {
-            e.target.parentNode.classList.remove("active")
-        }, 1000)
-    })
+function alignTopCar () {
+  const windowWidth = window.innerWidth ; 
+  if(windowWidth < 1024) {
+    const ref = document.querySelectorAll('#collection_bar_mobile .collection_mobile_list')
+    evalEqlCardWidth(10, 90, windowWidth, ref);
+  } else {
+    console.log("desktop")
+    const ref = document.querySelectorAll('#collection_bar_desktop .list-collection__thumbnail')
+    evalEqlCardWidth(10, 120, windowWidth, ref);
+  }
 }
-}
-});
-
-
-

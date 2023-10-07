@@ -65,7 +65,7 @@
       %}
     </div>
   {% endif %}
-  <div class="container has-column-padding-bottom featured-collection layout--{{ layout }} is-justify-space-around">
+  <div class="container has-column-padding-bottom featured-collection layout--{{ layout }} is-justify-center">
     {% if section_onboarding == false %}
       {% comment %} Loop through products {% endcomment %}
       {% if layout == 'slider' %}
@@ -80,7 +80,8 @@
             align_height: section.settings.align_height,
             height: section.settings.collection_height,
             show_gutter: section.settings.show_gutter,
-            featured_collection: section.settings.collection
+            featured_collection: section.settings.collection,
+            recommend: 'recommend'
           %}
         {% endif %}
       {% else %}

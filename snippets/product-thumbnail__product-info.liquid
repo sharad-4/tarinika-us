@@ -8,7 +8,7 @@
   {% else %}
     <a href="{{ product.url | within: collection }}" class="product-thumbnail__title">{{ product.title }}</a>
   {% endif %}
-
+{% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: '', concierge_install: true, product: product %}
   {% if collection_handles contains 'coming-soon' %}
     {% if settings.stickers_enabled == false %}
       {{ 'collections.general.coming_soon' | t }}
@@ -19,9 +19,7 @@
     </span>
   {% else %}
     <span class="product-thumbnail__price price {% if product.compare_at_price_max > product.price %}sale{% endif %}">
-      {% if product.price_varies and product.price_min > 0 %}
-        <small><em>{{ 'products.general.from' | t }}</em></small>
-      {% endif %}
+     
       {% if product.price_min > 0 %}
         <span class="money">
           {%
@@ -42,6 +40,17 @@
             %}
           </span>
         </span>
+      {% endif %}
+      {% if product.available %}
+        {% if product.compare_at_price > product.price %}
+          <script> console.log( {{ product | json }}, {{ product.selected_or_first_available_variant | json}} )  </script>
+          <div class="sale-sticker thumbnail-sticker sticker-{{i}}">
+            <span class="sticker-text">{%- assign variant = product.selected_or_first_available_variant -%}
+          {% if variant.price < variant.compare_at_price and variant.available %}
+                    {{ variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price }}% Off
+                  {% endif %}</span>
+          </div>
+        {% endif %}
       {% endif %}
     </span>
     {% if settings.select_first_available_variant %}

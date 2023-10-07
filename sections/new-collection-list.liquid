@@ -81,6 +81,37 @@ div#products-{{id}} {
 div#butns-{{id}} {
 display:block;
 }
+  .new-collection-carousel-prev-icon-{{ id }}{
+   position:absolute;
+   top:40%;
+   left:-10px;
+   margin:0px !important;
+ }
+
+  .new-collection-carousel-next-icon-{{ id }}{
+     position:absolute;
+     top:40%;
+     right:-10px;
+      margin:0px !important;
+  }
+
+@media only screen and (max-width:789px){
+  
+   .new-collection-carousel-prev-icon-{{ id }}{  
+     position:absolute;
+     top:40%;
+     left:-10px;  
+     margin:0 !important;
+   }
+  
+  .new-collection-carousel-next-icon-{{ id }}{
+     position:absolute;
+     top:40%;
+     right:3px;
+     margin:0px !important;
+  }
+ 
+}
   .has-gutter-enabled.has-multirow-blocks .has-gutter {
     margin-bottom: 20px;
     border: 1px solid #e1e1e1;
@@ -121,6 +152,13 @@ display:block;
     justify-content: space-between;
     width: 100%;
 }
+
+@media only screen and (max-width: 789px) {
+  div#butns-{{id}} {
+    width: 95% !important;
+  }
+}
+  
   div#butns-{{id}} button:hover {
     cursor: pointer;
 }
@@ -170,7 +208,7 @@ display:block;
                   data-scroll-class="{{ animation }}"
                 {% endif %} style="position:relative">
 
-  <div id="products-{{id}}" class="container featured_container">
+  <div id="products-{{id}}" class="container label-carousel-{{ id }} featured_container">
     {% if section.blocks.size > 0 %}
 
       {% for block in section.blocks %}
@@ -266,28 +304,48 @@ display:block;
 
     {% endif %}
   </div>
-<div id="butns-{{id}}" class="container justify-content-between new-collection-button">
-<button class="rightleft prevcol" onclick="slide('left')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="12 8 8 12 12 16"></polyline><line x1="16" y1="12" x2="8" y2="12"></line></svg></button>
-<button class="rightleft nextcol" onclick="slide('right')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="12 16 16 12 12 8"></polyline><line x1="8" y1="12" x2="16" y2="12"></line></svg></button>
-</div>
+
+<button class="rightleft new-collection-carousel-prev-icon-{{ id }} prevcol" onclick="slideCarousel('left')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="12 8 8 12 12 16"></polyline><line x1="16" y1="12" x2="8" y2="12"></line></svg></button>
+<button class="rightleft new-collection-carousel-next-icon-{{ id }} nextcol" onclick="slideCarousel('right')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="12 16 16 12 12 8"></polyline><line x1="8" y1="12" x2="16" y2="12"></line></svg></button>
+
 </section>
 
 <script type="text/javascript">
-function slide(direction){
+
+  console.log("slide","slidre")
+  function slideCarousel(direction){
+    
+  console.log("direction",direction)
     var container = document.getElementById('products-{{ id }}');
-    scrollCompleted = 0;
-    var slideVar = setInterval(function(){
-        if(direction == 'left'){
-            container.scrollLeft -= 50;
+    let scrollValue = container.children[0].offsetWidth + 20;
+   if(direction == 'left'){
+            container.scrollLeft -= scrollValue;
         } else {
-            container.scrollLeft += 50;
+            container.scrollLeft += scrollValue;
         }
-        scrollCompleted += 10;
-        if(scrollCompleted >= 100){
-            window.clearInterval(slideVar);
-        }
-    }, 50);
 }
+
+  
+(function(){
+
+    function handleCheckShowIcon(){
+    let widthOfItem=document.querySelector(".label-carousel-{{ id }}").scrollWidth
+    let buttons=document.querySelector(".new-collection-carousel-prev-icon-{{ id }}")
+    let buttons1=document.querySelector(".new-collection-carousel-next-icon-{{ id }}")
+    if(widthOfItem<window.innerWidth){
+      buttons.style.display="none"
+      buttons1.style.display="none"
+    }else{
+       buttons.style.display="flex"
+       buttons1.style.display="flex"
+    }
+  }
+  handleCheckShowIcon()
+window.addEventListener("resize",handleCheckShowIcon)
+})()
+
+
+  
 </script>
 {% schema %}
 {

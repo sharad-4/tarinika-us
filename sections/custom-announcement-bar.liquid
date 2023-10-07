@@ -6,7 +6,7 @@
             {% for block in section.blocks %}
                 <li class="slide_message-bar item {% if forloop.index == 1 %}current{% endif %}">
                     {{ block.settings.announcement_bar__text }}
-                    <button class="close announcement-bar__close js-close-announcement" aria-label="close"
+                    <!-- <button class="close announcement-bar__close js-close-announcement" aria-label="close"
                         onclick="close_banner()">
                         <span class="icon " data-icon="x"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
                                 <g id="x">
@@ -16,7 +16,7 @@
                                 </g>
                             </svg>
                         </span>
-                    </button>
+                    </button> -->
                 </li>
             {% endfor %}
         </ul>

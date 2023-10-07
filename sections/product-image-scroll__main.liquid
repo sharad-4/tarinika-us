@@ -99,10 +99,7 @@
               <span class="vendor">{{ product.vendor | link_to_vendor }}</span>
             </p>
 
-          {%- elsif block.type == 'sku' -%}
-            {% comment %} Sku {% endcomment %}
-            <p class="sku">{{ selected_variant.sku }}</p>
-
+         
           {%- elsif block.type == 'title' -%}
             {% comment %} Name {% endcomment %}
             <h1 class="product_name title">

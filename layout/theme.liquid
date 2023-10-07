@@ -9,11 +9,13 @@
   <meta name="theme-color" content="{{ settings.shop_bg_color }}">
   <link rel="canonical" href="{{ canonical_url }}">
 
-    <!-- <link rel="dns-prefetch preconnect" href="http://dev.ua.attryb.com" />
-    <link rel="dns-prefetch preconnect" href="https://velocity-d7k4uaby0-himanshu-attrybcom.vercel.app" />
-    <link rel="preload" href="https://personalization-event-tracker.s3.ap-south-1.amazonaws.com/personalization5.umd.js" as="script"  />    
+   <!-- preload personalization  -->
+      <link rel="dns-prefetch preconnect" href="http://dev.ua.attryb.com" />
+      <link rel="dns-prefetch preconnect" href="https://velocity-d7k4uaby0-himanshu-attrybcom.vercel.app" />
+      <link rel="preload" href="https://personalization-event-tracker.s3.ap-south-1.amazonaws.com/personalization5.umd.js" as="script"  />    
+    <!-- preload personalization  -->
   
-   <script containerId="650dae8601b5934682c178c7" src="https://d1k4m61tg1t9tl.cloudfront.net/personalization5.umd.js?version=0.1.9" defer="defer"></script> -->
+   <script containerId="650dae8601b5934682c178c7" src="https://d1k4m61tg1t9tl.cloudfront.net/personalization5.umd.js?version=0.1.9" defer="defer"></script>
 
   
 
@@ -81,6 +83,8 @@
   <link rel="stylesheet" href="{{ 'fancybox.css' | asset_url }}">
   <link rel="stylesheet" href="{{ 'styles.css' | asset_url }}">
 <link rel="stylesheet" href="{{ 'customstyles.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'index.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'quickfixes.css' | asset_url }}">
   {% comment %}Inject theme-object begin{% endcomment %}
   <script>
     window.PXUTheme = window.PXUTheme || {};
@@ -396,6 +400,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="dynamic-sections">
       {{ content_for_layout }}
     </div>
+    {% section 'index__newsletter' %}
   </div>
 
   {% if settings.footer_layout == "centered" %}
@@ -409,7 +414,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     {% section 'footer-promotional' %}
   {% endif %}
  
+
+      
+  <div id="footer-text-section-home" style="display:none;" >    
   {% section 'index__rich-text' %}
+  </div>
+
 
   {% if settings.header_layout == "vertical" %}
     </div>

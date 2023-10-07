@@ -44,7 +44,8 @@
   .breadcrumb__container{margin-bottom:2%}
   .section {
     max-width: unset;
-    width: 50%;
+/*     width: 50%; */
+    width: calc(75% - 20px);
     margin-left: auto;
     margin-right: auto;
 }
@@ -149,6 +150,17 @@
                 context: 'article',
                 text_alignment: 'center'
         %}
+            <div class="container blog-meta">
+        <div class="one-whole column meta-info is-small">
+          {% render 'meta-info-list',
+                  blog_author: section.settings.blog_author,
+                  blog_date: section.settings.blog_date,
+                  blog_read_time: section.settings.read_time,
+                  blog_comment_count: section.settings.blog_comment_count %}
+
+
+        </div>
+      </div>
       </div>
   {% if section.settings.show_breadcrumb %}
     <div class="container breadcrumb__container">
@@ -256,17 +268,7 @@
 
       
 
-      <div class="container blog-meta">
-        <div class="one-whole column meta-info is-small">
-          {% render 'meta-info-list',
-                  blog_author: section.settings.blog_author,
-                  blog_date: section.settings.blog_date,
-                  blog_read_time: section.settings.read_time,
-                  blog_comment_count: section.settings.blog_comment_count %}
 
-          
-        </div>
-      </div>
 
       <div class="container article-content has-padding-top has-padding-bottom">
         <div class="one-whole column content">
@@ -282,6 +284,9 @@
 
           {{ article.content }}
         </div>
+       <li class="meta-info-list__item">
+          <a href="{{ routes.search_url }}?type=author&q={{ article.author }}">Blog by: {% if article %}{{ article.author }}{% else %}{{ shop.name }}{% endif %}</a>
+      </li>
       <div class="page-navigation-arrows has-padding-bottom">
           {% if blog.previous_article %}
             <a href="{{ blog.previous_article }}" title="{{ 'blogs.article.previous_article_html' | t }}" class="page-navigation__previous">
@@ -536,16 +541,14 @@
                     </div>
                   </div>
 
-                {% if block.settings.button_type != 'none' %}
                   <div class="blog-card__read-more buttons">
                     {% render 'button',
-                            label: block.settings.button_label,
+                            label: 'Read More',
                             href: a.url,
                             type: "link",
-                            style: block.settings.button_type
+                            style: 'button--secondary'
                     %}
                   </div>
-                {% endif %}
                 </div>
               {% endunless %}
             {% endfor %}

@@ -121,9 +121,15 @@
           {% endif %}
         </div>
       {% endfor %}
+         <div class="footer__credits {% if section.settings.display_payment_methods %}two-thirds {% else %} one-whole {% endif %} column small-down--one-whole">
+        <p>&copy; {{ "now" | date: "%Y" }} {{ shop.name | link_to: routes.root_url }}. <span> {{ section.settings.copyright_text }}</span>  </p>
+       
+      </div>
     </div>
+
+<!--   <div class="newsletter_button"><button type="button" onclick="openNewsLetter()">Sign Up</button></div>  -->
   </section>
-  <section class="footer__extra-content section">
+  <!-- <section class="footer__extra-content section">
     <div class="container has-padding-top has-padding-bottom">
       {% if locale_selector or currency_selector or settings.show_multiple_currencies == true %}
         <div class="one-whole column">
@@ -167,8 +173,32 @@
         </div>
       {% endif %}
     </div>
-  </section>
+  </section> -->
 </footer>
+
+<script>
+
+      document.addEventListener('click', function(event) {
+       const elm = document.querySelector(".shopify-section.newsletter > section > div ")
+        if(elm){
+           const outsideClick = !elm?.contains(event.target);
+            const newsLetterSection = document.getElementsByClassName("shopify-section newsletter")[0]
+            if( event.target?.getAttribute("onclick") !== "openNewsLetter()" && outsideClick && newsLetterSection.style.display !== "none" ){
+                newsLetterSection.style.display = "none"
+            }  
+        }
+      });
+  
+  function openNewsLetter() {
+    // window.location.href = "/pages/newsletter"
+
+    const newsLetterSection = document.getElementsByClassName("shopify-section newsletter")[0]
+    if(newsLetterSection){
+      newsLetterSection.style.display = "block"
+    }
+
+  }
+</script>
 
 {% schema %}
 
