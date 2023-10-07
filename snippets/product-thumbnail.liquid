@@ -60,7 +60,8 @@
   thumbnail
   product__thumbnail
   product__grid-item
-  thumbnail__hover-overlay--{{ hover_enabled }}"
+  thumbnail__hover-overlay--{{ hover_enabled }}
+  has-padding-bottom"
   {% if section.settings.pagination_type != 'basic_pagination' %}
     data-load-more--grid-item
   {% endif %}>
@@ -68,7 +69,6 @@
 
       <div class="product-image__wrapper">
         <div class="image__container product__imageContainer">
-             
           <a href="{{ product.url | within: collection }}">
             {% if settings.stickers_enabled %}
               {%
@@ -179,7 +179,7 @@
               {%
                 render 'product-thumbnail__add-to-cart',
                 product: product,
-                thumbnail: 'thumbnail'
+                thumbnail: 'thumbnail',
               %}
             {% endif %}
 
@@ -211,14 +211,6 @@
                 </div>
               {% endif %}
             {% endif %}
-              <div class='wishlist-heart-icon-wrapper'>
-                {% capture the_snippet_fave_icon %}
-                      {% render 'ssw-widget-faveicon' with product.id %}
-                {% endcapture %}          
-                {% unless the_snippet_fave_icon contains 'Liquid error' %}
-                {{ the_snippet_fave_icon }}
-                {% endunless %} 
-              </div>
           </div>
         {% endif %}
       </div>

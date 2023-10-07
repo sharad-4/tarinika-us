@@ -86,11 +86,6 @@
   div#column-{{id}}:hover{
     box-shadow: 3px 2px 5px #e1e1e1;
   }
-  @media only screen and (max-width:800px){
-      div#products-{{id}}{
-    flex-flow:column;
-  }
-  }
 {% endstyle %}
 
 <section class="section
@@ -142,10 +137,6 @@
                     list-collection__thumbnail
                     medium-down--one-whole">
 
-          {% capture the_snippet_fave_icon %}{% render 'ssw-widget-faveicon' with product.id %}{% endcapture %}
-          {% unless the_snippet_fave_icon contains 'Liquid error' %}
-          {{ the_snippet_fave_icon }}
-          {% endunless %}    
           <div class="product-wrap">
             <div class="collection-thumbnail-overlay"></div>
 

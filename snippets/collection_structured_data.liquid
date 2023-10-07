@@ -7,9 +7,9 @@
     "url": "{{ shop.url }}{{ collection.url }}",
     "description":{%- if collection.featured_image -%}
       {%- assign image_size = collection.featured_image.width | append: 'x' -%}
-      {"image": [
+      "image": [
         "https:{{ collection.featured_image.src | img_url: image_size }}"
-      ]}
+      ],
     {%- endif -%}
   }
 </script>

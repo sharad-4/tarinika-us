@@ -12,6 +12,15 @@
 
     {{ checkout_stylesheets }}
     {{ checkout_scripts }}
+    <style>
+      .radio__label__primary{font-weight:bold}
+      .content-box .small-text {
+    color: #737373;
+    font-size: 14px;
+    font-weight: 400;
+}
+    </style>
+           
   </head>
   <body>
     {{ skip_to_content_link }}
@@ -50,18 +59,318 @@
     </div>
 
     {{ tracking_code }}
-    
-    {% comment %}SV-12.04.22{% endcomment %}
-    {% render 'shipping-process-times' %}
-    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js" defer="defer"></script>    
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js" defer="defer"></script>
-    <script type="text/javascript" src="{{ 'custom-shipping-rules.js' | asset_url }}" defer="defer"></script>
-  </body>
 
-<script>
-  let inner_text = document.querySelectorAll(".product__description__property")
-  for (let i = 0; i < inner_text.length; i++) {
-    inner_text[i].innerText = "Ships in 7-10 business days";
-  }
+       {% render 'shipping-process-times' %}
+       
+
+    <script type="text/javascript" src="{{ 'day.js' | asset_url }}"></script> 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ 'custom-shipping-rules.js' | asset_url }}"></script>
+
+    
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", () => {
+  let intervalForShippingEtaCount = 0;
+  const intervalForShippingEta = setInterval(() => {
+    intervalForShippingEtaCount++;
+    if (intervalForShippingEtaCount >= 20) {
+      clearTimeout(intervalForShippingEta);
+    }
+
+    const refs = document.querySelectorAll('div.shipping-eta');
+    if(!refs || refs.length === 0) {
+      return;
+    }
+
+    clearTimeout(intervalForShippingEta);
+    for(let i=0; i<refs.length-1; i++) {
+    	const parentRef = refs[i].closest('.content-box__row');
+        if(!refs[i].querySelector('p')) {
+          parentRef.remove();
+        }
+        else {
+          parentRef.querySelector('input[type=radio]').checked = true;
+        }
+    }
+  }, 1000);
+});
 </script>
+
+    <!-- discount codes start  -->
+
+    <script async defer>
+  document.addEventListener("DOMContentLoaded", async function(event) {
+   try{
+       await injectDiscounts()
+
+    // Get the section element you want to observe
+    const section = document.querySelector('.order-summary__section.order-summary__section--discount')
+
+ // Create a new MutationObserver object
+  const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+  
+      setTimeout(async ()=>{
+        if(!document.getElementById('discount-coupons')){
+           await injectDiscounts()
+        }
+        
+      },  2)     
+    });
+  });
+
+// Define the options for the observer
+const options = {
+  childList: true,
+  subtree: true,
+  attributes: true,
+  characterData: true
+};
+
+// Start observing the section for changes
+observer.observe(section, options);
+
+  async function injectDiscounts(){
+
+    if(!document.getElementById('discount-coupons')){
+
+const discounts = [
+    {
+        title: "Flat 10",
+        shortSummary: "SAVE 10% ON ORDERS ABOVE ₹2500",
+    },
+    {
+        title: "Flat 15",
+        shortSummary: "SAVE 15% ON ORDERS ABOVE ₹4000",
+    },
+    {
+        title: "Flat 20",
+        shortSummary: "SAVE 20% ON ORDERS ABOVE ₹6000",
+    },
+    {
+        title: "NEW10",
+        shortSummary: "Get 10% off sitewide for first-time orders",
+    },
+];
+
+window.handleDiscountClick = function handleDiscountClick(event, title){
+  const url = new URL(window.location.href);
+  url.searchParams.set('discount', title);
+  window.location.href = url.toString()
+}   
+    
+  const discountContainer = document.querySelector('.order-summary__section.order-summary__section--total-lines')
+  const discountContainerMobile = document.querySelector('.section.section--reductions.hidden-on-desktop')
+  if(discountContainer){
+    const html = `<div class="coupons_class" id="discount-coupons">
+			<h4 class="coupon_header">Discount Coupons</h4>
+   <div class="coupons-row_container" >
+          <button class="coupons_arrow left"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+			<div class="coupons_row">
+        ${
+          discounts.map((discount)=>
+            `<a class="coupon_chip" onClick="handleDiscountClick(event, '${discount.title}')"
+            ><div class="c_head">${discount.title}</div>
+            <div class="c_text">${discount.shortSummary}</div></a>
+          `).join('')
+        }
+			</div>
+       <button class="coupons_arrow right"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+       </div>
+		</div>`
+
+     if(!document.getElementById('discount-coupons')){
+       if(window.innerWidth < 1000 ){
+       discountContainerMobile.insertAdjacentHTML('afterend', html);
+    }else{
+      discountContainer.insertAdjacentHTML('afterbegin', html);
+    }
+     }
+    
+
+    handleArrowClick()
+
+    function handleArrowClick(){
+    
+    const couponsRow = document.querySelector('.coupons_row');
+    const couponsArrowLeft = document.querySelector('.coupons_arrow.left');
+    const couponsArrowRight = document.querySelector('.coupons_arrow.right');
+    
+    const scrollAmount = 200;
+    
+    couponsArrowLeft.addEventListener('click', () => {
+      couponsRow.scrollBy({
+        left: -scrollAmount,
+        behavior: 'smooth',
+      });
+    });
+    
+    couponsArrowRight.addEventListener('click', () => {
+      couponsRow.scrollBy({
+        left: scrollAmount,
+        behavior: 'smooth',
+      });
+    });
+  }
+  } 
+
+      const checkoutData = await fetch(`/wallets/checkouts/${location.pathname.split('/checkouts/')[1]}`,{
+            headers: {
+                  'Content-Type': 'application/json',
+                  'x-shopify-checkout-authorization-token': document.querySelector("[name=shopify-checkout-authorization-token]").getAttribute("content")
+                }
+            })
+
+      const checkout = await checkoutData.text()
+      const appliedDiscount = JSON.parse(checkout)?.checkout?.applied_discount
+
+      // ${appliedDiscount?.title === discount?.title ? 'active' : ''}
+
+      const domDiscounts = document?.querySelector('.coupons_row')?.children
+
+      for(let i = 0; i<domDiscounts?.length;i++){
+        const elm = domDiscounts[i]
+        const discountCode = elm.querySelector('.c_head').innerText
+        if(discountCode === appliedDiscount?.title){
+          elm.classList.add('active')
+        }
+      }
+  
+     }
+      
+    }
+  
+  }
+    catch(error){
+      console.log("ERROR", error)
+    }
+});
+   
+</script>
+<style>
+/*   base font size : 16px */
+
+  .coupons_class{
+    margin-bottom:1.25rem;
+    border-bottom: 1px solid rgba(172,172,172,0.34);
+    padding-bottom: 21px;
+  }
+
+  .coupon_chip.active{
+    border-color: #49abb5;
+    color: #49abb5;
+  }
+  
+  .coupons-row_container{
+    position: relative;
+    width: 95%;
+    margin: auto;
+  }
+  
+  .coupon_header {
+    font-size: 1.125rem; /* 18px ÷ 16px = 1.125rem */
+    line-height: 1.4375rem; /* 23px ÷ 16px = 1.4375rem */
+    margin-bottom: 0.625rem; /* 10px ÷ 16px = 0.625rem */
+  }
+
+  .coupons_row {
+    position: relative;
+    display: flex;
+    gap:1rem;
+    overflow-x: auto;
+    width: 100%;
+    color: #000;
+    
+    -ms-overflow-style: none; /* hide scrollbar on Edge and IE */
+    scrollbar-width: none; /* hide scrollbar on Firefox */
+
+        padding: 0px 12px;
+
+    width: 93%;
+    margin: auto;
+  }
+
+  .coupons_row::-webkit-scrollbar {
+  display: none; /* hide scrollbar on Chrome, Safari and Opera */
+}
+
+  .coupons_arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 1.5rem;
+  width: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  color: #000;
+  background-color: transparent;
+  border: none;
+}
+
+/* .coupons_arrow:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+} */
+
+.coupons_arrow.left {
+  left: -20px;
+}
+
+.coupons_arrow.right {
+  right: -20px;
+}
+
+  
+  .coupon_chip {
+    border: 0.0625rem solid #000000; /* 1px ÷ 16px = 0.0625rem */
+    border-radius: 0.125rem; /* 2px ÷ 16px = 0.125rem */
+    height:fit-content;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem 0.375rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+    color: #000;
+   
+  }
+  
+  .c_head {
+    font-size: 0.875rem; /* 14px ÷ 16px = 0.875rem */
+    line-height: 1.0625rem; /* 17px ÷ 16px = 1.0625rem */
+    margin-bottom: 0.3125rem; /* 5px ÷ 16px = 0.3125rem */
+    color: inherit;
+    white-space: nowrap;
+     min-width:6.25rem;
+  }
+  
+  .c_text {
+    font-size: 0.5rem; /* 8px ÷ 16px = 0.5rem */
+    line-height: 0.625rem; /* 10px ÷ 16px = 0.625rem */
+    color: inherit;
+    min-width: 7.25rem;
+  }
+
+  .coupon_chip:hover {
+    border-color: #49abb5;
+    color:#000;
+  }
+
+  @media (max-width: 1000px) {
+  .coupons_class{
+    margin-top: 1.25rem;
+    border-top: 1px solid rgba(172,172,172,0.34);
+    padding-top: 16px;
+  }
+  }
+  
+</style>
+    
+    <!-- discount code end -->
+    
+  </body>
 </html>

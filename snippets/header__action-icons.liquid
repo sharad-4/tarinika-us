@@ -16,89 +16,7 @@
 {%- if object.settings.show_locale_selector == true and shop.published_locales.size > 1 -%}
   {%- assign locale_selector = true -%}
 {%- endif -%}
-<style>
-  .nav-submenu-login {
-    display: none;
-  }
-  .login-icon-dropdown {
-    position: relative;
-  }
-  .down-drop-login {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
-   @media only screen and (min-width: 789px){
-     .login-icon-dropdown:hover .underline-divider-line-login {
-        height: 2px;
-        color: #000;
-        display: block;
-        width: 100%;
-        background: #000;
-        position: absolute;
-        top: 50px;
-     }
-     .login-icon-dropdown {
-       cursor: pointer;
-     }
 
-      .nav-submenu-login {
-       position: absolute;
-       top: 59px;
-       padding: 0px 20px;
-       background-color: #f6f6f6 !important;
-       color: #404040;
-       font-size: 14px!important;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 18px!important;
-        letter-spacing: .357px;
-         text-transform: none;
-         box-shadow: 0 8px 8px #0a0a0a1a;
-         cursor: pointer;
-        flex-direction: column;
-        gap: 0px;
-       width: 300px;
-       right: 0px;
-     }
-     .login-dropdown-list {
-        padding: 18px 0;
-        font-size: 14px;
-        letter-spacing: .36px;
-        border-bottom: 1px solid #ECECEC;
-        width: 100%;
-        display: inline-block;
-        text-align: left;
-        line-height: 18px;
-        position: relative;
-       display: flex;
-       justify-content: space-between;
-     }
-     .login-dropdown-list:hover .login-dropdown-tag  {
-       color: #007ace !important;
-     }
-   }
-  .svg-wrapper-navbar {
-    height: 20px;
-    width: 20px;
-  }
-  .svg-wrapper-navbar svg {
-    height: 100%;
-    width: 100%;
-  }
-
-  .login-dropdown-list  div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-  .login-dropdown-list:hover .svg-wrapper-navbar svg{
-    stroke: #007ace;
-  }
-
-</style>
 <div class="header__icons header__icon-style-{{ icon_style | replace: '_', '-' }} {{ header_icon_class }}">
 
 
@@ -128,7 +46,7 @@
     {% comment %} Account icon {% endcomment %}
     {% if customer %}
       {% comment %} Logout {% endcomment %}
-      <a href="{{ routes.account_url }}" class="header__link action-area__link auth-icon-dropdown" >
+      <a href="{{ routes.account_url }}" class="header__link action-area__link" >
           {% render 'icon',
                   name: 'avatar',
                   icon_class: 'header__icon'
@@ -137,12 +55,12 @@
       </a>
     {% else %}
       {% comment %} Login {% endcomment %}
-      <a href="{{ routes.account_login_url }}" class="header__link action-area__link auth-icon-dropdown" >
+      <a href="{{ routes.account_login_url }}" class="header__link action-area__link" >
           {% render 'icon',
                   name: 'avatar',
                   icon_class: 'header__icon'
           %}
-          <span class="underline-divider-line-login"></span>
+          <span class="icon-caption">{{ 'layout.customer.log_in' | t | escape }}</span>
       </a>
     {% endif %}
   {% endif %}
@@ -179,130 +97,3 @@
     </div>
   </div>
 </div>
-<span class="nav-submenu-login">
-
-              {% unless customer %}
-
-			  <span class="login-dropdown-list">
-                     <a class="down-drop-login" href="https://www.tarinika.com/account/login"></a>
-                <div>
-                <div class="svg-wrapper-navbar" >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                </div>
-                     <a class="login-dropdown-tag" href="https://www.tarinika.com/account/login">Login</a>
-                </div>
-                <div class="svg-wrapper-navbar" >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                </div>
-              </span>
-
-            {% endunless %}
-  
-		      <span class="login-dropdown-list">
-                
-                <a class="down-drop-login"  href="https://www.tarinika.com/pages/wishlist" ></a>
-                <div> 
-                <div class="svg-wrapper-navbar" >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                </div>
-                <a class="login-dropdown-tag"  href="https://www.tarinika.com/pages/wishlist">Wishlist</a>
-                </div>
-                <div class="svg-wrapper-navbar" >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                </div>
-              </span>
-		      <span class="login-dropdown-list">
-                
-                <span class="down-drop-login" onclick="openRewardsPage()" ></span>
-                <div> 
-                <div class="svg-wrapper-navbar" >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-gift"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>
-                </div>
-                <span class="login-dropdown-tag"  onclick="openRewardsPage()" >Rewards</span>
-                </div>
-                <div class="svg-wrapper-navbar" >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                </div>
-              </span>
-
-
-          {% if customer %}
-            <span class="login-dropdown-list">
-              <a class="down-drop-login"  href="https://www.tarinika.com/account" ></a>
-              <div> 
-              <div class="svg-wrapper-navbar" >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-              </div>
-              <a class="login-dropdown-tag"  href="https://www.tarinika.com/account">My Orders</a>
-              </div>
-              <div class="svg-wrapper-navbar" >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-              </div>
-            </span>
-        {% endif %}
-
-  
-{% if customer %}
-  <span class="login-dropdown-list">
-         <a class="down-drop-login" href="https://www.tarinika.com/account/logout"></a>
-    <div>
-    <div class="svg-wrapper-navbar" >
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-    </div>
-         <a class="login-dropdown-tag" href="https://www.tarinika.com/account/logout">Logout</a>
-    </div>
-    <div class="svg-wrapper-navbar" >
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-    </div>
-  </span>
-{% endif %}
-
-		 </span>
-<script>
-  function openRewardsPage () {
-      var currentUrl = window.location.href;
-      var newUrl = currentUrl + "#smile-home";
-      window.location.href = newUrl;
-  }
-
-window.addEventListener('DOMContentLoaded',(e)=>{
-
-// Get references to the elements
-const loginIconDropdown = document.querySelector('a.login-icon-dropdown');
-const accountIconDropdown = document.querySelector("a[href='/account']" );
-const headerComponent = document.querySelector(".auth-icon-dropdown" );
-const navSubmenuLogin = document.querySelector('.nav-submenu-login');
-  
-// if(accountIconDropdown){
-//   accountIconDropdown.addEventListener('mouseover', () => {
-//   navSubmenuLogin.style.display = 'flex';
-// });
-
-// navSubmenuLogin.addEventListener('mouseover', () => {
-//       navSubmenuLogin.style.display = 'flex';
-// });
-
-// navSubmenuLogin.addEventListener('mouseout', () => {
-//   navSubmenuLogin.style.display = 'none';
-// });
-// }
-// else{
-headerComponent.addEventListener('mouseover', () => {
-  navSubmenuLogin.style.display = 'flex';
-});
-
-navSubmenuLogin.addEventListener('mouseover', () => {
-      navSubmenuLogin.style.display = 'flex';
-});
-
-navSubmenuLogin.addEventListener('mouseout', () => {
-  navSubmenuLogin.style.display = 'none';
-});
-headerComponent.addEventListener('mouseout', () => {
-  navSubmenuLogin.style.display = 'none';
-});
-// } 
-})
-
-
-</script>

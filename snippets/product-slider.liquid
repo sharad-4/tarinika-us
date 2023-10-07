@@ -62,8 +62,7 @@ product_recommendations: <boolean>
           %}
           medium-down--one-half column has-thumbnail-sticker
           {% if product.media[1] != blank and settings.show_secondary_image == true %}has-secondary-image-swap{% endif %}">
-         
-        <div class="product-wrap" data-product-id="{{ product.id }}">
+        <div class="product-wrap">
           <div class="product-image__wrapper">
             <div class="image__container product__imageContainer">
               <a href="{{ product.url | within: collection }}">
@@ -153,14 +152,6 @@ product_recommendations: <boolean>
                       </div>
                     {% endif %}
                   {% endif %}
-                  <div class='wishlist-heart-icon-wrapper'>
-                    {% capture the_snippet_fave_icon %}
-                          {% render 'ssw-widget-faveicon' with product.id %}
-                    {% endcapture %}          
-                    {% unless the_snippet_fave_icon contains 'Liquid error' %}
-                    {{ the_snippet_fave_icon }}
-                    {% endunless %} 
-                  </div>
                 </div>
               </a>
             {% endif %}

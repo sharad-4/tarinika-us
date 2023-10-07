@@ -305,13 +305,17 @@ display:block;
     {% endif %}
   </div>
 
-<button class="rightleft new-collection-carousel-prev-icon-{{ id }} prevcol" onclick="slide('left')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="12 8 8 12 12 16"></polyline><line x1="16" y1="12" x2="8" y2="12"></line></svg></button>
-<button class="rightleft new-collection-carousel-next-icon-{{ id }} nextcol" onclick="slide('right')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="12 16 16 12 12 8"></polyline><line x1="8" y1="12" x2="16" y2="12"></line></svg></button>
+<button class="rightleft new-collection-carousel-prev-icon-{{ id }} prevcol" onclick="slideCarousel('left')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="12 8 8 12 12 16"></polyline><line x1="16" y1="12" x2="8" y2="12"></line></svg></button>
+<button class="rightleft new-collection-carousel-next-icon-{{ id }} nextcol" onclick="slideCarousel('right')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="12 16 16 12 12 8"></polyline><line x1="8" y1="12" x2="16" y2="12"></line></svg></button>
 
 </section>
 
 <script type="text/javascript">
-function slide(direction){
+
+  console.log("slide","slidre")
+  function slideCarousel(direction){
+    
+  console.log("direction",direction)
     var container = document.getElementById('products-{{ id }}');
     let scrollValue = container.children[0].offsetWidth + 20;
    if(direction == 'left'){
@@ -320,18 +324,6 @@ function slide(direction){
             container.scrollLeft += scrollValue;
         }
 }
-
-// function(){
-// const containerId = {{ id | json}}
-  
-// const buttonContainer =  document.getElementById(`butns-${containerId}`)
-// const container =  document.getElementById(`products-${containerId}`)
-//   console.log("container", container)
-// // if(window.innerWidth && buttonContainer){
-// //   buttonContainer.remove()
-// // }
-  
-// }()
 
   
 (function(){
@@ -351,7 +343,7 @@ function slide(direction){
   handleCheckShowIcon()
 window.addEventListener("resize",handleCheckShowIcon)
 })()
-  
+
 
   
 </script>
