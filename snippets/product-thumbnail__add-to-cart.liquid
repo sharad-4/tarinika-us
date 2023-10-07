@@ -118,9 +118,9 @@
 {% endif %}
 
 <div id="add-to-cart_product" class="add-to-cart__buttons animated fadeInUp" onclick="addProductsInCart(event)">
-  <span class="add_to_cart button action_button js-add-to-cart-link" inventory="{{ product.variants[0].inventory_quantity }}" variant-id="{{ product.variants[0].id }}" data-id="{{ product.id }}" data-url="{{ product.url }}">
-    Add to Cart
-  </span>
+  <svg class="add_to_cart button action_button js-add-to-cart-link" inventory="{{ product.variants[0].inventory_quantity }}" variant-id="{{ product.variants[0].id }}" data-id="{{ product.id }}" data-url="{{ product.url }}" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+    <path d="M10.6668 5.99992V3.99992C10.6668 2.52716 9.47292 1.33325 8.00017 1.33325C6.52741 1.33325 5.3335 2.52716 5.3335 3.99992V5.99992M2.39483 6.90123L1.99483 11.1679C1.8811 12.381 1.82424 12.9876 2.02553 13.4561C2.20236 13.8677 2.51224 14.208 2.90551 14.4224C3.35318 14.6666 3.96241 14.6666 5.18086 14.6666H10.8195C12.0379 14.6666 12.6471 14.6666 13.0948 14.4224C13.4881 14.208 13.798 13.8677 13.9748 13.4561C14.1761 12.9876 14.1192 12.381 14.0055 11.1679L13.6055 6.90123C13.5095 5.87682 13.4614 5.36461 13.2311 4.97736C13.0282 4.63631 12.7284 4.36333 12.3699 4.19315C11.9628 3.99992 11.4484 3.99992 10.4195 3.99992L5.58086 3.99992C4.55196 3.99992 4.03751 3.99992 3.63044 4.19315C3.27194 4.36332 2.97217 4.63631 2.76927 4.97736C2.53889 5.36461 2.49087 5.87682 2.39483 6.90123Z" stroke="#312E2E" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
 </div>
 
 <script>
@@ -160,12 +160,19 @@
         success: function(data) {
           // alert("Product has been added in cart.")
           document.getElementById("contentWrapper_Modal").style.display = "block"
+
+          setTimeout(()=>{
+            document.getElementById("contentWrapper_Modal").style.display = "none"
+          }, 3000);
+          
         }
     })
   }
-
-  function closeModal(event) {
-    event.preventDefault()
+    setTimeout(()=>{
+      closeModal()
+    }, 3000);
+  function closeModal() {
+    // event.preventDefault()
     document.getElementById("contentWrapper_Modal").style.display = "none"
   }
 

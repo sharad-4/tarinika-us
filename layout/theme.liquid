@@ -1,21 +1,21 @@
 {% capture content %}
 <!doctype html>
 <html class="no-js no-touch" lang="{{ shop.locale }}">
-<head>
+<head> 
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MM8QTGD');</script>
+<!-- End Google Tag Manager -->
+  
   <meta charset="utf-8">
   <meta http-equiv="cleartype" content="on">
   <meta name="robots" content="index,follow">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="{{ settings.shop_bg_color }}">
   <link rel="canonical" href="{{ canonical_url }}">
-
-    <!-- <link rel="dns-prefetch preconnect" href="http://dev.ua.attryb.com" />
-    <link rel="dns-prefetch preconnect" href="https://velocity-d7k4uaby0-himanshu-attrybcom.vercel.app" />
-    <link rel="preload" href="https://personalization-event-tracker.s3.ap-south-1.amazonaws.com/personalization5.umd.js" as="script"  />    
-  
-   <script containerId="650dae8601b5934682c178c7" src="https://d1k4m61tg1t9tl.cloudfront.net/personalization5.umd.js?version=0.1.9" defer="defer"></script> -->
-
-  
 
   {%- if current_tags -%}{%- assign meta_tags = current_tags | join: ', ' -%}{%- endif -%}
   <title>{%- if template.name == "index" -%}{{ page_title }}{%- else -%}{{ page_title }}{% if current_tags %} {{ 'general.meta.tagged_html' | t: tags: meta_tags }}{%- endif -%}{% if current_page != 1 %} {{ 'general.meta.page' | t: page_number: current_page }}{% endif %}{% unless page_title contains shop.name %} - {{ shop.name }}{% endunless %}{% endif %}</title>
@@ -51,7 +51,7 @@
   <link rel="preload" href="{{ 'styles.css' | asset_url }}" as="style">
 
   <!-- Preload JS -->
-  <link rel="preload" href="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" as="script">
+
   <link rel="preload" href="{{ 'vendors.js' | asset_url }}" as="script">
   <link rel="preload" href="{{ 'utilities.js' | asset_url }}" as="script">
   <link rel="preload" href="{{ 'app.js' | asset_url }}" as="script">
@@ -80,7 +80,10 @@
   <!-- CSS for Flex -->
   <link rel="stylesheet" href="{{ 'fancybox.css' | asset_url }}">
   <link rel="stylesheet" href="{{ 'styles.css' | asset_url }}">
-<link rel="stylesheet" href="{{ 'customstyles.css' | asset_url }}">
+  <link rel="stylesheet" href="{{ 'customstyles.css' | asset_url }}">
+  <link rel="stylesheet" href="{{ 'index.css' | asset_url }}">
+   <link rel="stylesheet" href="{{ 'quickfixes.css' | asset_url }}">
+
   {% comment %}Inject theme-object begin{% endcomment %}
   <script>
     window.PXUTheme = window.PXUTheme || {};
@@ -112,6 +115,7 @@
     <script src="{{ '/services/javascripts/countries.js' }}"></script>
   {%- endif -%}
 
+
   {%- if template.directory == 'customers' -%}
     <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer></script>
     <script src="{{ 'customer_area.js' | shopify_asset_url }}" defer></script>
@@ -130,9 +134,29 @@
       .noscript {
         display: block;
       }
-
+     
     </style>
   </noscript>
+  
+  <style>
+    .icon-wrapper {
+      align-items: center;
+      margin-left: 2px;
+      width: auto !important;
+    }
+    .ssw-link-fave-menu.ssw-link-fave-menu-hide-count {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .ssw-link-fave-menu.ssw-link-fave-menu-hide-count i {
+      font-size: 19px;
+    }
+    .ssw-faveiticon {
+      z-index: 12;
+    }
+  </style>
+  
   <script>
     document.documentElement.className=document.documentElement.className.replace(/\bno-js\b/,'js');
     if(window.Shopify&&window.Shopify.designMode)document.documentElement.className+=' in-theme-editor';
@@ -183,75 +207,63 @@
     }
   </script>
 {% endif %}
-  <script type="text/javascript" defer> 
+   <!-- Global site tag (gtag.js) - Google Ads: 815228513 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-815228513"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-    (function(c,l,a,r,i,t,y){ 
-
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)}; 
-
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i; 
-
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y); 
-
-    })(window, document, "clarity", "script", "b1gcwpnv89"); 
-
-</script> 
-  
-  <!-- MS Clarity New Script Replace - Param -->
-  <!-- Google Tag Manager -->
-  
-<script type="text/javascript" defer>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PHSCKWQ');
+  gtag('config', 'AW-815228513');
 </script>
-<!-- End Google Tag Manager -->
+  
+  <!-- START Facebook Verification -->
+<meta name="facebook-domain-verification" content="oj6khqq2p6axgqpctrqgxbevr4grzv" />
 
-    <!-- Global site tag (gtag.js) - Google Ads: 10936124493 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10936124493"></script>
-  <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-10936124493'); gtag('config', 'AW-10936124493');</script>
-  <!-- Event snippet for Purchase (1) conversion page -->
-  <script>
-    gtag('event', 'conversion', {
-      'send_to': 'AW-10933937356/wAbsCITQqMsDEMzJ2t0o',
-      'transaction_id': ''
-    });
-  </script>
+   <meta name="google-site-verification" content="55716Y5ArzxahTqsDys6MZW72LaCBLUKV_2WrTp77GQ" />
+   <!-- Big Query for Reporting --> 
+  
+  <!-- START GOOGLE -->
+<meta name="google-site-verification" content="14TB_ZHuQRY0AZlihZy5P_XMxY1Gy_zmjRsGVwkuCgY" />
+    <!-- END GOOGLE -->   
+  
+    <!-- START PINTEREST -->
+  <meta name="p:domain_verify" content="d2cb13e95aae47a10b73a1c7a8127806"/>
+    <!-- END PINTEREST -->  
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6V28YRY7WE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  <script>
-  if (window.location.pathname === "/pages/outlet") {
-    window.location.pathname = "/collections/sale"
-  }
-  if (window.location.href === "https://tarinika.returnscenter.com/") {
-    window.location.href = "https://www.tarinika.in/apps/return_prime"
-  }
+  gtag('config', 'G-6V28YRY7WE');
+  
 </script>
-    
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PHSCKWQ"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 
-<!--   personalization script -->
-<!--    <script src="https://personalization-event-tracker.s3.ap-south-1.amazonaws.com/personalization5.umd.js" defer="defer"></script> -->
-<!--   personalization script -->
-
-  <script type="text/javascript">
+    <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "i7qp8f4yq8");
+    })(window, document, "clarity", "script", "i7qs9j2fij");
 </script>
 
-  <!--   404 redirect -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "i7qs9j2fij");
+</script>
+
+    <!--   404 redirect -->
 <script>
 
-    const notFoundRoute = 'https://www.tarinika.in/pages/404-redirect-page'
+    const notFoundRoute = 'https://www.tarinika.com/pages/404-redirect-page'
     const urlPath = window.location.pathname
     // Check if the current page is a 404 error page
-    if (document.title === '404 Not Found - Tarinika India' && urlPath !== `/pages/404-redirect-page` ) {
+    if (document.title === '404 Not Found - Tarinika' && urlPath !== `/pages/404-redirect-page` ) {
       // Redirect to the custom 404 page
       window.location.href = notFoundRoute;
     } 
@@ -336,7 +348,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   {% comment %}Inject @pixelunion/shopify-price-ui/price-ui-globals end{% endcomment %}
 
 
-   {%- if settings.show_announcement_bar -%}
+  {%- if settings.show_announcement_bar -%}
     {% section 'custom-announcement-bar' %}
   {%- endif -%}
 
@@ -396,7 +408,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="dynamic-sections">
       {{ content_for_layout }}
     </div>
+  {% section 'index__newsletter' %}
   </div>
+
+      
 
   {% if settings.footer_layout == "centered" %}
     {% section 'footer__icon-bar' %}
@@ -408,9 +423,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     {% section 'footer__icon-bar' %}
     {% section 'footer-promotional' %}
   {% endif %}
- 
-  {% section 'index__rich-text' %}
 
+  <div id="footer-text-section-home" style="display:none;" >    
+  {% section 'index__rich-text' %}
+  </div>
+<div style="display:none" id="custom-footer-section-tarinika">
+</div>
   {% if settings.header_layout == "vertical" %}
     </div>
   {% endif %}
@@ -433,21 +451,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   {% render 'mobile-search' %}
 
-  {% render 'structured-data' %}
+  {% comment %}{% render 'structured-data' %}{% endcomment %}
     {% comment %}AT-variant-status{% endcomment %}
   {% render 'shipping-process-times' %}  
   <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js" defer="defer"></script>    
-  <script src="{{ 'custom-shipping-rules.js' | asset_url }}"></script>
-  <script src="{{ 'custom.js' | asset_url }}" defer="defer"></script>
-{% include 'elspw_include' %}
+  <script src="{{ 'custom-shipping-rules.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'custom.js' | asset_url }}"></script>
  {% include 'smile-initializer' %}
 
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MM8QTGD"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
-  {% render 'app_wishlist-king' %}      
+  {% render 'app_wishlist-king' %}
+  {% render 'gw-custom-scripts' %}
   </body>
 </html>
 {% endcapture %}
 {% assign content = content | replace_first: '<!doctype', '!doctype' | split: ' <' %}
 {%- for html in content -%}{%- assign htmlblock = html | strip | prepend: ' <' -%}{{htmlblock | replace: ' </', '</'}}{%- endfor -%}
-
-

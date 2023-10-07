@@ -181,9 +181,13 @@ display:block;
       display: none;
     }
   }
+
+
+
+  
 {% endstyle %}
 
-<section class="section collection_section featured_section
+<section class="section collection_section featured_section make-width-full-with-margin
                 {{ css_class }}
                 is-width-{{ width }}
                 {% if show_gutter == false %}
@@ -200,7 +204,7 @@ display:block;
                   data-scroll-class="{{ animation }}"
                 {% endif %} style="position:relative">
 
-  <div class='featured_container-wrapper'>
+  <div class='featured_container-wrapper custom-section-carousal'>
     <div id="products-{{id}}" class="container featured_container">
       {% if section.blocks.size > 0 %}
   
@@ -305,10 +309,9 @@ display:block;
   
       {% endif %}
     </div>
-  <div id="butns-{{id}}" class="container justify-content-between new-collection-button">
   <button class="rightleft prevcol custom-section-left-btn-{{id}}" onclick="slideCollection('left','{{ id }}')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="12 8 8 12 12 16"></polyline><line x1="16" y1="12" x2="8" y2="12"></line></svg></button>
   <button class="rightleft nextcol custom-section-right-btn-{{id}}" onclick="slideCollection('right','{{ id }}')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="12 16 16 12 12 8"></polyline><line x1="8" y1="12" x2="16" y2="12"></line></svg></button>
-  </div>
+  
 </div>
 </section>
 <script>
@@ -319,9 +322,8 @@ display:block;
         let scrollableWidth = productCustomSlider.scrollWidth
         let windowWidth = window.innerWidth
         if(windowWidth > scrollableWidth){
-          previousBtnCardSlider.style.visibility = 'hidden'
-          nextBtnCardSlider.style.visibility = 'hidden'
-          productCustomSlider.style.setProperty('justify-content', 'center', 'important');
+          previousBtnCardSlider.style.visibility = 'visible'
+          nextBtnCardSlider.style.visibility = 'visible'
         }else{
           previousBtnCardSlider.style.visibility = 'visible'
           nextBtnCardSlider.style.visibility = 'visible'
@@ -329,7 +331,45 @@ display:block;
         }
     }
     handleCustomSectionScroll()
-    
+
+  function handleCheckShowIcon(){
+    let widthOfItem=document.querySelector(".featured_container").scrollWidth
+    let buttons=document.querySelector(".new-collection-button")
+    console.log(widthOfItem,window.innerWidth,"consigdsfsdf")
+    if(widthOfItem>window.innerWidth){
+      buttons.style.display="none"
+    }
+  }
+  handleCheckShowIcon()
+  window.addEventlistener('resize',handleCheckShowIcon)
+
+
+(function() {
+
+  function evalEqlCardWidth(gap, minWidth, containerWidth, cardRefs){
+  try {
+  const numOfCards = Math.floor((containerWidth - gap )/ (minWidth+ gap))
+
+  const cardWidth = (containerWidth - ((numOfCards+1) * gap)) / numOfCards ;
+  cardRefs.forEach(cardRef => {
+    // cardRef.setAttribute('style', `width:${cardWidth}px !important`  )
+    cardRef.style.setProperty("width",  `${cardWidth}px`, "important")
+    cardRef.style.setProperty("max-width",  `${cardWidth}px`, "important")
+    cardRef.style.setProperty("min-width",  `${cardWidth}px`, "important")
+      // cardRef.style.width =  `${cardWidth}px`
+  });
+  } catch (error) {
+      console.log(error)
+  }
+}
+
+  
+  const containerId = {{ id | json }}
+  if(window.innerWidth >= 800)
+    evalEqlCardWidth(20, 350, window.innerWidth ,document.querySelectorAll( `#column-${containerId}`))
+})();
+  
+  
 </script>
 {% schema %}
 {

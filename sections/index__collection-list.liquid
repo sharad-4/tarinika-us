@@ -92,17 +92,13 @@ display:block;
     background: none;
     border: none;
 }
-
-  .collection_section {
-    padding-bottom: 21px;
-  }
 @media only screen and (max-width:900px){
   div#products-{{id}}{
-  flex-flow: row !important;
+  flex-flow: column!important;
 }
-/*   div#column-{{id}}:last-child {
+  div#column-{{id}}{
     margin-top: 10%;
-} */
+}
   #butns-{{id}}{
     display:none!important;
 }
@@ -121,12 +117,13 @@ display:block;
     position: absolute;
     top: 35%;
     display: flex;
+    z-index: 999999;
     justify-content: space-between;
     width: 100%;
 }
 {% endstyle %}
 
-<section class="section collection_section
+<section class="section 
                 {{ css_class }}
                 is-width-{{ width }}
                 {% if show_gutter == false %}

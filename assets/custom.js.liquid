@@ -60,7 +60,8 @@
     
     // on variant change
     $(document).on('variant:change', function(e) {
-      console.log(e);
+     
+      
       var variant = e.variant;
       var product = e.product;
       updateVariantStatus(variant, product);
@@ -87,7 +88,7 @@
   }
   
   $(document).ready(function() {
-    console.log('READY');
+
     variantInventoryStatus();
    });
 
@@ -97,12 +98,12 @@
 })();
 
 window.addEventListener('load', function() {
-    console.log("Window loaded")
+ 
     var variant = {}
     var thisVariant = {}
     var variants = {}
     var productEl = document.querySelector("[data-product-form]");
-      if(typeof productEl === "object") {
+      if(typeof productEl === "object" && productEl !== null) {
         thisVariant = JSON.parse(productEl.getAttribute("data-selected-variant"))
         variants = JSON.parse(productEl?.getAttribute("data-variant-inventory"))
         variant.inventory_quantity = thisVariant?.inventory_quantity;
@@ -113,21 +114,27 @@ window.addEventListener('load', function() {
      var is_variant_available = variant.inventory_quantity > 0;
      var is_variant_backlog = variant.inventory_quantity <= 0 && variant.inventory_policy == 'continue';
       
-     var product_available_variants = variants.filter(function(v) {
-        return v.inventory_quantity > 0;
-      });
-      
-      var product_has_available_variants = Boolean(product_available_variants.length);
-      var $product_form = productEl;
-      var $status = $product_form.querySelector('.variant-stock-status');
-      if (is_variant_available) {
-        $status.innerText = "Ships in 1-2 business days.";
-      }
-      else if (is_variant_backlog && product_has_available_variants) {
-        $status.innerText = "Ships in 7-10 business days. Other variants available to ship immediately.";
-      }
-      else if (!product_has_available_variants) {
-        $status.innerText = "Ships in 7-10 business days.";
-      }
+    if (Array.isArray(variants)) {
+  var product_available_variants = variants.filter(function(v) {
+    return v.inventory_quantity > 0;
+  });
+    }
+var product_has_available_variants = Array.isArray(product_available_variants) && product_available_variants.length > 0;
+var $product_form = productEl;
+if ($product_form) {
+  var $status = $product_form.querySelector('.variant-stock-status');
+  if (is_variant_available) {
+    $status.innerText = "Ships in 1-2 business days.";
+  }
+  else if (is_variant_backlog && product_has_available_variants) {
+    $status.innerText = "Ships in 7-10 business days. Other variants available to ship immediately.";
+  }
+  else if (!product_has_available_variants) {
+    $status.innerText = "Ships in 7-10 business days.";
+  }
+} else {
+  // Handle the case where $product_form is not found
+  console.error("Product form is not found.");
+}
 })
  

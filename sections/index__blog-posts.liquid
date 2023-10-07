@@ -26,7 +26,6 @@
       flex-wrap: nowrap;
     }
     .blog-card__link .image-element__wrap {
-      height: 110px;
       max-height: 100% !important;
     }
     .card-content.blog-card__content {
@@ -52,18 +51,18 @@
     width: 100%;
     z-index: 2;
   }
-  .ivDFXw {
+  /* .ivDFXw {
       right: -16px;
   }
   .fUHKSs {
       left: -16px;
-  }
+  } */
   .jSVjCL {
       width: 40px;
       height: 40px;
       line-height: 37px;
       border-radius: 50%;
-      position: absolute;
+
       text-align: center;
       border: 1px solid grey;
   }
@@ -190,13 +189,18 @@
               </div>
             </div>
           {% if section.settings.button_type != 'none' %}
-            <div class="blog-card__read-more">
+            <div class="blog-card__read-more buttons">
               {% render 'button',
                       label: section.settings.button_label,
                       href: article.url,
                       type: "link",
                       style: section.settings.button_type
               %}
+              <p class="redirect-arrow-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M5.83325 14.1663L14.1666 5.83301M14.1666 5.83301H5.83325M14.1666 5.83301V14.1663" stroke="#6941C6" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </p>
             </div>
           {% endif %}
           </div>
@@ -267,7 +271,7 @@
   </div>
 
 <div id="butns-blog-posts" class="container justify-content-between-ocassion">
-<button class="rightleft prevcol" onclick="slideBlogs('left')">
+<button class="rightleft blog-container-prev-icon prevcol" onclick="slideBlogs('left')">
   <div class="CarouselSlider__ArrowCircle-sc-49r1d5-4 CarouselSlider__ArrowCircleLeft-sc-49r1d5-5 jSVjCL fUHKSs">
       <i aria-label="icon: left" height="9px"
           class="anticon anticon-left CarouselSlider__StyledLeft-sc-49r1d5-7 jVnbgl">
@@ -280,7 +284,7 @@
       </i>
   </div>
 </button>
-<button class="rightleft nextcol" onclick="slideBlogs('right')">
+<button class="rightleft blog-container-next-icon nextcol" onclick="slideBlogs('right')">
   <div class="CarouselSlider__ArrowCircle-sc-49r1d5-4 CarouselSlider__ArrowCircleRight-sc-49r1d5-6 jSVjCL ivDFXw">
       <i aria-label="icon: right" height="9px" class="anticon anticon-right CarouselSlider__StyledRight-sc-49r1d5-8 kYgaUp">
           <svg viewBox="64 64 896 896" focusable="false" class="" data-icon="right" width="1em" height="1em" fill="grey" aria-hidden="true">
@@ -295,18 +299,12 @@
 <script type="text/javascript">
 function slideBlogs(direction){
     var container = document.getElementById('blog_container');
-    scrollCompleted = 0;
-    var slideVar = setInterval(function(){
-        if(direction == 'left'){
-            container.scrollLeft -= 20;
+    let scrollValue = container.children[0].offsetWidth + 20;
+    if(direction == 'left'){
+            container.scrollLeft -= scrollValue;
         } else {
-            container.scrollLeft += 20;
+            container.scrollLeft += scrollValue;
         }
-        scrollCompleted += 10;
-        if(scrollCompleted >= 100){
-            window.clearInterval(slideVar);
-        }
-    }, 50);
 }
 </script>
 

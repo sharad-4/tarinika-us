@@ -47,9 +47,6 @@
     padding: 5px 10px;
     text-align: center;
   }
-  a {
-    color: #47c1bf;
-  }
   h1.product_name.title {
     margin-bottom: 2%;
 }
@@ -96,7 +93,6 @@ h1 {
             js-product_section
             container
             is-justify-space-between
-            has-padding-bottom
             {% if product_images_position == 'right' %}
               is-flex-row-reverse
             {% endif %}">
@@ -134,6 +130,7 @@ h1 {
               medium-down--one-whole">
 
     <div class="mobile_breadcrumb">{% render 'mobile-breadcrumb' %}</div>
+    
 
     {% comment %} Sale sticker {% endcomment %}
     {% if stickers_enabled %}
@@ -144,14 +141,20 @@ h1 {
         collection_handles: collection_handles,
       %}
     {% endif %}
-
+    {% assign count = 0 %}
     {%- for block in section.blocks -%}
       <div class="product-block
-                  product-block--{{ block.type | downcase | replace: '_', '-' }}
+                  product-block--{{ block.type | downcase | replace: '_', '-' }} {{ block.type }}
                   {% if forloop.first == true %}
                     product-block--first
                   {% endif %}"
-                  {{ block.shopify_attributes }}>
+      >
+<!--       {% if forloop.index == 3 and block.type == "@app" %}
+        style="height:45px;"
+      {% endif %}
+      {% if forloop.index == 4 and block.type == "@app" %}
+        style="height:34px;"
+      {% endif %} -->
 
         {%- if block.type == 'vendor' -%}
           {% comment %} Vendor {% endcomment %}
@@ -165,16 +168,6 @@ h1 {
             </span>
           </p>
 
-        {%- elsif block.type == 'sku' -%}
-          {% comment %} Sku {% endcomment %}
-          <p class="sku">
-            {% if section_onboarding %}
-              1234567890
-            {% else %}
-              {{ selected_variant.sku }}
-            {% endif %}
-          </p>
-
         {%- elsif block.type == 'title' -%}
           {% comment %} Name {% endcomment %}
           <h1 class="product_name title">
@@ -186,7 +179,7 @@ h1 {
               {{ product.title }}
             {% endif %}
           </h1>
-
+{% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: '', concierge_install: true, product: product %}
         {%- elsif block.type == 'size-chart' -%}
           {% comment %} Size chart {% endcomment %}
           {% for tag in product.tags %}
@@ -352,7 +345,7 @@ h1 {
 </ol>
 Doing this will ensure your beautiful artificial jewelry goes on for years.  
 </li>
-<li id="tab2">We ship all orders in 7-10 business days. You can avail free shipping above INR 2,000 for India orders. For returns, we offer free 14-days easy returns for all regular items. Tarinika Outlet items can only be exchanged within 48 hours of delivery. Visit our Shipping and Delivery page or Returns page to learn more. </li>
+<li id="tab2">We ship all our orders in 7–10 business days, other than our ready-to-ship products. Free delivery is available on orders of USD 99 or above in the United States and in other countries for orders of USD 149 or more. We only accept USA and Indian orders for our 14-day easy return/exchange policy. For additional information, please visit our <a href="https://www.tarinika.com/pages/shipping-and-delivery" target="_blank">Shipping and Delivery page</a> or <a href="https://www.tarinika.com/pages/returns-exchanges" target="_blank">Returns page</a>.</li>
 <li id="tab3">Have a query? Write to us at <a href="mailto:support@tarinika.com">support@tarinika.com</a> and we’ll address it within 24 hours.</li>
 </ul>
 <!--End tab labels - custom code by Prateek-->
@@ -386,7 +379,6 @@ Doing this will ensure your beautiful artificial jewelry goes on for years.
               {% endunless %}
             </div>
           {% endif %}
-
 
           <div class="mobile-menu-divider"></div>
 

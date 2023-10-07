@@ -30,11 +30,36 @@
     justify-content: space-around;
     bottom: 0vh;
 }
+  .sale.price_save {
+    margin-left: 1rem;
+  }
   .cart__style .cart__row-description {
     margin-left: 15px;
   }
   .cart__style p {
     font-size: 0.875rem !important;
+  }
+  @media only screen and (min-width: 900px) {
+    .shopify-cleanslate [data-shopify-buttoncontainer] {
+      -webkit-flex-wrap: wrap !important;
+      flex-wrap: wrap !important;
+      -webkit-flex-direction: row !important;
+      flex-direction: row !important;
+      justify-content: space-between;
+    }
+    .shopify-cleanslate [data-shopify-buttoncontainer] li {
+      width: calc(100% - 292px);
+      -webkit-flex-basis: unset !important;
+      -ms-flex-preferred-size: unset !important;
+      flex-basis: unset !important;
+    }
+    .shopify-cleanslate [data-shopify-buttoncontainer] li:first-child:nth-last-child(n + 4),
+    .shopify-cleanslate [data-shopify-buttoncontainer] li:first-child:nth-last-child(n + 4) ~ * {
+      width: calc(100% - 210px);
+    }
+/*     .shopify-cleanslate [data-shopify-buttoncontainer] li:nth-child(3) {
+      width: calc(100% - 292px);
+    } */
   }
     {% render 'new-cart-styles' %}
   {% endstyle %}
@@ -95,7 +120,7 @@
         <div class="cart__item-list one-whole column medium-down--one-whole">
           {% assign total_saving = 0 %}
           {% for item in cart.items %}
-            {% if item.original_price < item.variant.compare_at_price %}
+            {% if item.variant.compare_at_price > item.variant.price %}
               {% assign saving = item.variant.compare_at_price | minus: item.variant.price | times: item.quantity %}
               {% assign total_saving = saving | plus: total_saving %}
             {% endif %}
@@ -157,9 +182,33 @@
                   </div>
                   </div> 
             <div class="desc-02">
-   <div class="cart__price">
+   <div class="cart__price_discounted">
                   {% if item.line_level_discount_allocations.size < 1 %}
-                  <p class="d-flex align-items-end">
+                  <p class="align-items-end">
+                    {% if item.original_price > 0 %}
+                      <span class="product--price">
+                        <span class="money {% if item.original_price < item.variant.compare_at_price %}sale{% endif %}">
+                          {% render 'price-element', price: item.original_price %}
+                        </span>
+
+                        {% if item.original_price < item.variant.compare_at_price %}
+                          <span class="money was-price">
+                            {% render 'price-element', price: item.variant.compare_at_price %}
+                          </span>
+                        {% endif %}
+                      </span>
+                      {% comment %}
+                      {% if item.original_price < item.variant.compare_at_price %}
+                        <span class="sale price_save"> You Save: {% assign compare_at = item.variant.compare_at_price | minus: item.original_price %}
+                          {% render 'price-element', price: compare_at %}
+                        </span>
+                      {% endif %}
+                      {% endcomment %}
+                    {% else %}
+                      {{ settings.free_price_text }}
+                    {% endif %}
+
+                    {% comment %}
                     {% if item.original_price > 0 %}
                       <span class="money {% if item.original_price < item.variant.compare_at_price %}sale{% endif %}">
                         {% render 'price-element', price: item.original_price %}
@@ -176,6 +225,7 @@
                     {% else %}
                       {{ settings.free_price_text }}
                     {% endif %}
+                    {% endcomment %}
                   </p>
                   {% endif %}
                   {% comment %} Discounts for line items {% endcomment %}
@@ -228,13 +278,14 @@
         </div>
       </div>
     <div class="cart-extra container is-align-center cart__points">
-  <p>Get <span class="cart__subtotal">
-    <span class="money">
-      {{ cart.total_price | money_without_currency}}  
-<!--           {% render 'price-element', price: cart.total_price %} -->
-
-        </span>
-      </span>Tarinika rewards points on this order</p>
+  <p>Get
+    {% if cart.currency.iso_code == "USD" %}
+    {% assign tarinika_us_points = cart.total_price %}
+      <span class="cart__subtotal"><span class="amoney">{{ tarinika_us_points | times: 5 | money_without_currency | replace:',' , '' | ceil }}</span>
+      </span>&nbsp;Tarinika rewards points on this order</p>
+    {% else %}
+       5 Rewards Points for every $1 USD spent</p>
+    {% endif %}
 <div class="one-whole"><a class="cart-links" href="#smile-home">
           <p>Check your Tarinika Points</p>
           
@@ -263,7 +314,7 @@
               <div class="column sticked">
          
       <div class="h3 text-left">Order Summary</div>       
-      <div class="cart-extra"> 
+      <div class="cart-extra">
        {% assign total_savings = total_saving | plus: cart.total_discount %}
        {% assign only_savings = total_saving %}
        {% assign total_cart_item_price = total_savings | plus: cart.total_price %}

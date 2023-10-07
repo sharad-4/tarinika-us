@@ -1284,6 +1284,7 @@ class Product {
     }
 
     if (this.variantSelection) {
+
       Promise.all([
         this.variantSelection.getProduct(),
         this.variantSelection.getVariant(),
@@ -1761,6 +1762,7 @@ class Product {
             if (flkty) {
               $thumbnailProductGallery.find('.is-nav-selected').removeClass('is-nav-selected');
               const $selected = $thumbnails.eq(flkty.selectedIndex).addClass('is-nav-selected');
+
               // scroll nav
               const scrollY = (
                 $selected.position().top
@@ -1775,7 +1777,7 @@ class Product {
           });
         } else {
           $thumbnailProductGallery.flickity({
-            cellAlign: 'center',
+            cellAlign: 'left',
             contain: true,
             groupCells: '80%',
             imagesLoaded: true,
@@ -1792,7 +1794,7 @@ class Product {
       } else {
         // Otherwise create standard thumbnail slider
         $thumbnailProductGallery.flickity({
-          cellAlign: 'center',
+          cellAlign: 'left',
           contain: true,
           groupCells: '80%',
           imagesLoaded: true,
@@ -1976,7 +1978,7 @@ window.PXUTheme.jsProduct = {
           freeScroll: true,
           imagesLoaded: true,
           draggable: true,
-          cellAlign: 'center',
+          cellAlign: 'left',
           wrapAround: slideData.wrapAround,
           pageDots: false,
           contain: true,

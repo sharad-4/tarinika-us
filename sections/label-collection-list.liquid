@@ -4,23 +4,6 @@
 - Uses blocks
 {% endcomment %}
 
-<script>
-  function generateRandomWord() {
-  const alphabet = 'abcdefghijklmnopqrstuvwxyz';
-  const word = [];
-
-  for (let i = 0; i < 4; i++) {
-    const randomIndex = Math.floor(Math.random() * alphabet.length);
-    word.push(alphabet[randomIndex]);
-  }
-
-  return word.join('');
-}
-
-// Example usage
-const randomWord = generateRandomWord();
-  
-</script>
 
 {% assign id = section.id %}
 {% assign collections_per_row = section.settings.collections_per_row %}
@@ -56,7 +39,37 @@ const randomWord = generateRandomWord();
       max-height: {{ collection_height }}px;
     }
   {% endif %}
+  .new-collection-carousel-prev-icon-{{ id }}{
+   position:absolute;
+   top:40%;
+   left:-10px;
+   margin:0px !important;
+ }
 
+  .new-collection-carousel-next-icon-{{ id }}{
+     position:absolute;
+     top:40%;
+     right:-10px;
+      margin:0px !important;
+  }
+
+@media only screen and (max-width:789px){
+  
+   .new-collection-carousel-prev-icon-{{ id }}{  
+     position:absolute;
+     top:40%;
+     left:-10px;  
+     margin:0 !important;
+   }
+  
+  .new-collection-carousel-next-icon-{{ id }}{
+     position:absolute;
+     top:40%;
+     right:3px;
+     margin:0px !important;
+  }
+ 
+}
   .collection-thumbnail-overlay {
     background-color: {%- if overlay_alpha != 0 -%}{{ overlay_background | color_modify: 'alpha', overlay_background_alpha }}{% endif %};
   }
@@ -64,6 +77,9 @@ const randomWord = generateRandomWord();
   .collection-info__caption span {
     color: {%- if overlay_text_alpha != 0 -%}{{ overlay_text }}{% endif %}
   }
+
+
+  
 {%- endcapture -%}
 
 {% comment %} Section specific CSS {% endcomment %}
@@ -139,9 +155,18 @@ display:block;
     justify-content: space-between;
     width: 100%;
 }
+ 
   div#butns-{{id}} button:hover {
     cursor: pointer;
 }
+
+@media only screen and (max-width: 789px) {
+  div#butns-{{id}} {
+    width: 95% !important;
+  }
+}
+  
+  
   .features_image .image-element__wrap,
   #featured_image img {
     width: 100% !important;
@@ -161,6 +186,16 @@ display:block;
   .featured_container .column {
     max-width: 400px !important;
   }
+
+    @media only screen and (min-width:1310px){
+    #products-template--14689230291010__3bc69ff2-5ca0-4e30-9d94-fdd56a2c25df {
+      width: 85%;
+      margin: auto;
+    }
+    div#butns-template--14689230291010__3bc69ff2-5ca0-4e30-9d94-fdd56a2c25df{
+      display: none;
+    }
+}
   @media only screen and (min-width:1810px) {
     div#products-{{id}} {
       justify-content: center;
@@ -169,6 +204,31 @@ display:block;
       display: none;
     }
   }
+
+  @media only screen and (min-width: 790px) {
+    
+  div#products-{{id}}{
+    gap: 20px;
+  }
+
+
+  div#column-{{id}} {
+    width: unset !important;
+    margin: unset !important;
+    flex: unset !important;
+    min-width: unset !important;
+    max-width: unset !important;
+  }
+
+  div#shopify-section-{{ id }} .section{
+    width: 100vw !important;
+    padding :0 20px;
+  }
+
+}
+
+
+  
 {% endstyle %}
 
 <section class="section collection_section featured_section
@@ -188,7 +248,7 @@ display:block;
                   data-scroll-class="{{ animation }}"
                 {% endif %} style="position:relative">
 
-  <div id="products-{{id}}" class="container featured_container">
+  <div id="products-{{id}}" class="container featured_container label-carousel-{{ id }} custom-featured-container-carousel">
     {% if section.blocks.size > 0 %}
 
       {% for block in section.blocks %}
@@ -292,11 +352,68 @@ display:block;
 
     {% endif %}
   </div>
-<div id="butns-{{id}}" class="container justify-content-between new-collection-button">
-<button class="rightleft prevcol" onclick="slideCollection('left','{{ id }}')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="12 8 8 12 12 16"></polyline><line x1="16" y1="12" x2="8" y2="12"></line></svg></button>
-<button class="rightleft nextcol" onclick="slideCollection('right','{{ id }}')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="12 16 16 12 12 8"></polyline><line x1="8" y1="12" x2="16" y2="12"></line></svg></button>
-</div>
+
+<button class="rightleft prevcol  new-collection-carousel-prev-icon-{{ id }}" onclick="slideCollection('left','{{ id }}')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="12 8 8 12 12 16"></polyline><line x1="16" y1="12" x2="8" y2="12"></line></svg></button>
+<button class="rightleft nextcol  new-collection-carousel-next-icon-{{ id }}" onclick="slideCollection('right','{{ id }}')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="12 16 16 12 12 8"></polyline><line x1="8" y1="12" x2="16" y2="12"></line></svg></button>
+
 </section>
+
+<script>
+
+//  function setColumnWidths() {
+   
+//   const columnId = {{ id | json }}
+//   const colParent = document.querySelector(`#products-${columnId}`);
+//   const colContainers = document.querySelectorAll(`#column-${columnId}`);
+//   const newWidth = colParent.offsetWidth / 3;
+
+//   // Loop over the selected elements
+//   colContainers.forEach(colContainer => {
+//   console.log("colContainer", colContainer)
+//     colContainer.style.width = `${newWidth - 10}px`;
+//     colContainer.style.minWidth = `${newWidth - 10}px`;
+//     colContainer.style.maxWidth = `${newWidth - 10}px`;
+//     colContainer.style.flex = `unset`;
+//   });
+// }
+
+// if(window.innerWidth >= 789){
+//   setColumnWidths();
+// }
+  
+// window.addEventListener("resize", (event) => {
+// if(window.innerWidth >= 789){
+//   setColumnWidths();
+// }
+  
+// });
+
+
+(function() {
+
+  function evalEqlCardWidth(gap, minWidth, containerWidth, cardRefs){
+  try {
+  const numOfCards = Math.floor((containerWidth - gap )/ (minWidth+ gap))
+
+  const cardWidth = (containerWidth - ((numOfCards+1) * gap)) / numOfCards ;
+  cardRefs.forEach(cardRef => {
+    // cardRef.setAttribute('style', `width:${cardWidth}px !important`  )
+    cardRef.style.setProperty("width",  `${cardWidth}px`, "important")
+    cardRef.style.setProperty("max-width",  `${cardWidth}px`, "important")
+    cardRef.style.setProperty("min-width",  `${cardWidth}px`, "important")
+      // cardRef.style.width =  `${cardWidth}px`
+  });
+  } catch (error) {
+      console.log(error)
+  }
+}
+
+  
+  const containerId = {{ id | json }}
+  if(window.innerWidth >= 800)
+    evalEqlCardWidth(20, 350, window.innerWidth ,document.querySelectorAll( `#column-${containerId}`))
+})();
+</script>
 
 {% schema %}
 {
@@ -541,3 +658,40 @@ display:block;
   ]
 }
 {% endschema %}
+
+<script>
+
+(function(){
+  function generateRandomWord() {
+  const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+  const word = [];
+
+  for (let i = 0; i < 4; i++) {
+    const randomIndex = Math.floor(Math.random() * alphabet.length);
+    word.push(alphabet[randomIndex]);
+  }
+
+  return word.join('');
+}
+
+// Example usage
+const randomWord = generateRandomWord();
+    function handleCheckShowIcon(){
+    let widthOfItem=document.querySelector(".label-carousel-{{ id }}").scrollWidth
+    let buttons=document.querySelector(".new-collection-carousel-prev-icon-{{ id }}")
+    let buttons1=document.querySelector(".new-collection-carousel-next-icon-{{ id }}")
+    if(widthOfItem<window.innerWidth){
+      buttons.style.display="none"
+      buttons1.style.display="none"
+    }else{
+       buttons.style.display="flex"
+       buttons1.style.display="flex"
+    }
+  }
+  handleCheckShowIcon()
+window.addEventListener("resize",handleCheckShowIcon)
+})()
+
+  
+</script>
+
