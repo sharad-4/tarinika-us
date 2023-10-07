@@ -14,39 +14,7 @@
      top:50%;
      right:7px;
 }
-.new-collection-carousel-prev-icon{
-   position:absolute;
-   top:40%;
-   left:-10px;
-   margin:0px !important;
- }
 
-  .new-collection-carousel-next-icon{
-     position:absolute;
-     top:40%;
-     right:-10px;
-      margin:0px !important;
-  }
-
-@media only screen and (max-width:789px){
-  
-   .new-collection-carousel-prev-icon{  
-     position:absolute;
-     top:40%;
-     left:-10px;  
-     margin:0 !important;
-   }
-  
-  .new-collection-carousel-next-icon{
-     position:absolute;
-     top:40%;
-     right:3px;
-     margin:0px !important;
-  }
-  
- 
-  
-}
 
 
  

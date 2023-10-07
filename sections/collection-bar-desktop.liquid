@@ -1,7 +1,7 @@
 {% comment %}
-** Collection bar desktop - dynamic **
-- Draggable section
-- Uses blocks
+  ** Collection bar desktop - dynamic **
+  - Draggable section
+  - Uses blocks
 {% endcomment %}
 
 {% assign id = section.id %}
@@ -46,186 +46,227 @@
 
 {% comment %} Section specific CSS {% endcomment %}
 {% style %}
-  #shopify-section-{{ id }} {
-    scrollbar-color: lightgrey transparent;
-    padding-top: {{ padding_top }}px;
-    padding-bottom: {{ padding_bottom }}px;
-    background-color: #E2EAEC;
-    overflow: auto;
-    height: 201px;
-  }
-  #shopify-section-{{ id }}:hover::-webkit-scrollbar {
-      height:4px;
-  }
-  #shopify-section-{{ id }}:hover::-webkit-scrollbar-track {
-      background-color: transparent !important;
-  }
-  #shopify-section-{{ id }}:hover::-webkit-scrollbar-thumb {
-      background-color: lightgrey !important;
-  }
-  .collection-bar-desktop-wrap {
-/*     width: 150px;
-    height: 150px; */
-    border-radius: 10px;
-  }
-/*   @media only screen and (min-width: 992px) {
-    .collection-bar-desktop-wrap {
-      border-radius: 5%;
+    #shopify-section-{{ id }} {
+      scrollbar-color: lightgrey transparent;
+      padding-top: {{ padding_top }}px;
+      padding-bottom: {{ padding_bottom }}px;
+      background-color: #E2EAEC;
+      overflow: auto;
+      height: 201px;
     }
-  } */
-  .collection_desktop_image {
-    width: 120px;
+    #shopify-section-{{ id }}:hover::-webkit-scrollbar {
+        height:4px;
+    }
+    #shopify-section-{{ id }}:hover::-webkit-scrollbar-track {
+        background-color: transparent !important;
+    }
+    #shopify-section-{{ id }}:hover::-webkit-scrollbar-thumb {
+        background-color: lightgrey !important;
+    }
+    .collection-bar-desktop-wrap {
+  /*     width: 150px;
+      height: 150px; */
+      border-radius: 10px;
+    }
+  /*   @media only screen and (min-width: 992px) {
+      .collection-bar-desktop-wrap {
+        border-radius: 5%;
+      }
+    } */
+    .collection_desktop_image {
+      width: 120px;
+    }
+    {% render 'css-loop',
+            css: section_css,
+            id: id
+    %}
+    {% render 'css-loop',
+            css: custom_css,
+            id: id
+    %}
+    .section{max-width:unset}
+  div#products-{{id}} {
+      flex-flow: row !important;
+      display: inline-flex;
+  /*     overflow-x: auto;
+      overflow-y: hidden; */
   }
-  {% render 'css-loop',
-          css: section_css,
-          id: id
-  %}
-  {% render 'css-loop',
-          css: custom_css,
-          id: id
-  %}
-  .section{max-width:unset}
-div#products-{{id}} {
+    .collection-bar {
+  /*     overflow-x: auto;
+      overflow-y: hidden; */
+    white-space: nowrap;
+    }
+  .column.one-fifth.thumbnail.list-collection--align-height.has-gutter.has-gutter--mobile.list-collection__thumbnail.medium-down--one-whole {
+      min-width: 234px;
+      flex: 1 0 35%;
+  }
+  div#butns-{{id}} {
+  display:block;
+  }
+    .has-gutter-enabled.has-multirow-blocks .has-gutter {
+      margin-bottom: 20px;
+      border: 1px solid #e1e1e1;
+      border-radius: 10px;
+  }
+    .collection_list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: none !important;
+      border-radius: none !important;
+      margin: 0 15px !important;
+    }
+
+    .cardtitle{
+      font-size:1rem !important;
+      text-align: center;
+    }
+    button.rightleft {
+      background: none;
+      border: none;
+  }
+      #butns-{{id}}{
+      display:none!important;
+  }
+  /*   .collection_image .image-element__wrap {
+      min-width: 100%;
+      max-height: 400px!important;
+      max-width: 600px!important;
+    } */
+    .collection-caption {
+      padding: 10px 0 !important;
+    }
+  /*   .collection-caption .cardtitle {
+      font-size: 1.5rem !important;
+    } */
+    .collection-bar-desktop {
+      margin: 62px 0px 0px 0px;
+    }
+  @media only screen and (max-width:900px){
+      .collection-bar-desktop-wrap {
+          width: 50px !important;
+          height: 50px !important;
+      }
+    .cardtitle{font-size:0.75rem !important}
+
+    div#products-{{id}}{
     flex-flow: row !important;
     display: inline-flex;
-/*     overflow-x: auto;
-    overflow-y: hidden; */
-}
-  .collection-bar {
-/*     overflow-x: auto;
-    overflow-y: hidden; */
-  white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 1080px;
   }
-.column.one-fifth.thumbnail.list-collection--align-height.has-gutter.has-gutter--mobile.list-collection__thumbnail.medium-down--one-whole {
-    min-width: 234px;
-    flex: 1 0 35%;
-}
-div#butns-{{id}} {
-display:block;
-}
-  .has-gutter-enabled.has-multirow-blocks .has-gutter {
-    margin-bottom: 20px;
-    border: 1px solid #e1e1e1;
-    border-radius: 10px;
-}
-  .collection_list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: none !important;
-    border-radius: none !important;
-    margin: 0 15px !important;
-  }
-
-  .cardtitle{
-    font-size:1rem !important;
-    text-align: center;
-  }
-  button.rightleft {
-    background: none;
-    border: none;
-}
     #butns-{{id}}{
-    display:none!important;
-}
-/*   .collection_image .image-element__wrap {
-    min-width: 100%;
-    max-height: 400px!important;
-    max-width: 600px!important;
+      display:none!important;
+  }
+  /* .collection-info__caption--below-image {
+    padding: 10px !important;
   } */
-  .collection-caption {
-    padding: 10px 0 !important;
-  }
-/*   .collection-caption .cardtitle {
-    font-size: 1.5rem !important;
-  } */
-  .collection-bar-desktop {
-    margin: 62px 0px 0px 0px;
-  }
-@media only screen and (max-width:900px){
-    .collection-bar-desktop-wrap {
-        width: 50px !important;
-        height: 50px !important;
+    .collection_image_wrap {
+      width: 80px !important;
+      height: 80px !important;
     }
-  .cardtitle{font-size:0.75rem !important}
-      
-  div#products-{{id}}{
-  flex-flow: row !important;
-  display: inline-flex;
-  overflow-x: auto;
-  overflow-y: hidden;
-  width: 1080px;
-}
-  #butns-{{id}}{
-    display:none!important;
-}
-/* .collection-info__caption--below-image {
-  padding: 10px !important;
-} */
-  .collection_image_wrap {
-    width: 80px !important;
-    height: 80px !important;
+
   }
-  
-}
-.rightleft > svg {
-    stroke-width: 0.7px;
-    stroke: #606379;
-    width: 45px;
-    height: 45px;
-}
-.prevcol{margin-left:-3%}
-.nextcol{margin-right:-3%}
-  
-  div#butns-{{id}} {
-    position: absolute;
-    top: 35%;
-    display: flex;
-    z-index: 999999;
-    justify-content: space-between;
-    width: 100%;
-}
-  .collection-info__caption {
-    padding: 0px;
+  .rightleft > svg {
+      stroke-width: 0.7px;
+      stroke: #606379;
+      width: 45px;
+      height: 45px;
   }
-  #collection_bar_desktop {
-    margin-left: 10px;
-  }
-  @media only screen and (max-width:1024px){
-    .shopify-section.collection-bar-desktop {
-      display: none;
-    }
-  }
-  @media only screen and (min-width:2048px){
-    #collection_bar_desktop {
-      margin-left: auto;
+  .prevcol{margin-left:-3%}
+  .nextcol{margin-right:-3%}
+
+    div#butns-{{id}} {
+      position: absolute;
+      top: 35%;
       display: flex;
+      z-index: 999999;
+      justify-content: space-between;
+      width: 100%;
+  }
+    .collection-info__caption {
+      padding: 0px;
+    }
+    #collection_bar_desktop {
+      margin-left: 10px;
+    }
+    @media only screen and (max-width:1024px){
+      .shopify-section.collection-bar-desktop {
+        display: none;
+      }
+    }
+    @media only screen and (min-width:2048px){
+      #collection_bar_desktop {
+        margin-left: auto;
+        display: flex;
+      }
+    }
+  @media only screen and (min-width:1024px){
+   .collection-bar-desktop .previous-btn-desktop {
+      padding: 0px;
+      position: absolute;
+      top: 30%;
+      left: 4px;
+     height: 24px !important;
+     width: 24px !important;
+      z-index: 10;
+  }
+  .collection-bar-desktop .next-btn-desktop {
+      padding: 0px;
+      position: absolute;
+      top: 30%;
+      z-index: 10;
+    height: 24px !important;
+     width: 24px !important;
+      right: 14px;
+  }
+    .previous-btn-desktop .jSVjCL  , .next-btn-desktop .jSVjCL  {
+      border: none;
+          width: 30px;
+          height: 30px;
+     line-height: 26px;
     }
   }
+
+  #collection_bar_desktop {
+    scroll-behavior: smooth;
+  }
+  
 {% endstyle %}
-
-<section id="collection_bar_desktop" class="section
-                {{ css_class }}
-                is-width-{{ width }}
-                {% if show_gutter == false %}
-                  has-no-side-gutter
-                  has-background
-                {% else %}
-                  has-gutter-enabled
-                {% endif %}
-                {% if section.blocks.size > collections_per_row %}
-                  has-multirow-blocks
-                {% endif %}
-                "
-                {% if animation != "none" %}
-                  data-scroll-class="{{ animation }}"
-                {% endif %} style="position:relative">
-
-  <div id="products-{{id}}" class="container">
+    <button class="rightleft previous-btn-desktop" onclick="slideBlogsTopDesktop('left')"> 
+      <div class="CarouselSlider__ArrowCircle-sc-49r1d5-4 CarouselSlider__ArrowCircleRight-sc-49r1d5-6 jSVjCL ivDFXw"> 
+        <i aria-label="icon: right" height="9px" class="anticon anticon-right CarouselSlider__StyledRight-sc-49r1d5-8 kYgaUp"> 
+          <svg viewBox="64 64 896 896" focusable="false" class="" data-icon="left" width="1em" height="1em" fill="grey" aria-hidden="true"> <path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg>
+        </i>
+      </div>
+    </button>
+    <button class="rightleft next-btn-desktop" onclick="slideBlogsTopDesktop('right')"> <div class="CarouselSlider__ArrowCircle-sc-49r1d5-4 CarouselSlider__ArrowCircleRight-sc-49r1d5-6 jSVjCL ivDFXw"> <i aria-label="icon: right" height="9px" class="anticon anticon-right CarouselSlider__StyledRight-sc-49r1d5-8 kYgaUp"> <svg viewBox="64 64 896 896" focusable="false" class="" data-icon="right" width="1em" height="1em" fill="grey" aria-hidden="true"> <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path></svg></i></div>
+    </button>
+<section
+  id="collection_bar_desktop"
+  class="
+    section
+    {{ css_class }}
+    is-width-{{ width }}
+    {% if show_gutter == false %}
+      has-no-side-gutter
+      has-background
+    {% else %}
+      has-gutter-enabled
+    {% endif %}
+    {% if section.blocks.size > collections_per_row %}
+      has-multirow-blocks
+    {% endif %}
+  "
+  {% if animation != 'none' %}
+    data-scroll-class="{{ animation }}"
+  {% endif %}
+  style="position:relative"
+>
+  <div id="products-{{id}}" class="container loop-of-card-container">
     {% if section.blocks.size > 0 %}
-
       {% for block in section.blocks %}
-
         {% assign feature_collection = block.settings.feature_collection %}
         {% assign collection = collections[feature_collection] %}
 
@@ -235,34 +276,38 @@ display:block;
         {% elsif collection.image != blank %}
           {% assign collection_image = collection.image %}
           {% assign collection_image_alt = collection.image.alt | escape %}
-        {% else collection.empty? == false %}
+        {% else %}
           {% assign collection_image = collection.products.first.featured_image %}
           {% assign collection_image_alt = collection.products.first.featured_image.alt | escape %}
         {% endif %}
 
-        <div id="column-{{id}}" class="column collection_list
-                    {% render 'column-width', value: collections_per_row %}
-                    thumbnail
-                    {% if section.settings.align_height %}
-                      list-collection--align-height
-                    {% endif %}
-                    {% if show_gutter == true %}
-                      has-gutter
-                      has-gutter--mobile
-                    {% endif %}
-                    list-collection__thumbnail
-                    medium-down--one-whole">
-
+        <div
+          id="column-{{id}}"
+          class="
+            column collection_list
+            {% render 'column-width', value: collections_per_row %}
+            thumbnail
+            {% if section.settings.align_height %}
+              list-collection--align-height
+            {% endif %}
+            {% if show_gutter == true %}
+              has-gutter
+              has-gutter--mobile
+            {% endif %}
+            list-collection__thumbnail
+            medium-down--one-whole
+          "
+        >
           <div class="product-wrap collection-bar-desktop-wrap collection_image_wrap">
-            <div class="collection-thumbnail-overlay"></div> 
+            <div class="collection-thumbnail-overlay"></div>
 
-            {% if collection_image != nil %}
+            {% if collection_image != null %}
               <div class="thumbnail image__container collection_image collection_desktop_image">
                 {% render 'image-element',
-                        image: collection_image.src,
-                        alt: collection_image_alt,
-                        image_crop: true,
-                        max_height: collection_height
+                  image: collection_image.src,
+                  alt: collection_image_alt,
+                  image_crop: true,
+                  max_height: collection_height
                 %}
               </div>
             {% else %}
@@ -279,65 +324,105 @@ display:block;
                     {% elsif collection != blank %}
                       {{ collection.title }}
                     {% else %}
-                      {{ "homepage.onboarding.collection_title" | t }}
+                      {{ 'homepage.onboarding.collection_title' | t }}
                     {% endif %}
                   </span>
                   {% render 'button',
-                          label: block.settings.button_label,
-                          href: collection.url,
-                          style: section.settings.button_style
+                    label: block.settings.button_label,
+                    href: collection.url,
+                    style: section.settings.button_style
                   %}
                 </div>
               {% endif %}
             </a>
           </div>
           {% if section.settings.collection_title_below_image != blank %}
-            <a class="collection-info__caption-wrapper collection-info__caption--below-image collection-caption" href="{{ collection.url }}">
+            <a
+              class="collection-info__caption-wrapper collection-info__caption--below-image collection-caption"
+              href="{{ collection.url }}"
+            >
               <span class="cardtitle">
                 {% if block.settings.title != blank %}
                   {{ block.settings.title }}
                 {% elsif collection != blank %}
                   {{ collection.title }}
                 {% else %}
-                  {{ "homepage.onboarding.collection_title" | t }}
+                  {{ 'homepage.onboarding.collection_title' | t }}
                 {% endif %}
               </span>
               {% render 'button',
-                      label: block.settings.button_label,
-                      href: collection.url,
-                      style: section.settings.button_style
+                label: block.settings.button_label,
+                href: collection.url,
+                style: section.settings.button_style
               %}
             </a>
           {% endif %}
         </div>
-
       {% endfor %}
-
     {% endif %}
   </div>
-<div id="butns-{{id}}" class="container justify-content-between">
-<button class="rightleft prevcol" onclick="slide('left')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="12 8 8 12 12 16"></polyline><line x1="16" y1="12" x2="8" y2="12"></line></svg></button>
-<button class="rightleft nextcol" onclick="slide('right')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="12 16 16 12 12 8"></polyline><line x1="8" y1="12" x2="16" y2="12"></line></svg></button>
-</div>
+  <div id="butns-{{id}}" class="container justify-content-between">
+    <button class="rightleft prevcol" onclick="slide('left')">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="feather feather-arrow-left-circle"
+      >
+        <circle cx="12" cy="12" r="10"></circle><polyline points="12 8 8 12 12 16"></polyline><line x1="16" y1="12" x2="8" y2="12"></line>
+      </svg>
+    </button>
+    <button class="rightleft nextcol" onclick="slide('right')">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="feather feather-arrow-right-circle"
+      >
+        <circle cx="12" cy="12" r="10"></circle><polyline points="12 16 16 12 12 8"></polyline><line x1="8" y1="12" x2="16" y2="12"></line>
+      </svg>
+    </button>
+  </div>
 </section>
 
 <script type="text/javascript">
-  window.addEventListener("touchstart", func, {passive: true} )
-function slide(direction){
-    var container = document.getElementById('products-{{ id }}');
-    scrollCompleted = 0;
-    var slideVar = setInterval(function(){
-        if(direction == 'left'){
-            container.scrollLeft -= 50;
+    function slideBlogsTopDesktop(direction){
+    var container = document.getElementById('collection_bar_desktop');
+    let scrollValue = container.querySelectorAll('#column-{{id}}')[0].offsetWidth + 10;
+    if(direction == 'left'){
+            container.scrollLeft -= scrollValue;
         } else {
-            container.scrollLeft += 50;
+            container.scrollLeft += scrollValue;
         }
-        scrollCompleted += 10;
-        if(scrollCompleted >= 100){
-            window.clearInterval(slideVar);
-        }
-    }, 50);
-}
+       }
+    window.addEventListener("touchstart", ()=>{}, {passive: true} )
+  function slide(direction){
+      var container = document.getElementById('products-{{ id }}');
+      scrollCompleted = 0;
+      var slideVar = setInterval(function(){
+          if(direction == 'left'){
+              container.scrollLeft -= 50;
+          } else {
+              container.scrollLeft += 50;
+          }
+          scrollCompleted += 10;
+          if(scrollCompleted >= 100){
+              window.clearInterval(slideVar);
+          }
+      }, 50);
+  }
 </script>
 {% schema %}
 {

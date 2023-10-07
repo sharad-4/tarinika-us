@@ -8,12 +8,72 @@ function evalEqlCardWidth(gap, minWidth, containerWidth, cardRefs){
   cardRefs.forEach(cardRef => {
     // cardRef.setAttribute('style', `width:${cardWidth}px !important`  )
     cardRef.style.setProperty("width",  `${cardWidth}px`, "important")
+    
+    cardRef.style.setProperty("min-width",  `${cardWidth}px`, "important")
       // cardRef.style.width =  `${cardWidth}px`
   });
   } catch (error) {
       console.log(error)
   }
 }
+function customCollectionList () {
+  const windowWidth = window.innerWidth ; 
+  const ref = document.querySelectorAll('.custom-section-carousal .list-collection__thumbnail')
+  evalEqlCardWidth(20, 300, windowWidth, ref);
+}
+customCollectionList();
+// Function to detect changes in a div with data-collection-main attribute
+function observeCollectionChanges(selector) {
+  // Select the target element to observe
+  const target = document.querySelector(selector);
+
+  // Check if the target element exists in the DOM
+  if (!target) {
+    console.error('Target element not found.');
+    return;
+  }
+
+  // Create a new MutationObserver
+  const observer = new MutationObserver((mutationsList, observer) => {
+    // Handle changes here
+    // You can perform actions or call functions when changes occur
+    // For example, trigger a function when changes happen
+    handleChanges(mutationsList);
+  });
+
+  // Configure the observer to watch for childList changes (content changes)
+  const config = { childList: true, attributes: true };
+
+  // Start observing the target element for changes
+  observer.observe(target, config);
+
+  // Function to handle changes (modify as needed)
+  function handleChanges(mutationsList) {
+     window.PXUTheme.currencyConverter.init()
+  }
+}
+function evalEqlCardWidthPartTwo(gap, minWidth, containerWidth, cardRefs){
+  try {
+  const numOfCards = Math.floor((containerWidth + gap )/ (minWidth+ gap))
+  const cardWidth = (containerWidth - ((numOfCards-1) * gap)) / numOfCards ;
+  cardRefs.forEach(cardRef => {
+    cardRef.style.setProperty("width",  `${cardWidth}px`, "important")
+    cardRef.style.setProperty("min-width",  `${cardWidth}px`, "important")
+    cardRef.style.setProperty("max-width",  `${cardWidth}px`, "important")
+  });
+  } catch (error) {
+      console.log(error)
+  }
+}
+window.addEventListener("load", (event) => {
+  setTimeout(() => {
+     window.PXUTheme.currencyConverter.init()
+  }, 500);
+
+    if(window.location.pathname.includes('wishlist'))
+      observeCollectionChanges("body");
+});
+
 
 alignTopCar();
 
@@ -23,14 +83,30 @@ document.addEventListener("DOMContentLoaded", (event) => {
   $('#footer-text-section-home').css("display", "block")
   }
 
-      // const currencies = ['United States (USD $)', 'Canada (CAD $)', 'India (INR ₹)', 'United Kingdom (GBP £)', 'Australia (AUD $)', 'Germany (EUR €)', 'Japan (JPY ¥)'];
+  
 
+    if(window.location.pathname.includes("collections")){
+  // Call the function to start observing changes
+    observeCollectionChanges("div[data-collection-main]");
+    }
+
+      if( window.location.pathname.includes('/cart')){
+        observeCollectionChanges(".column.sticked")
+          $('#cart_form').on('click', function() {
+            setTimeout(() => {
+               window.PXUTheme.currencyConverter.init()
+            }, 900);
+      });
+      }
+
+
+
+      // const currencies = ['United States (USD $)', 'Canada (CAD $)', 'India (INR ₹)', 'United Kingdom (GBP £)', 'Australia (AUD $)', 'Germany (EUR €)', 'Japan (JPY ¥)'];
       // $('.disclosure-list__item').each(function () {
       //   const listItem = $(this);
       //   const button = listItem.find('.disclosure__button');
       //   const buttonText = button.text();
       //   let currencyFound = false;
-
       //   for (let i = 0; i < currencies.length; i++) {
       //     if (buttonText.includes(currencies[i])) {
       //       currencyFound = true;
@@ -41,14 +117,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
       //       break;
       //     }
       //   }
-
       //   if (!currencyFound) {
       //     listItem.remove();
       //   }
       // });
   
       if(window.innerWidth < 800)
-        document.querySelector('a[href="https://omniform1.com/forms/v1/landingPage/61489ea823d8ae001a4b2d04/641cf32db09e89c71966c57c"]').setAttribute("href", "https://omniform1.com/forms/v1/landingPage/61489ea823d8ae001a4b2d04/64eda546195751ac400d4038"   )
+        document.querySelector('a[href="https://omniform1.com/forms/v1/landingPage/61489ea823d8ae001a4b2d04/641cf32db09e89c71966c57c"]')?.setAttribute("href", "https://omniform1.com/forms/v1/landingPage/61489ea823d8ae001a4b2d04/64eda546195751ac400d4038"   )
+  
 });
 
 
@@ -74,8 +150,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const sliderImage = document.querySelector(".product-gallery__thumbnails>div>div>div");
     const previousBtnImageSlider = document.querySelector(".product_gallery__thumbnails_previous_btn");
     const nextBtnImageSlider = document.querySelector(".product_gallery__thumbnails_next_btn");
-    nextBtnImageSlider.style.display = 'flex'
-    previousBtnImageSlider.style.display = 'flex'
+     if(nextBtnImageSlider)
+        nextBtnImageSlider.style.display = 'flex'
+     if(previousBtnImageSlider)
+       previousBtnImageSlider.style.display = 'flex'
 
     let dynamicWidth;
     function trackDynamicWidth() {
@@ -92,39 +170,42 @@ document.addEventListener("DOMContentLoaded", (event) => {
       handleScroll()
       ImageSliderContainer.scrollLeft += dynamicWidth + 12;
     };
-    previousBtnImageSlider.addEventListener("click", handlePrevBtn);
-    nextBtnImageSlider.addEventListener("click", handleNextBtn);
+    previousBtnImageSlider?.addEventListener("click", handlePrevBtn);
+    nextBtnImageSlider?.addEventListener("click", handleNextBtn);
 
     function handleScroll() {
+      if(previousBtnImageSlider && nextBtnImageSlider){
+        
         const { scrollLeft, scrollWidth, clientWidth } = ImageSliderContainer;
+  
         const isEndReached = scrollLeft + clientWidth >= scrollWidth - 20;
-       previousBtnImageSlider.style.display = 'flex'
+      previousBtnImageSlider.style.display = 'flex'
       nextBtnImageSlider.style.display = 'flex'
       if(scrollWidth<=clientWidth){
          previousBtnImageSlider.style.display = 'none'
       nextBtnImageSlider.style.display = 'none'
       }
-        // if(scrollLeft <= 0){
-        //   previousBtnImageSlider.style.display = 'none'
-        // }else{
-        //   previousBtnImageSlider.style.display = 'flex'
-        // }
-        // if(isEndReached){
-        //   nextBtnImageSlider.style.display = 'none'
-        // }else{
-        //   nextBtnImageSlider.style.display = 'flex'
-        // }
+        if(scrollLeft <= 0){
+          // previousBtnImageSlider.style.display = 'none'
+        }else{
+          // previousBtnImageSlider.style.display = 'flex'
+        }
+        if(isEndReached){
+          // nextBtnImageSlider.style.display = 'none'
+        }else{
+          // nextBtnImageSlider.style.display = 'flex'
+        }
+      }
     }
-    handleScroll()
+      handleScroll()
     
    }
   window.addEventListener("load", (event) => {
    makeCarouseDynamic()
   });
-window.addEventListener("resize",makeCarouseDynamic)
-// -----------------------------------
 
-// -----------------------------------
+window.addEventListener("resize",makeCarouseDynamic)
+
 
 window.PXUTheme.contentCreator.accordion = {
   init: function () {
@@ -547,6 +628,9 @@ window.PXUTheme.infiniteScroll = {
         if (typeof loadMoreButtonUrl === 'undefined') {
           $('[data-load-more]').addClass('is-hidden');
         }
+        
+         window.PXUTheme.currencyConverter.init()
+      
       },
 
       error(x, t, m) {
@@ -1981,20 +2065,35 @@ function slideCollection(direction, id){
         }
 }
 
-  function handleCheckShowIcon(){
-    let widthOfItem=document.querySelector(".featured_container").scrollWidth
-    let buttons=document.querySelector(".new-collection-carousel-prev-icon")
-    let buttons1=document.querySelector(".new-collection-carousel-next-icon")
-    if(widthOfItem<window.innerWidth){
-      buttons.style.display="none"
-      buttons1.style.display="none"
-    }else{
-       buttons.style.display="flex"
-       buttons1.style.display="flex"
+   const source=document.querySelector(".collection__description ");
+   const popularSearches=document.querySelector("#popular-searches-section");
+  console.log(popularSearches,"popular searches")
+if(popularSearches){
+  popularSearches.style.margin="auto"
+}
+
+   
+    if(source){
+     source.style.display="block"
+     source.style.maxWidth="1200px";
+      }
+    const target=document.querySelector("#custom-footer-section-tarinika");
+    target.style.display="block";
+    target.style.margin="auto";
+    target.style.marginTop="10px"
+    target.style.marginRight="10px"
+    target.style.marginLeft="10px"
+    target.setAttribute("class","has-padding-top")
+
+    if(source){
+      target.appendChild(source)
     }
-  }
-  handleCheckShowIcon()
-window.addEventListener("resize",handleCheckShowIcon)
+if(popularSearches){
+    target.append(popularSearches)
+  
+}
+    
+
 
 
 function alignTopCar () {
@@ -2003,8 +2102,16 @@ function alignTopCar () {
     const ref = document.querySelectorAll('#collection_bar_mobile .collection_mobile_list')
     evalEqlCardWidth(10, 90, windowWidth, ref);
   } else {
-    console.log("desktop")
     const ref = document.querySelectorAll('#collection_bar_desktop .list-collection__thumbnail')
     evalEqlCardWidth(10, 120, windowWidth, ref);
   }
 }
+
+
+
+let sourceForCurrency=document.querySelector(".header-menu__disclosure")
+let hide=document.querySelector(".header-menu__disclosure .disclosure")
+hide.style.display="flex"
+let item=document.querySelector("#slideshow_announcement-bar")
+
+item.append(sourceForCurrency)

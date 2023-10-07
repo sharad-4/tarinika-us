@@ -3,25 +3,23 @@ IMPORTANT, PLEASE EDIT CAREFULLY. MAKE SURE THERE ARE NO SYNTAX ERRORS
 ONLY EDIT LIQUID VALUES, DON"T CHANGE SCRIPT
 {% endcomment %}
 
-{% comment %} STANDARD_RATE_2 Enabled option on tarinika.in: 29-Jul-2022 {% endcomment %}
-{% comment %} MIXED_RATE_2 & MIXED_RATE_4 Enabled option on tarinika.in: 29-Jul-2022 {% endcomment %}
-
 {% liquid 
   assign IN_STOCK_PROCESS_TIME = 2
   assign OUT_OF_STOCK_PROCESS_TIME = 7
   
-  assign STANDARD_TRANSIT_TIME = 10
-  assign EXPRESS_TRANSIT_TIME = 5
+  assign STANDARD_TRANSIT_TIME = 17
+  assign EXPRESS_TRANSIT_TIME = 12
 
   assign STANDARD_RATE_1 = 'Free - Standard Shipping'
-  assign STANDARD_RATE_2 = 'Standard Shipment'
-  assign STANDARD_RATE_3 = 'Free - Standard Shipment'
+  assign STANDARD_RATE_2 = 'Standard Shipping'
+  assign STANDARD_RATE_3 = 'Express Shipping'
 
-  assign MIXED_RATE_1 = 'Free - Standard Shipment'
-  assign MIXED_RATE_2 = 'Standard Shipment' 
+  assign MIXED_RATE_1 = 'Free - Standard Shipping'
+  assign MIXED_RATE_2 = 'Standard Shipping'
   assign MIXED_RATE_3 = 'Express Shipping'
-  assign MIXED_RATE_4 = 'Split Shipment'   
-  assign MIXED_RATE_5 = 'Free - Split Shipment'
+  
+  assign MIXED_RATE_4 = 'Split Shipment - Standard'
+  assign MIXED_RATE_5 = 'Split Shipment - Express'
 %}
 
 

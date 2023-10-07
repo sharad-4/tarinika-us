@@ -51,12 +51,12 @@
   margin-left: 8px
  }
 
-    .mobile-menu__toggle-icon .icon {
+  .mobile-menu__toggle-icon .icon {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-
+  
   .mobile-header__content {
     justify-content: space-between;
   }
@@ -69,7 +69,14 @@
     padding-top: 18px;
   }
   
-  
-  
 }
 /* mobile css */
+
+/* common css */
+
+span.money{
+    opacity:0;
+}
+
+/* common css */
+

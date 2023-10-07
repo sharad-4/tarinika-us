@@ -161,18 +161,6 @@
               </tr>
             {% endfor %}
 
-            <tr>
-              <td colspan="4">{{ 'customer.order.subtotal' | t }}</td>
-              <td>
-                <span>
-                  {%
-                    render 'price-element',
-                    price: order.subtotal_price
-                  %}
-                </span>
-              </td>
-            </tr>
-
             {% for shipping_method in order.shipping_methods %}
             <tr>
               <td colspan="4">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</td>

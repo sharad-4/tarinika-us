@@ -777,6 +777,12 @@ window.PXUTheme.currencyConverter = {
     for (var i = 0; i < priceEls.length; i += 1) {
       this._convertEl(priceEls[i], newCurrency);
     }
+
+    // Iterate through the NodeList and set opacity for each element
+    priceEls.forEach(function(priceEl) {
+      priceEl.style.opacity = 1; // Change this value to the desired opacity level (0.5 for 50% opacity)
+    });
+    
   },
   convertCurrencies: function () {
     if (!this.isInitialised) {
