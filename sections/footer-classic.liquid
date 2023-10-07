@@ -122,8 +122,6 @@
         </div>
       {% endfor %}
     </div>
-
-<!--   <div class="newsletter_button"><button type="button" onclick="openNewsLetter()">Sign Up</button></div>  -->
   </section>
   <section class="footer__extra-content section">
     <div class="container has-padding-top has-padding-bottom">
@@ -171,30 +169,6 @@
     </div>
   </section>
 </footer>
-
-<script>
-
-      document.addEventListener('click', function(event) {
-       const elm = document.querySelector(".shopify-section.newsletter > section > div ")
-        if(elm){
-           const outsideClick = !elm?.contains(event.target);
-            const newsLetterSection = document.getElementsByClassName("shopify-section newsletter")[0]
-            if( event.target?.getAttribute("onclick") !== "openNewsLetter()" && outsideClick && newsLetterSection.style.display !== "none" ){
-                newsLetterSection.style.display = "none"
-            }  
-        }
-      });
-  
-  function openNewsLetter() {
-    // window.location.href = "/pages/newsletter"
-
-    const newsLetterSection = document.getElementsByClassName("shopify-section newsletter")[0]
-    if(newsLetterSection){
-      newsLetterSection.style.display = "block"
-    }
-
-  }
-</script>
 
 {% schema %}
 

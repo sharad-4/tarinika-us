@@ -1,19 +1,5 @@
 "use strict";
-// -----Single Product thumbnail image slider-----
-  window.addEventListener("load", (event) => {
-    const ImageSliderContainer = document.querySelector(".product-gallery__thumbnails>div>div");
-    const previousBtnImageSlider = document.querySelector(".product_gallery__thumbnails_previous_btn");
-    const nextBtnImageSlider = document.querySelector(".product_gallery__thumbnails_next_btn");
-    const handlePrevBtn = () => {
-      ImageSliderContainer.scrollLeft -= 92;
-    };
-  
-    const handleNextBtn = () => {
-      ImageSliderContainer.scrollLeft += 92;
-    };
-    previousBtnImageSlider.addEventListener("click", handlePrevBtn);
-    nextBtnImageSlider.addEventListener("click", handleNextBtn);
-  });
+
 
 window.PXUTheme.contentCreator.accordion = {
   init: function () {
@@ -1198,13 +1184,11 @@ window.PXUTheme.responsiveVideo = {
 };
 
 function selectCallback(productEl, product, variant, state) {
-
     $(document).trigger({
     type: 'variant:change',
     variant: variant,
     product: product
   });
-  
   const $product = $(productEl);
   const $notifyForm = $('.product__notify-form', $product);
   const $productForm = $('.product_form, .shopify-product-form', $product);
@@ -1265,26 +1249,15 @@ function selectCallback(productEl, product, variant, state) {
   $('.cart-warning', $product).text('');
 
   if (variant) {
-    
     $('.sku', $product).text(variant.sku);
     $('.notify_form_message', $product).attr('value', `${$('.notify_form_message', $product).data('body')} - ${variant.title}`);
   }
 
   if (variant && variant.available) {
-   
     const variantWithInventory = { ...variant,
       ...(variantInventory ? variantInventory.find(v => v.id === variant.id) || {} : {})
     };
-    if (variantWithInventory) {
-      variant.inventory_quantity = variantWithInventory.inventory_quantity;
-      variant.inventory_management = variantWithInventory.inventory_management;
-      variant.inventory_policy = variantWithInventory.inventory_policy;
 
-      var sVariants = JSON.parse(sessionStorage.getItem("variants")) || {}
-      sVariants[variant.id] = variant
-      sessionStorage.setItem("variants", JSON.stringify(sVariants));
-      // debugger
-    }
     if (variantWithInventory.inventory_management && variantWithInventory.inventory_quantity > 0) {
       if (window.PXUTheme.theme_settings.display_inventory_left) {
         let itemsLeftText = window.PXUTheme.translation.product_count_other;
@@ -1874,3 +1847,48 @@ function slideCollection(direction, id){
         }
     }, 50);
 }
+
+document.addEventListener("DOMContentLoaded", (event) => {
+ var productOfferOpen = true
+
+var productAccordionContainer = document.querySelector(".attryb-offer-accordion-down")
+
+if(productAccordionContainer){
+  productAccordionContainer.addEventListener("click", function () {
+    if (productOfferOpen) {
+        var productPannel = document.querySelector(".attryb-offer-content")
+        productPannel.className += " active"
+        productPannel.style.maxHeight = productPannel.scrollHeight + "px"
+        document.querySelector(".attryb-offer-header").className += " active"
+        document.querySelector(".attryb-offer-accordion-down").className += " active"
+        document.querySelector(".attryb-offer-container").className += " active"
+        productOfferOpen = false
+    } else {
+        var productPannel = document.querySelector(".attryb-offer-content")
+        productPannel.className = "attryb-offer-content"
+        productPannel.style.maxHeight = null
+        document.querySelector(".attryb-offer-header").className = "attryb-offer-header"
+        document.querySelector(".attryb-offer-accordion-down").className = "attryb-offer-accordion-down"
+        document.querySelector(".attryb-offer-container").className = "attryb-offer-container"
+        productOfferOpen = true
+    }
+})
+
+var productOfferItems = document.getElementsByClassName("attryb-offer-code")
+
+for (var i = 0; i < productOfferItems.length; i++) {
+    const ele = productOfferItems[i]
+    ele.addEventListener("click", (e) => {
+        navigator.clipboard.writeText
+            (e.target.textContent);
+        e.target.parentNode.classList.add("active")
+        setTimeout(() => {
+            e.target.parentNode.classList.remove("active")
+        }, 1000)
+    })
+}
+}
+});
+
+
+

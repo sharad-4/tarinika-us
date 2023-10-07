@@ -21,7 +21,7 @@
       width: 100%;
     {% endif %}
   }
-  .section{max-width:unset;width:95%}
+  .section{max-width:unset;width:80%}
   .sidebar-section {
     {% if section.settings.sidebar_position == 'right' %}
       order: 1;
@@ -57,12 +57,6 @@
  .card-image.blog-card__image {
     max-height: 10rem;
     overflow: hidden;
-}
-  .blog__title.title::after {
-  content: 'Blogs';
-}
-.blog__title.title span{
-	display:none
 }
 {% endstyle %}
 {% comment %} JSON-LD Structured data - https://developers.google.com/search/docs/guides/intro-structured-data {% endcomment %}

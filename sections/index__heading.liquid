@@ -56,6 +56,19 @@
           css: section.settings.custom_css,
           id: section.id
   %}
+  .heading-section__content h2 {
+    margin: 0 !important;
+  }
+  #shopify-section-{{ section.id }} .heading-section__subheading {
+    margin: 10px 0 !important;
+    padding: 0 !important;
+  }
+  #shopify-section-{{ section.id }} .heading-section__subheading p {
+    margin-bottom: 1em !important;
+  }
+  #shopify-section-{{ section.id }} .heading-section__content .heading-divider {
+    margin: 0 !important;
+  }
 {% endstyle %}
 
 {% comment %} HTML markup {% endcomment %}

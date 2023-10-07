@@ -1284,7 +1284,6 @@ class Product {
     }
 
     if (this.variantSelection) {
-
       Promise.all([
         this.variantSelection.getProduct(),
         this.variantSelection.getVariant(),
@@ -1762,7 +1761,6 @@ class Product {
             if (flkty) {
               $thumbnailProductGallery.find('.is-nav-selected').removeClass('is-nav-selected');
               const $selected = $thumbnails.eq(flkty.selectedIndex).addClass('is-nav-selected');
-
               // scroll nav
               const scrollY = (
                 $selected.position().top

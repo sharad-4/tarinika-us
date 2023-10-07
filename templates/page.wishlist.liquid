@@ -1,0 +1,56 @@
+{% comment %}
+** Page content **
+{% endcomment %}
+
+{% assign id = section.id %}
+{% comment %}Layout{% endcomment %}
+{% assign width = section.settings.width %}
+{% assign padding_top = section.settings.padding_top %}
+{% assign padding_bottom = section.settings.padding_bottom %}
+{% assign animation = section.settings.animation | default: 'none' %}
+{% comment %}Advanced{% endcomment %}
+{% assign css_class = section.settings.css_class %}
+{% assign custom_css = section.settings.custom_css %}
+
+{% style %}
+  #shopify-section-{{ id }} {
+    padding-top: {{ padding_top }}px;
+    padding-bottom: {{ padding_bottom }}px;
+    {% if width == 'wide' %}
+      width: 100%;
+    {% endif %}
+  }
+
+  {% render 'css-loop',
+          css: custom_css,
+          id: id
+  %}
+  @media only screen and (max-width:789px){
+      .button{
+    margin-bottom:5%;
+  }
+    .image-with-text__wrapper>h3 {
+    line-height: 2rem!important;
+}
+  }
+
+  {% endstyle %}
+
+<section class="section
+        {{ css_class }}
+        is-width-wide"
+        {% if animation != "none" %}
+          data-scroll-class="{{ animation }}"
+        {% endif %}>
+  <div class="container page__container">
+      {% render 'heading',
+              title: page.title,
+              heading_tag: 'h1',
+              context: 'page',
+              text_alignment: 'center'
+      %}
+    <div class="page__content content container {% if settings.table_styles_enabled %} table is-striped is-bordered {% endif %}">
+      {% render 'page-multi-column', content: page.content %}
+    </div>
+  </div>
+</section>

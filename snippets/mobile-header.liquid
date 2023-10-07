@@ -105,11 +105,6 @@
   {% endif %}
       {% endif %}
       <div class="icon-wrapper">
-        
-        {% capture the_snippet_fave_icon_menu %}{% render 'ssw-widget-faveicon-menu' with product.id %}{% endcapture %}
-        {% unless the_snippet_fave_icon_menu contains 'Liquid error' %}
-        {{ the_snippet_fave_icon_menu }}
-        {% endunless %}    
         {% comment %} Cart icon {% endcomment %}
         <div class="header-cart action-area__link {% if cart.item_count != 0 %}has-cart-count{% endif %}" data-ajax-cart-trigger>
           <a class="header__link" {% if settings.cart_action != 'mini_cart' or settings.cart_action != 'drawer' %}href="{{ routes.cart_url }}"{% endif %} >

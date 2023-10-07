@@ -107,7 +107,7 @@ class VariantSelection extends HTMLElement {
   }
 
   getVariant() {
-    return this.getProduct().then(product => product ? product.variants.find(v => v.id.toString() === this.variant) || false : false).catch(() => false); 
+    return this.getProduct().then(product => product ? product.variants.find(v => v.id.toString() === this.variant) || false : false).catch(() => false);
   }
 
   getState() {
@@ -1316,8 +1316,6 @@ $(function() {
   if (window.PXUTheme.theme_settings.shipping_calculator_enabled && document.querySelector('[data-shipping-calculator]')) {
     const shippingCalculator = new ShippingCalculator({ el: document.querySelector('[data-shipping-calculator]') });
   }
-
-    
 });
 
 /*============================================================================

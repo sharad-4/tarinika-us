@@ -41,6 +41,7 @@
     font-family: {{ text_font.family }}, {{ text_font.fallback_families }};
     font-weight: {{ text_font.weight }};
     font-style: {{ text_font.style }};
+    word-break: break-word;
   }
   .rich-text__text>p>a {
     color: #47c1bf;
@@ -70,6 +71,9 @@
           css: section.settings.custom_css,
           id: section.id
   %}
+  #index__text {
+    margin-top: 25px;
+  }
 {% endstyle %}
 
 {% comment %} HTML markup {% endcomment %}
@@ -94,7 +98,7 @@
         {% endif %}
 
         {% if text != blank %}
-          <div class="rich-text__text has-columns--{{ section.settings.columns }} text-align-{{ text_alignment }} content {% if text_size > 35 %}mobile-shrink-text{% endif %}">
+          <div id="index__text" class="rich-text__text has-columns--{{ section.settings.columns }} text-align-{{ text_alignment }} content {% if text_size > 35 %}mobile-shrink-text{% endif %}">
             {{ text }}
           </div>
         {% endif %}

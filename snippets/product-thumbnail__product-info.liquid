@@ -8,7 +8,7 @@
   {% else %}
     <a href="{{ product.url | within: collection }}" class="product-thumbnail__title">{{ product.title }}</a>
   {% endif %}
-{% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: '', concierge_install: true, product: product %}
+
   {% if collection_handles contains 'coming-soon' %}
     {% if settings.stickers_enabled == false %}
       {{ 'collections.general.coming_soon' | t }}

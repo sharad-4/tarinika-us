@@ -11,17 +11,22 @@
   #shopify-section-{{ section.id }} {
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
+     {% if section.settings.bg-image %}
+        background:url('{{ section.settings.bg-image | img_url: 'master' }}');
+    {% endif %}
+
     {% if section.settings.width == 'wide' %}
       width: 100%;
     {% endif %}
-  background:{{ section.settings.bgColor }}
+    background-color:{{ section.settings.bgColor }};
+
   }
   {% render 'css-loop',
           css: section.settings.custom_css,
           id: section.id
   %}
   .image-with-text__wrapper .buttons {
-        margin: 10px 0;
+    margin: 10px 0;
   }
 
   @media only screen and (max-width: 768px) {
@@ -179,11 +184,16 @@
   "max_blocks": 3,
   "settings": [
     {
-      "type": "color",
-      "id" : "bgColor",
-      "label" : "Background Color",
-      "default" : "#fff"
-    },
+          "type": "color",
+          "id": "bgColor",
+          "label": "Background Color",
+          "default": "#fff"
+        },
+   {
+  "type": "image_picker",
+  "id": "bg-image",
+  "label": "Custom Background Image"
+},
     {
       "type": "header",
       "content": "Layout"

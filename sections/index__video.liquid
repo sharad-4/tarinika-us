@@ -161,7 +161,7 @@
             </div>
           {% elsif html5_video != blank %}
             <div class="video-element" data-video-element>
-              <video class="video-{{ id }}">
+              <video class="video-{{ id }} add-video-control-attribute"  >
                 <source src="{{ html5_video }}">
               </video>
             </div>
@@ -201,8 +201,14 @@
     data-section-id="{{ id }}"
     data-section-data
   >
+    if(section.settings.autoplay) {
+        const attributeName = 'autoplay';
+        const elements = document.querySelector('.add-video-control-attribute');
+        element.setAttribute(attributeName);
+    }
+    
     {
-      "autoplay": {{ autoplay | json }},
+      "autoplay": {{ section.settings.autoplay | json }},
       "autoloop": {{ section.settings.autoloop | json }},
       "video_id": {{ iframe_video.id | json }},
       "video_type": {{ iframe_video.type | json }},

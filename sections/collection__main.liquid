@@ -31,12 +31,11 @@
 {% assign bangles = "antique-bangles,nakshatra-cz-bangles" | split: "," %}
 {% assign waist_bands = "antique-waist-bands,nakshatra-cz-waist-bands" | split: "," %}
 {% assign armlets = "antique-armlet,nakshatra-cz-armlet" | split: "," %}
-{% assign hair_accessory = "antique-hair-accessory,nakshatra-cz-hair-accessory,maang-tikkas,antique-hair-clip,nakshatra-cz-hair-clip" | split: "," %}
-{% assign rings = "antique-rings,nakshatra-cz-rings" | split: "," %}
+{% assign hair_accessory = "antique-hair-accessory,nakshatra-cz-hair-accessory,maang-tikkas" | split: "," %}
+{% assign rings = "antique-rings," | split: "," %}
 {% assign anklets = "antique-anklets," | split: "," %}
 {% assign beads_collection = "beads-collection-cz-beads,beads-collection-cz-necklaces,beads-collection-pearl-beads,beads-collection-gemstone-beads,beads-collection-bead-necklaces,mala-collection-black-beads,mangalsutra-jewelry" | split: "," %}
 
-{% render 'collection_structured_data' %}
 
 {% comment %} CSS {% endcomment %}
 {% style %}
@@ -50,12 +49,6 @@
   .container.container--pagination {
     padding: 2rem 0 4rem;
 }
-  .container.container--pagination.pagination--description {
-    padding-bottom: 0 !important;
-  }
-  .button-style .paginate {
-    padding-bottom: 4rem;
-  }
 
   .collection__description {
     width: 100%;
@@ -70,9 +63,6 @@
     margin-bottom: 0.5714em;
     word-wrap: break-word;
 }
-  h3{
-    font-size:1.8rem!important;
-  }
   h2#Filtertext {
     font-size: 1.5rem!important;
     font-weight: 400;
@@ -88,9 +78,6 @@
 }
   h3{
     line-height:2rem!important;
-  }
-  .collection__description h1 {
-    display: none;
   }
 
   .sidebar-section {
@@ -127,13 +114,11 @@
           css: custom_css,
           id: id
   %}
-section.footer__extra-content.section {
-    width: 95%!important;
-    max-width: unset;
+h3{
+  font-size:1.8rem!important;
 }
 
 
-{% comment %}   Products Interlinking {% endcomment %}
   .product_type_description,
   .popular__search {
     width:62.5%;
@@ -561,8 +546,8 @@ section.footer__extra-content.section {
         </div>
       {% endif %}
 
-      <div class="container container--pagination pagination--description">
-        <div class="one-whole column text-align-center button-style">
+      <div class="container container--pagination">
+        <div class="one-whole column text-align-center">
           {%- assign load_more_text = 'collections.general.pagination_button' | t -%}
           {% render 'pagination',
                   paginate: paginate,
@@ -572,6 +557,7 @@ section.footer__extra-content.section {
               {% comment %} Collection description {% endcomment %}
 
         </div>
+      </div>
         {% if collection.description != blank %}
     <div class="container border-top-padding">
       <div class="product_type_description column">
@@ -596,7 +582,7 @@ section.footer__extra-content.section {
           {% elsif armlets contains collection.handle %}
             Bestselling Armlets
           {% elsif hair_accessory contains collection.handle %}
-            Bestselling Hair Accessories
+            Bestselling Hair Accessory
           {% elsif rings contains collection.handle %}
             Bestselling Rings
           {% elsif anklets contains collection.handle %}
@@ -633,10 +619,6 @@ section.footer__extra-content.section {
                 <a href={{ link.url }} target='_blank'><span class='popularTag'> Contemporary Collection - {{ link.title }}</span></a>
               {% elsif split_again_link_url[0] == "kundan" %}
                 <a href={{ link.url }} target='_blank'><span class='popularTag'> Kundan - {{ link.title }}</span></a>
-              {% elsif split_again_link_url[0] == "beads" and split_again_link_url[1] == "collection" %}
-                <a href={{ link.url }} target='_blank'><span class='popularTag'> Beads Collection - {{ link.title }}</span></a>
-              {% elsif split_again_link_url[0] == "mala" and split_again_link_url[1] == "collection" %}
-                <a href={{ link.url }} target='_blank'><span class='popularTag'> Mala Collection - {{ link.title }}</span></a>
               {% else %}
                 <a href={{ link.url }} target='_blank'><span class='popularTag'>{{ link.title }}</span></a>
               {% endif %}
@@ -668,10 +650,6 @@ section.footer__extra-content.section {
                       <a href={{ link.url }} target='_blank'><span class='popularTag'> Contemporary Collection - {{ link.title }}</span></a>
                     {% elsif split_again_link_url[0] == "kundan" %}
                       <a href={{ link.url }} target='_blank'><span class='popularTag'> Kundan - {{ link.title }}</span></a>
-                    {% elsif split_again_link_url[0] == "beads" and split_again_link_url[1] == "collection" %}
-                      <a href={{ link.url }} target='_blank'><span class='popularTag'> Beads Collection - {{ link.title }}</span></a>
-                    {% elsif split_again_link_url[0] == "mala" and split_again_link_url[1] == "collection" %}
-                      <a href={{ link.url }} target='_blank'><span class='popularTag'> Mala Collection - {{ link.title }}</span></a>
                     {% else %}
                       <a href={{ link.url }} target='_blank'><span class='popularTag'>{{ link.title }}</span></a>
                     {% endif %}
@@ -702,7 +680,7 @@ section.footer__extra-content.section {
               {% elsif armlets contains collection.handle %}
                 Bestselling Armlets
               {% elsif hair_accessory contains collection.handle %}
-                Bestselling Hair Accessories
+                Bestselling Hair Accessory
               {% elsif rings contains collection.handle %}
                 Bestselling Rings
               {% elsif anklets contains collection.handle %}
@@ -721,71 +699,6 @@ section.footer__extra-content.section {
         </div>
     </div>
   {% endif %}
-
-<script>
-  $( document ).ready(function() {
-    var collection_url = ""
-    var necklace_category = ""
-    var category = "{{collection.handle}}"
-    var collection_split = category.split("-")
-    var currency = ""
-    // collections.best-selling-product-collection.products
-    if (collection_split.includes("earrings")) {
-      collection_url = '/collections/earrings/products.json'
-    } else if (collection_split.includes("necklace") || collection_split.includes("necklaces") && !collection_split.includes("beads")) {
-      collection_url = '/collections/necklace-sets/products.json'
-      necklace_category = "necklace-sets"
-    } else if (collection_split.includes("choker")) {
-      collection_url = '/collections/choker/products.json'
-    } else if (collection_split.includes("pendants")) {
-      collection_url = '/collections/pendants/products.json'
-    } else if (collection_split.includes("bangles")) {
-      collection_url = '/collections/bangles/products.json'
-    } else if (collection_split.includes("waist")) {
-      collection_url = '/collections/waist-bands/products.json'
-    } else if (collection_split.includes("armlets") || collection_split.includes("armlet")) {
-      collection_url = '/collections/armlets/products.json'
-    } else if (collection_split.includes("hair") || collection_split.includes("maang") || collection_split.includes("hairs")) {
-      collection_url = '/collections/hair-accessories/products.json'
-    } else if (collection_split.includes("rings") || collection_split.includes("ring")) {
-      collection_url = '/collections/rings/products.json'
-    } else if (collection_split.includes("anklets")) {
-      collection_url = '/collections/anklets/products.json'
-    } else if (collection_split.includes("beads") || collection_split.includes("mangalsutra")) {
-      collection_url = '/collections/beads-collection/products.json'
-    } else {
-      collection_url = '/collections/' + category + '/products.json'
-    }
-
-    console.log(collection_url)
-    
-    $.ajax({
-        type: 'get',
-        url: collection_url,
-        dataType: 'json',
-        success: function (data) {
-            for (var index = 0; index < 10; index++) {
-                var currencySymbol = Intl.NumberFormat("en-US", {
-                    style: "currency",
-                    currency: "{{ shop.currency }}",
-                    minimumFractionDigits: 0,
-                })
-                var price = currencySymbol.format(Math.trunc(data.products[index].variants[0].price)).replace(/^(\D+)/, '$1 ');
-              if (necklace_category) {
-                $("#col-bsp-titles").append("<div><a href=" + '/collections/' + necklace_category + '/products/' + data.products[index].handle + " target='_blank'><span class='productTitle'>" + data.products[index].title + "</span><span class='productprice'>" + price + "</span></a></div>");
-              } else {
-                $("#col-bsp-titles").append("<div><a href=" + '/collections/' + category + '/products/' + data.products[index].handle + " target='_blank'><span class='productTitle'>" + data.products[index].title + "</span><span class='productprice'>" + price + "</span></a></div>");
-              }
-                
-            }
-        },
-        error: function (xhr, status, error) {
-            console.log(xhr, error);
-        }
-    });
-  });
-</script>
-      </div>
     </div>
 
     {% comment %} JavaScript {% endcomment %}
@@ -806,16 +719,77 @@ section.footer__extra-content.section {
     {% endpaginate %}
   </div>
 
-<div id="contentWrapper_Modal">
-  <div class="contentWrapper_alert contentWrapper_animation">
-    <div class="contentWrapper__modal-body">
-      <div class="contentWrapper__modal-body-text">Product has been added in the cart.</div>
+  <div id="contentWrapper_Modal">
+    <div class="contentWrapper_alert contentWrapper_animation">
+      <div class="contentWrapper__modal-body">
+        <div class="contentWrapper__modal-body-text">Product has been added in the cart.</div>
+      </div>
+      <span id="contentWrapper_dismiss_alert" onclick="closeModal(event)">×</span>
     </div>
-    <span id="contentWrapper_dismiss_alert" onclick="closeModal(event)">×</span>
   </div>
-</div>
-
+  
 </section>
+
+<script>
+  $( document ).ready(function() {
+  
+    var collection_url = ""
+    var necklace_category = ""
+    var category = "{{collection.handle}}"
+    var collection_split = category.split("-")
+    if (collection_split.includes("earrings")) {
+      collection_url = '/collections/earrings/products.json'
+    } else if (collection_split.includes("necklace") || collection_split.includes("necklaces") && !collection_split.includes("beads")) {
+      collection_url = '/collections/all_necklace-sets/products.json'
+      necklace_category = "all_necklace-sets"
+    } else if (collection_split.includes("choker")) {
+      collection_url = '/collections/choker/products.json'
+    } else if (collection_split.includes("pendants")) {
+      collection_url = '/collections/pendants/products.json'
+    } else if (collection_split.includes("bangles")) {
+      collection_url = '/collections/bangles/products.json'
+    } else if (collection_split.includes("waist")) {
+      collection_url = '/collections/waist-bands/products.json'
+    } else if (collection_split.includes("armlets")) {
+      collection_url = '/collections/armlets/products.json'
+    } else if (collection_split.includes("hair") || (collection_split.includes("maang"))) {
+      collection_url = '/collections/hair-accessory/products.json'
+    } else if (collection_split.includes("rings")) {
+      collection_url = '/collections/rings/products.json'
+    } else if (collection_split.includes("anklets")) {
+      collection_url = '/collections/anklets/products.json'
+    } else if (collection_split.includes("beads") || (collection_split.includes("mangalsutra"))) {
+      collection_url = '/collections/beads-collection/products.json'
+    } else {
+      collection_url = '/collections/' + category + '/products.json'
+    }
+    
+    $.ajax({
+        type: 'get',
+        url: collection_url,
+        dataType: 'json',
+        success: function (data) {
+            for (var index = 0; index < 10; index++) {
+                var currencySymbol = Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "INR",
+                    minimumFractionDigits: 0,
+                })
+                var price = currencySymbol.format(Math.trunc(data.products[index].variants[0].price)).replace(/^(\D+)/, '$1 ');
+              if (necklace_category) {
+                $("#col-bsp-titles").append("<div><a href=" + '/collections/' + necklace_category + '/products/' + data.products[index].handle + " target='_blank'><span class='productTitle'>" + data.products[index].title + "</span><span class='productprice'>" + price + "</span></a></div>");
+              } else {
+                $("#col-bsp-titles").append("<div><a href=" + '/collections/' + category + '/products/' + data.products[index].handle + " target='_blank'><span class='productTitle'>" + data.products[index].title + "</span><span class='productprice'>" + price + "</span></a></div>");
+              }
+                
+            }
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr, error);
+        }
+    });
+  });
+</script>
 
 
 <script> // jquery code to control hide and show filter actions

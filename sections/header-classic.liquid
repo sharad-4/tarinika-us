@@ -166,7 +166,7 @@
             {% endif %}
           </div>
 
-          <div class="header__menu ">
+          <div class="header__menu is-justify-{{ section.settings.menu_alignment }}">
             <nav class="header__menu-items is-flex is-flex-wrap is-justify-{{ section.settings.menu_alignment }} header__dropdown--{{ settings.dropdown_position }}" role="navigation" aria-label="main navigation">
               {% assign main_menu = linklists[section.settings.main_linklist] %}
               {% for link in main_menu.links %}
@@ -226,17 +226,6 @@
   }
 </script>
 <script src="{{ 'z__jsHeader.js' | asset_url }}"></script>
-
-<script>
-  $(function() {
-     $('.mega-menu__content').each(function(_, item) {
-       let firstChild = item.firstChild.nextSibling;
-       if (firstChild.innerHTML === "") {
-         $(item).remove();
-       }
-     });
-  });
-</script>
 
 {% comment %}Schema{% endcomment %}
 {% schema %}

@@ -157,41 +157,36 @@ enable_product_lightbox: <boolean>
   </div>
   {% if display_thumbnails == true %}
     {% if thumbnail_position != 'no-thumbnails' and product.media.size > 1 %}
-      <div class='product_gallery__thumbnails-wrapper'>
-          <button class='product_gallery__thumbnails_next_btn'><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M95,48H9.83L41,16.86A2,2,0,0,0,38.14,14L3.59,48.58a1.79,1.79,0,0,0-.25.31,1.19,1.19,0,0,0-.09.15l-.1.2-.06.2a.84.84,0,0,0,0,.17,2,2,0,0,0,0,.78.84.84,0,0,0,0,.17l.06.2.1.2a1.19,1.19,0,0,0,.09.15,1.79,1.79,0,0,0,.25.31L38.14,86A2,2,0,0,0,41,86a2,2,0,0,0,0-2.83L9.83,52H95a2,2,0,0,0,0-4Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg></button>
-          <button class='product_gallery__thumbnails_previous_btn'><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M95,48H9.83L41,16.86A2,2,0,0,0,38.14,14L3.59,48.58a1.79,1.79,0,0,0-.25.31,1.19,1.19,0,0,0-.09.15l-.1.2-.06.2a.84.84,0,0,0,0,.17,2,2,0,0,0,0,.78.84.84,0,0,0,0,.17l.06.2.1.2a1.19,1.19,0,0,0,.09.15,1.79,1.79,0,0,0,.25.31L38.14,86A2,2,0,0,0,41,86a2,2,0,0,0,0-2.83L9.83,52H95a2,2,0,0,0,0-4Z" class="arrow"></path></svg></button>
+      <div class="product-gallery__thumbnails
+                product-gallery__thumbnails--{{ thumbnail_position }}
+                js-gallery-carousel
+                is-slide-nav--{{ enable_thumbnail_slider }}
+                {% if enable_thumbnail_slider == false %}
+                  container equal-columns--outside-trim
+                  is-justify-center
+                {% endif %}">
+        {% for media in product.media %}
 
-          <div class="product-gallery__thumbnails
-                    product-gallery__thumbnails--{{ thumbnail_position }}
-                    js-gallery-carousel
-                    is-slide-nav--{{ enable_thumbnail_slider }}
-                    {% if enable_thumbnail_slider == false %}
-                      container equal-columns--outside-trim
-                      is-justify-center
-                    {% endif %}">
-            {% for media in product.media %}
-    
-              {% if media.media_type contains 'video' %}
-                {% assign thumbnail_badge = 'video-thumbnail' %}
-              {% elsif media.media_type contains 'model' %}
-                {% assign thumbnail_badge = '3d-thumbnail' %}
-              {% else %}
-                {% assign thumbnail_badge = '' %}
-              {% endif %}
-    
-              <div class="product-gallery__thumbnail one-fifth column is-relative"
-                    data-title="{{ media.alt | escape }}" tabindex="0">
-                <img src="{{ media | img_url: '300x' }}" alt="">
-                {% if thumbnail_badge != blank %}
-                  {% render 'icon',
-                          name: thumbnail_badge,
-                          icon_class: 'media-badge'
-                  %}
-                {% endif %}
-              </div>
-            {% endfor %}
+          {% if media.media_type contains 'video' %}
+            {% assign thumbnail_badge = 'video-thumbnail' %}
+          {% elsif media.media_type contains 'model' %}
+            {% assign thumbnail_badge = '3d-thumbnail' %}
+          {% else %}
+            {% assign thumbnail_badge = '' %}
+          {% endif %}
+
+          <div class="product-gallery__thumbnail one-fifth column is-relative"
+                data-title="{{ media.alt | escape }}" tabindex="0">
+            <img src="{{ media | img_url: '300x' }}" alt="">
+            {% if thumbnail_badge != blank %}
+              {% render 'icon',
+                      name: thumbnail_badge,
+                      icon_class: 'media-badge'
+              %}
+            {% endif %}
           </div>
-        </div>
+        {% endfor %}
+      </div>
     {% endif %}
   {% endif %}
 </div>

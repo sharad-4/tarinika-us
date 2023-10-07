@@ -94,9 +94,9 @@
     </li> -->
     {% if template.name == 'product' %}
       <li>
-<!--         <span class="breadcrumb-separator">
-          {% render 'icon', name: breadcrumb_separator %}
-        </span> -->
+        <span class="breadcrumb-separator">
+<!--           {% render 'icon', name: breadcrumb_separator %} -->
+        </span>
         <a href="{{ routes.collections_url }}/{% if collection.handle != blank %}{{ collection.handle }}{% else %}all{% endif %}" title="{{ collection.title | escape }}">
           {% unless collection.title %} All {% else %} {{ collection.title }} {% endunless %}
         </a>
@@ -142,7 +142,7 @@
       </li>
     {% endif %}
     {% if product.handle != blank %}
-      <li>
+      <li class="breadcrumb-tag">
         <span class="breadcrumb-separator">
           {% render 'icon', name: breadcrumb_separator %}
         </span>

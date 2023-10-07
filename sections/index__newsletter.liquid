@@ -135,22 +135,17 @@
     <div class="newsletter__wrapper column {% if image != blank %} is-active-image one-half medium-down--one-whole{% else %} one-whole {% endif %}">
       <div class="newsletter__text-wrapper text-align-{{ object.settings.newsletter_section_text_align }}">
 <!--         <h2 class="newsletter__heading newsletter__text title">{{ heading }}</h2> -->
-<!--         <h2 class="newsletter__heading newsletter__text title">Join the Exclusive Tarinika Club</h2> -->
-        <div >{{ heading }}</div>
-        <h2 class="newsletter__heading newsletter__text title">10% off</h2>
-<!--         <div >{{ subheading }}</div> -->
-        <div class="newsletter__description">Be the first to know about our launch Get access to our Invite only sale Rewards for your every purchase. </div>
-       
-
-<!--         <div class="newsletter__subheading newsletter__text heading">Get 10% off on your first purchase - Use code MYTARINIKA10</div> -->
-<!--         <ul>
+        <h2 class="newsletter__heading newsletter__text title">Join the Exclusive Tarinika Club</h2>
+<!--         <div class="newsletter__subheading newsletter__text">{{ subheading }}</div> -->
+        <div class="newsletter__subheading newsletter__text heading">Get 10% off on your first purchase - Use code MYTARINIKA10</div>
+        <ul>
           <li>
             <div class="newsletter__text subheading">Stay on top of the latest jewellery trends and news.</div>
           </li>
           <li>
             <div class="newsletter__subheading newsletter__text subheading">Be the first to know about new collections, exciting sales and special discounts.</div>
           </li>
-        </ul> -->
+        </ul>
       </div>
 
       {% render 'newsletter-form',

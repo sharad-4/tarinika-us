@@ -5,9 +5,19 @@
 {% endif %}
 
 <style>
-/*   #product-form-{{ product.id }} form {
-    min-height: 283px;
-  } */
+  #product-form-{{ product.id }} form {
+/*     height: 283px; */
+    display: flex;
+    flex-wrap: wrap;
+  }
+  variant-selection.variant-selection {
+    width: 100%;
+  }
+  @media only screen and (max-width: 798px) {
+    .purchase-details__buttons {
+      height: 110px;
+    }
+  }
 </style>
 
 <div class="clearfix product_form init smart-payment-button--{{ show_payment_button }} {% if product.variants.size > 1 or product.options.size > 1 %}product_form_options{% endif %} product_form--{{ settings.product_form_style }}"
@@ -193,14 +203,10 @@
     </variant-selection>
     {% comment %}Inject @pixelunion/shopify-variants-ui/variant-selection end{% endcomment %}
 
-    <div class="mobile-menu-divider" style="margin-bottom: 12px;"></div>
-    
-    
+
     {% if product.available %}
       {% if settings.display_inventory_left %}
-        {% if product.handle != "gift-card" %}
-          <p class="items_left-x variant-stock-status" style="margin-bottom: 1.5rem;height: 24px;"></p>
-        {% endif %}
+        <p class="items_left-x variant-stock-status" style="margin-bottom: 1.5rem;height: 24px;width: 100%;">
         {% comment %}AT-variant status{% endcomment %}
         {% comment %}
           {% if selected_variant.inventory_management != blank and selected_variant.inventory_quantity > 0 %}
@@ -217,42 +223,82 @@
           {% endif %}
         {% endcomment %}
         </p>
-<!--          <p class="items_left style="margin-bottom: 1.5rem;">
-              <p style="color: #0E0808; font-family: Barlow !important; font-size: 16px; font-style: normal; font-weight: 400; line-height: 20px !important;">Quantity</p>
-          {% if selected_variant.inventory_management != blank and selected_variant.inventory_quantity > 0 %}
-            {% capture items_left_text %}
-              {% if selected_variant.inventory_quantity == 1 %}
-                {{ 'products.product.items_left_count.one' | t }}
-              {% else %}
-                {{ 'products.product.items_left_count.other' | t }}
-              {% endif %}
-            {% endcapture %}
-            {% if selected_variant.inventory_quantity <= settings.inventory_threshold %}
-              {{ selected_variant.inventory_quantity }} {{ items_left_text }}
-            {% endif %}
-          {% endif %}
-        </p> -->
       {% endif %}
 
-      
-     
+      <div class="purchase-details {% if settings.display_product_quantity %}has-quantity-box{% endif %}">
         {% if settings.display_product_quantity %}
-          <p style="
-    color: #0E0808;
-    font-family: Barlow !important;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 20px !important;    
-">Quantity</p>
           <div class="purchase-details__quantity product-quantity-box quantity-box--{{ settings.qty_box_style }}">
             {% render 'quantity-box' %}
           </div>
         {% endif %}
-      <div class="mobile-menu-divider" style="margin-top: 12px;"></div>
-      <div class="purchase-details {% if settings.display_product_quantity %}has-quantity-box{% endif %}">
         {% comment %} Error message for add to cart action {% endcomment %}
         <div class="cart-warning"></div>
+        
+<!-- ----------------------------------------------------------------------Product page Discount----------------------------------------------------------------- -->
+
+
+
+<!-- Product Page Discount  -->
+ <!-- <div class="attryb-offer-container">
+      <div class="attryb-offer-main">
+        <div class="attryb-offer-header">
+          <h4>BEST OFFERS FOR YOU!</h4>
+          <span class="attryb-offer-accordion-down"  >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </span>
+        </div>
+          
+        <div class="attryb-offer-content">
+          
+          <div class="attryb-offer-content-inside">
+            <p>Get 15% off on Min Purchase of ₹2500</p>
+            <div class="attryb-offer-content-code">
+              <p>Use Code:</p>
+              <p class="toolkit">Copied</p>
+              <div class="smallbox"></div>
+              <p class="attryb-offer-code">FLAT15</p>
+            </div>
+          </div>
+          
+          <div class="attryb-offer-content-inside">
+            <p>Get 20% off on Min Purchase of ₹4000</p>
+            <div class="attryb-offer-content-code">
+              <p>Use Code:</p>
+              <p class="toolkit">Copied</p>
+              <div class="smallbox"></div>
+              <p class="attryb-offer-code">FLAT20</p>
+            </div>
+          </div>
+          
+          <div class="attryb-offer-content-inside">
+            <p>Get 25% off on Min Purchase of ₹6000</p>
+            <div class="attryb-offer-content-code">
+              <p>Use Code:</p>
+              <p class="toolkit">Copied</p>
+              <div class="smallbox"></div>
+              <p class="attryb-offer-code">FLAT25</p>
+            </div>
+          </div>
+          
+          <div class="attryb-offer-content-inside">
+            <p>Get 10% off sitewide for first-time orders</p>
+            <div class="attryb-offer-content-code">
+              <p>Use Code:</p>
+              <p class="toolkit">Copied</p>
+              <div class="smallbox"></div>
+              <p class="attryb-offer-code">NEW10</p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+ -->
+     
+<!-- ----------------------------------------------------------------------Product page Discount----------------------------------------------------------------- -->
+
+
+
         <div class="purchase-details__buttons purchase-details__spb--{{ show_payment_button }}">
           {% if settings.cart_action == 'reload_page' %}
             <input type="hidden" name="return_to" value="back" />
@@ -260,45 +306,63 @@
             <input type="hidden" name="return_to" value="{{ routes.cart_url }}" />
           {% endif %}
 
-          
-          <div id="button-wrapper">
-            {% capture add_to_cart_label %}{% if collection_handles contains 'pre-order' %}{{ 'collections.general.pre_order' | t }}{% else %}{{ 'products.product.add_to_cart' | t }}{% endif %}{% endcapture %}
-            <button type="submit" name="add" class="button {% if settings.cart_action == 'mini_cart' or settings.cart_action == 'drawer' %} ajax-submit {% endif %}action_button button--add-to-cart {% if show_payment_button %} action_button--secondary {% endif %}" data-label={{ add_to_cart_label | json }} data-add-to-cart-trigger>
-              {% if  settings.button_cart_icon != blank and settings.button_cart_icon_position == 'left' %}
-                {%
-                  render 'icon',
-                  name: settings.button_cart_icon,
-                  icon_class: 'icon--cart'
-                %}
-              {% endif %}
-              <span class="text">{{ add_to_cart_label }}</span>
-              {% if  settings.button_cart_icon != blank and settings.button_cart_icon_position == 'right' %}
-                {%
-                  render 'icon',
-                  name: settings.button_cart_icon,
-                  icon_class: 'icon--cart icon--right'
-                %}
-              {% endif %}
-              <svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32" class="checkmark">
-                <path fill="none" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
-              </svg>
-            </button>
-          </div>
-
-               
+          {% capture add_to_cart_label %}{% if collection_handles contains 'pre-order' %}{{ 'collections.general.pre_order' | t }}{% else %}{{ 'products.product.add_to_cart' | t }}{% endif %}{% endcapture %}
+          <button type="submit" name="add" class="button {% if settings.cart_action == 'mini_cart' or settings.cart_action == 'drawer' %}  {% endif %}action_button button--add-to-cart {% if show_payment_button %} action_button--secondary {% endif %}" data-label={{ add_to_cart_label | json }} data-add-to-cart-trigger>
+            {% if  settings.button_cart_icon != blank and settings.button_cart_icon_position == 'left' %}
+              {%
+                render 'icon',
+                name: settings.button_cart_icon,
+                icon_class: 'icon--cart'
+              %}
+            {% endif %}
+            <span class="text">{{ add_to_cart_label }}</span>
+            {% if  settings.button_cart_icon != blank and settings.button_cart_icon_position == 'right' %}
+              {%
+                render 'icon',
+                name: settings.button_cart_icon,
+                icon_class: 'icon--cart icon--right'
+              %}
+            {% endif %}
+            <svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32" class="checkmark">
+              <path fill="none" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
+            </svg>
+          </button>
           {% if show_payment_button %}
             {{ form | payment_button }}
           {% endif %}
         </div>
       </div>
     {% endif %}
+    <a id="whatsapp-link" href="">
+      <button type="button" class="whatsapp-button" title="whatsapp">
+        <div class="whatsapp-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
+            <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#6DC765" stroke="none">
+            <path d="M1195 5105 c-210 -29 -385 -95 -560 -211 -352 -231 -575 -590 -624 -999 -15 -124 -15 -2546 0 -2670 49 -409 272 -766 624 -999 181 -120 371 -189 590 -215 124 -15 2546 -15 2670 0 634 75 1139 580 1214 1214 15 124 15 2546 0 2670 -26 219 -95 409 -215 590 -233 352 -590 575 -999 624 -137 17 -2581 13 -2700 -4z m2682 -326 c231 -31 442 -139 610 -312 164 -169 262 -367 292 -590 15 -108 15 -2526 0 -2634 -31 -231 -139 -442 -312 -610 -139 -135 -286 -219 -475 -271 l-97 -27 -1335 0 -1335 0 -97 27 c-189 52 -336 136 -475 271 -173 168 -281 379 -312 610 -15 108 -15 2526 0 2634 31 231 139 442 312 610 163 158 352 255 562 288 105 17 2541 21 2662 4z"/>
+            <path d="M2480 4204 c-419 -35 -763 -194 -1050 -484 -298 -302 -460 -695 -460 -1120 0 -260 56 -502 166 -721 l23 -46 -126 -373 c-125 -369 -126 -374 -114 -419 22 -85 107 -142 184 -125 18 3 194 58 391 120 198 63 364 114 370 114 7 0 50 -16 96 -36 357 -150 776 -164 1150 -37 506 171 897 587 1042 1108 35 126 50 245 51 405 1 160 -10 258 -44 395 -155 626 -684 1104 -1329 1204 -75 11 -284 20 -350 15z m316 -345 c162 -24 356 -100 494 -191 298 -197 490 -477 561 -821 24 -117 30 -337 10 -448 -70 -408 -330 -759 -699 -943 -201 -100 -403 -143 -629 -133 -194 8 -326 41 -508 125 -76 36 -111 47 -145 46 -26 -1 -145 -33 -282 -78 -130 -42 -241 -76 -246 -76 -6 0 25 107 69 237 50 151 79 253 79 281 0 33 -12 65 -49 135 -59 109 -114 268 -136 391 -17 103 -20 296 -4 399 86 575 561 1027 1143 1087 88 9 245 4 342 -11z"/>
+            <path d="M2040 3237 c-30 -16 -58 -43 -87 -85 -141 -206 -83 -433 195 -764 179 -214 352 -330 627 -423 205 -69 313 -58 451 45 57 43 80 82 95 166 16 88 11 93 -158 175 -199 95 -200 95 -253 28 -74 -94 -110 -129 -133 -129 -35 0 -183 75 -259 131 -116 86 -268 272 -268 327 0 12 17 41 38 65 56 62 72 88 72 120 0 41 -117 318 -144 343 -35 31 -119 32 -176 1z"/>
+            </g>
+          </svg>
+        </div>
+        <span class="whatsapp-button__label">Order on WhatsApp</span>
+      </button>
+    </a>
   {% endform %}
-
-  <div class="mobile-menu-divider" style="margin-bottom: 12px;"></div>  
-
   <div class="surface-pick-up surface-pick-up--loading" data-surface-pick-up></div>
   <div class="surface-pick-up__modal" data-surface-pick-up-modal></div>
   <div class="mobile-banner-shipping">
-    <img src="https://cdn.shopify.com/s/files/1/2026/1561/files/USB_mobile.png?v=1692775840" />
+    <img src="https://cdn.shopify.com/s/files/1/0232/5737/files/MicrosoftTeams-image_3_6d0dc57b-4657-4b0d-a028-e5ee3de5f406.png?v=1692607946" />
   </div>
 </div>
+
+<script>
+  var whatsappProductLink = document.getElementById("whatsapp-link");
+
+  {% if collection.handle %}
+    whatsappProductLink.setAttribute('href', "https://wa.me/+919391008801?text=Hi! I would like to buy: https://www.tarinika.in/collections/{{ collection.handle }}{{ product.url }}");
+  {% else %}
+    whatsappProductLink.setAttribute('href', "https://wa.me/+919391008801?text=Hi! I would like to buy: https://www.tarinika.in{{ product.url }}");
+  {% endif %}
+</script>
+
+

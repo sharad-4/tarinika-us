@@ -78,6 +78,7 @@
 
 .slide_message-bar p {
   font-size: .875rem !important;
+  font-family: Barlow!important;
 }
 
 /* @media only screen and (max-width: 480px) {

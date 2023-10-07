@@ -77,9 +77,9 @@
               </div>
             </div>
 
-            <div class="field" style="display:none">
+            <div class="field">
               <label for="address_province_{{form.id}}">{{ 'customer.addresses.province' | t }}</label>
-              <div class="select" id="address_province_container_{{form.id}}">
+              <div class="select" id="address_province_container_{{form.id}}" style="display:none">
                 <select id="address_province_{{form.id}}" class="address_form" name="address[province]" data-default="{{form.province}}"></select>
               </div>
             </div>
@@ -125,8 +125,10 @@
               {{ address.first_name | capitalize }} {{address.last_name | capitalize }}
               {% if address == customer.default_address %}({{ 'customer.addresses.default' | t }}){% endif %}
             </h4>
-            <p class="view_address test1">
-              {{ address.company }}<br>
+            <p class="view_address">
+              {% if address.company %}
+                {{ address.company }}<br>
+              {% endif %}
               {{ address.street }}<br>
               {{ address.city | capitalize }}{% if address.province_code %}, {{ address.province_code | upcase }}{% endif %} {{ address.zip | upcase }}<br>
               {{ address.country }}<br>
@@ -195,9 +197,9 @@
                 </div>
               </div>
 
-              <div class="field" style="display:none">
+              <div class="field">
                 <label for="address_province_{{form.id}}">{{ 'customer.addresses.province' | t }}</label>
-                <div class="select" id="address_province_container_{{form.id}}">
+                <div class="select" id="address_province_container_{{form.id}}" style="display:none">
                   <select id="address_province_{{form.id}}" class="address_form" name="address[province]" data-default="{{form.province}}"></select>
                 </div>
               </div>

@@ -108,14 +108,6 @@ a {
   text-shadow: 1px 0 0 #000;
 }
 
-.collection__description a {
-  line-height: normal !important;
-}
-
-.collection__description a strong {
-  color: #6b6b6b !important;
-}
-
 @media screen and (max-width: 1024px) {
   .container.border-top-padding {
     display: flex;
