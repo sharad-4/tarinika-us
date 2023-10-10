@@ -100,7 +100,7 @@
     background: none;
     padding: 1em 0;
     cursor: pointer;
-    margin-top: 10px;
+    max-width: unset !important;
 }
 
 .wk-button:hover {
@@ -108,7 +108,7 @@
 }
 
 .wk-button--add .wk-icon__svg {
-    fill: #fff;
+    fill: transparent;
 }
 
 .wk-button__icon {
@@ -120,16 +120,10 @@
 
 .wk-button__label {
     position: relative;
-    color: #000000;
+    color: var(--wk-button--color);
 /*     color: var(--wk-button--color) */
 }
 
-@media only screen and (min-width: 798px) {
-  .wk-button__label {
-    font-size: 1rem;
-    line-height: 1.2rem;
-  }
-}
 
 .wk-button__count {
     color: var(--wk-button--color)
@@ -387,15 +381,17 @@
   border-radius: 2px;
 }
 
-.wk-button:hover {
-/*   border: 1px solid #0e0808;
-  background-color: black;
-  color: #fff; */
-  border: 1px solid #D3D3D3;
+.wk-grid #ultimateTrustBadgeswidgetDiv {
+    display: none !important; 
 }
 
 
 
-
+@media only screen and (min-width: 798px) {
+  .wk-button__label {
+      font-size: 1rem;
+      line-height: 1.2rem;
+  }
+}
 
 

@@ -17,6 +17,23 @@ function evalEqlCardWidth(gap, minWidth, containerWidth, cardRefs){
 
 alignTopCar();
 
+function carousalIconFixes () {
+  const windowInner = window.innerWidth;
+  const innerWidth = document.getElementsByClassName("custom-section-carousal")[0].offsetWidth
+  console.log("windowInner : " , windowInner)
+  console.log("innerWidth : " , innerWidth)
+  if( windowInner >= innerWidth ) {
+    document.querySelector(".custom-section-carousal .prevcol").style.visibility = "hidden";
+    document.querySelector(".custom-section-carousal .nextcol").style.visibility = "hidden"
+  } else {
+    document.querySelector(".custom-section-carousal .prevcol").style.visibility = "visible";
+    document.querySelector(".custom-section-carousal .nextcol").style.visibility = "visible"
+  }
+} 
+carousalIconFixes();
+
+
+
 document.addEventListener("DOMContentLoaded", (event) => {
 
   if(window.location.pathname === '/'){
