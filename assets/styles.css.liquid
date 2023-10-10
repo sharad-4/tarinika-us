@@ -253,13 +253,17 @@ https://flickity.metafizzy.co
 .make-width-full-with-margin {
   width: calc(100vw - 40px) !important;
   margin: auto 20px !important;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 } 
 .custom-section-carousal {
-  width: 100%;
+  width: auto;
 }
 .custom-section-carousal .featured_container{
   gap: 20px;
-  width: 100%;
+  width: auto;
   justify-content: unset !important;
 }
 .custom-section-carousal  .container .column{
@@ -279,7 +283,19 @@ https://flickity.metafizzy.co
     top: 33%;
     left: 24px;
 }
+.product-wrap .wk-button--add {
+    display: none;
+}
+.product-wrap:hover .wk-button--add {
+    display: none;
+}
 @media only screen and (max-width: 798px) {
+  .collection-bar-mobile {
+    position: relative;
+  }
+  .section-unset-height {
+      height: unset !important;
+  }
   .custom-section-carousal .nextcol {
     right: 0px;
 }

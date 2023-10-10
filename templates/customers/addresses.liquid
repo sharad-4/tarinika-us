@@ -25,7 +25,7 @@
   }
   .account-sidebar,
   .account-main {
-    width: auto;
+    width: 100%;
   }
   .three-fourths.column.account-main {
     margin-top: 10px;
@@ -33,7 +33,6 @@
   }
   .address_table {
     width: 100%;
-    margin-left: 0 !important;
     margin-top: 10px;
   }
   .country label,
@@ -66,7 +65,7 @@
     %}
   </header>
 
-  <div class="container has-padding-top address_container
+  <div class="container has-padding-top">
     <aside class="one-fourth column account-sidebar">
       <a href="{{ routes.account_url }}">{{ 'customer.account.return' | t }}</a>
       <div class="account-sidebar__content has-padding-top">
@@ -173,7 +172,7 @@
         {% if customer.addresses.size > 0 %}
           {% render 'address-loop' %}
 
-<!--           <br class="clear" /> -->
+          <br class="clear" />
 
         {% else %}
           <p>{{ 'customer.addresses.no_addresses' | t }}</p>

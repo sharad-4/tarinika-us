@@ -144,7 +144,10 @@ section.footer__extra-content.section {
   .popular_searches_bestselling_space_between {
     width: 5%;
   }
-
+  .product_type_description, .bestselling_products, .popular__search {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+  }
   .bestselling_products h2,
   .popular_search h2 {
     margin-bottom: 0.5714em;
@@ -615,7 +618,7 @@ section.footer__extra-content.section {
       <!-- </div> -->
     </div>
 
-    <div id="popular-searches-section" class="container popular-searches">
+    <div class="container popular-searches">
       <div class="popular_search row">
         <h2 class="popular-search-head">Popular Searches</h2>
         <div class="popular__searches content has-padding-bottom">
@@ -650,7 +653,7 @@ section.footer__extra-content.section {
       </div>
     </div>
   {% else %}
-    <div id="popular-searches-section" class="container border-top-padding popular_search_bestselling">
+    <div class="container border-top-padding popular_search_bestselling">
         <div class="popular__search column">
             <h2 class="popular-search-head">Popular Searches</h2>
             <div class="popular__searches content has-padding-bottom">
@@ -684,7 +687,7 @@ section.footer__extra-content.section {
             </div>
         </div>
         <div class="popular_searches_bestselling_space_between"><p></p></div>
-        <div class="bestselling_products column">
+        <!-- <div class="bestselling_products column">
             <h2 class="bsp-prod-head">
               {% if earrings contains collection.handle %}
                 Bestselling Earrings
@@ -717,7 +720,7 @@ section.footer__extra-content.section {
                     <p id="col-bsp-titles" class="flex-space-between"></p>
                 </ul>
             </div>
-        </div>
+        </div> -->
     </div>
   {% endif %}
 
